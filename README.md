@@ -4,4 +4,5 @@
 Repository for the final project of the Software Development Methods exam 
 
 ## Useful links
-https://en.wikipedia.org/wiki/Take_It_Easy_(game)  
+Take it easy rules: https://en.wikipedia.org/wiki/Take_It_Easy_(game)  
+JavaFX: https://openjfx.io/  
