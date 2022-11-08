@@ -9,7 +9,7 @@ public class TileListLoader {
         allTiles = new ArrayList<>();
     }
 
-    public void loadTileList(String filename) {}
+    public void loadTileList(String filename) { }
 
     public ArrayList<Tile> getTileList() { return allTiles; }
 }
