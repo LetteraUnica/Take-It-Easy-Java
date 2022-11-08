@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="beans.TileTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-07T16:21:21" hostname="DESKTOP-JD96K0N" time="0.038">
+<testsuite name="beans.TileTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-08T16:39:09" hostname="TII-MSICKLINGER1" time="0.018">
   <properties/>
-  <testcase name="testTileValues()" classname="beans.TileTest" time="0.023"/>
+  <testcase name="testTileValues()" classname="beans.TileTest" time="0.014"/>
   <testcase name="testTile()" classname="beans.TileTest" time="0.001"/>
-  <testcase name="testImmutability1()" classname="beans.TileTest" time="0.008"/>
-  <testcase name="testImmutability2()" classname="beans.TileTest" time="0.004"/>
+  <testcase name="testImmutability1()" classname="beans.TileTest" time="0.001"/>
+  <testcase name="testImmutability2()" classname="beans.TileTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
