@@ -3,5 +3,13 @@ import java.util.*;
 
 public class TileListLoader {
 
-    private final List<Tile> allTiles = new ArrayList<Tile>();
+    private final ArrayList<Tile> allTiles;
+
+    public TileListLoader() {
+        allTiles = new ArrayList<>();
+    }
+
+    public void loadTileList(String filename) {}
+
+    public ArrayList<Tile> getTileList() { return allTiles; }
 }
