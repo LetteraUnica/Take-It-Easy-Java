@@ -11,5 +11,5 @@ public class TileListLoader {
 
     public void loadTileList(String filename) { }
 
-    public ArrayList<Tile> getTileList() { return allTiles; }
+    public ArrayList<Tile> getTileList() { return (ArrayList<Tile>) List.copyOf(allTiles); }
 }
