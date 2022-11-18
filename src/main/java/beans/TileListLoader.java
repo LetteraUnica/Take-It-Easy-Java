@@ -18,9 +18,13 @@ public class TileListLoader {
 
     public void loadTileList(String filename) throws FileNotFoundException {
         BufferedReader file = new BufferedReader(new FileReader(filename));
-        Type jsonListType = new TypeToken<ArrayList<Tile>>(){}.getType();
+        Type jsonListType = new TypeToken<List<Tile>>(){}.getType();
         this.allTiles = new Gson().fromJson(file, jsonListType);
     }
 
-    public ArrayList<Tile> getTileList() { return (ArrayList<Tile>) List.copyOf(allTiles); }
+    public List<Tile> getTileList() {
+        ArrayList<Tile> copyAllTiles = new ArrayList<Tile>();
+        copyAllTiles.addAll(allTiles);
+        return copyAllTiles;
+    }
 }
