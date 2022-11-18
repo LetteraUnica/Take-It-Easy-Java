@@ -13,9 +13,9 @@ public class Round {
 
     }
 
-    public int getcurrentPlayer() {return currentPlayer;}
+    public int getCurrentPlayer() {return currentPlayer;}
 
-    public Tile getcurrentTile() {return currentTile;}
+    public Tile getCurrentTile() {return currentTile;}
 
 
     }

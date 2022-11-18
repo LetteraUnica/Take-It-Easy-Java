@@ -34,4 +34,9 @@ public class Tile {
     public List<Integer> getValues() {
         return List.of(leftPath, rightPath, topPath);
     }
+
+    @Override
+    public String toString() {
+        return "\"Tile[idTile" + this.idTile + "leftPath" + this.leftPath + "rightPath" + this.rightPath + "topPath" + this.topPath + "]";
+    }
 }
