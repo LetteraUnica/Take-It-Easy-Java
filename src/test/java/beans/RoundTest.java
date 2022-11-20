@@ -9,8 +9,8 @@ public class RoundTest {
     public void testRound() {
         Tile tile = new Tile(1,2,3,4);
         Round round = new Round(1, tile);
-        assertEquals(1, round.getcurrentPlayer());
-        assertEquals(tile, round.getcurrentTile());
+        assertEquals(1, round.getCurrentPlayer());
+        assertEquals(tile, round.getCurrentTile());
     }
 
 }
