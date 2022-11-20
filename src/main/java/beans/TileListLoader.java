@@ -22,9 +22,7 @@ public class TileListLoader {
         this.allTiles = new Gson().fromJson(file, jsonListType);
     }
 
-    public List<Tile> getTileList() {
-        ArrayList<Tile> copyAllTiles = new ArrayList<Tile>();
-        copyAllTiles.addAll(allTiles);
-        return copyAllTiles;
+    public ArrayList<Tile> getTileList() {
+        return new ArrayList<>(this.allTiles);
     }
 }
