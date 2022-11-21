@@ -1,4 +1,4 @@
-package ui;
+package ui.lobby;
 
 import javafx.fxml.FXML;
 

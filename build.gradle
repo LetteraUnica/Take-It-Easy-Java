@@ -14,7 +14,7 @@ repositories {
 
 application {
     mainModule = 'ui'
-    mainClass = 'ui.MainMenu'
+    mainClass = 'ui.Main'
 }
 
 javafx {
