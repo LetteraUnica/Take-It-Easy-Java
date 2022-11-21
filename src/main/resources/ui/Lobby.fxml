@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LobbyController">
    <children>
       <ListView layoutX="17.0" layoutY="52.0" prefHeight="331.0" prefWidth="315.0" />
       <Text layoutX="17.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players" wrappingWidth="253.396484375">
@@ -16,7 +15,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="476.0" layoutY="58.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="109.0" text="Add player">
+      <Button layoutX="476.0" layoutY="58.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="30.0" prefWidth="109.0" text="Add player">
          <font>
             <Font size="14.0" />
          </font>
