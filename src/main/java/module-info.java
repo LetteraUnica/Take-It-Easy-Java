@@ -8,4 +8,6 @@ module ui {
 
     opens ui to javafx.fxml;
     exports ui;
+    exports ui.mainMenu;
+    opens ui.mainMenu to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package ui;
+package ui.mainMenu;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
