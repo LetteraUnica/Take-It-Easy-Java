@@ -13,4 +13,6 @@ module ui {
     opens ui.mainMenu to javafx.fxml;
     exports ui.lobby;
     opens ui.lobby to javafx.fxml;
+    exports ui.navigator;
+    opens ui.navigator to javafx.fxml;
 }
