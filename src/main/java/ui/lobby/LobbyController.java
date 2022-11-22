@@ -27,7 +27,7 @@ public class LobbyController {
     @FXML
     private Button startMatchButton;
 
-    private ArrayList<String> playerNames = new ArrayList<>();
+    private final ArrayList<String> playerNames = new ArrayList<>();
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
