@@ -3,7 +3,7 @@ package ui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.navigator.Navigator;
-import utils.NavigationConstants;
+import ui.navigator.NavigationConstants;
 
 public class Main extends Application {
     public static void main(String[] args) {

@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import ui.navigator.Navigator;
-import utils.NavigationConstants;
+import ui.navigator.NavigationConstants;
 
 import java.awt.*;
 import java.io.IOException;

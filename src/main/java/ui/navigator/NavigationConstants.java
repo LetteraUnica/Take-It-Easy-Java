@@ -1,4 +1,4 @@
-package utils;
+package ui.navigator;
 
 public class NavigationConstants {
     public static final String STARTING_MENU_FXML = "mainMenu.fxml";

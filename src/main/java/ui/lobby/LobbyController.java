@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ui.navigator.Navigator;
-import utils.NavigationConstants;
+import ui.navigator.NavigationConstants;
 
 import java.util.ArrayList;
 
