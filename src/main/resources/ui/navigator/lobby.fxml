@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@lobby.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.lobby.LobbyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../lobby/lobby.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.lobby.LobbyController">
    <children>
       <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players" wrappingWidth="283.0">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="338.0" layoutY="139.0" mnemonicParsing="false" onAction="#startGame" prefHeight="155.0" prefWidth="240.0" text="Start Match" textAlignment="CENTER">
+      <Button fx:id="startMatchButton" disable="true" layoutX="338.0" layoutY="139.0" mnemonicParsing="false" onAction="#startMatch" prefHeight="155.0" prefWidth="240.0" text="Start Match" textAlignment="CENTER">
          <font>
             <Font size="28.0" />
          </font>
@@ -47,12 +47,12 @@
       </ScrollPane>
       <HBox layoutX="338.0" layoutY="48.0" prefHeight="56.0" prefWidth="240.0">
          <children>
-            <TextField fx:id="playerNameField" prefHeight="55.0" prefWidth="154.0" promptText="Marco" style="-fx-background-radius: 10 0 0 10;" styleClass="textfield">
+            <TextField fx:id="playerNameField" prefHeight="55.0" prefWidth="154.0" promptText="Add player" style="-fx-background-radius: 10 0 0 10;" styleClass="textfield" onKeyTyped="#onPlayerNameChange">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addPlayer" prefHeight="54.0" prefWidth="86.0" style="-fx-background-radius: 0 10 10 0;" text="Add player">
+            <Button fx:id="addPlayerButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#addPlayer" prefHeight="54.0" prefWidth="86.0" style="-fx-background-radius: 0 10 10 0;" text="Add player">
                <font>
                   <Font size="14.0" />
                </font>
