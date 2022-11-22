@@ -55,16 +55,16 @@ public class LobbyController {
         removePlayerButton.setOnAction(event -> {
             playerNames.remove(playerName);
             playerList.getChildren().remove(rowContainer);
-            checkStartMatchButtonEnabled();
+            startMatchButtonEnable();
         });
 
         playerList.addRow(playerList.getRowCount(), rowContainer);
 
-        checkStartMatchButtonEnabled();
-    }
+        startMatchButtonEnable();
 
-    private void checkStartMatchButtonEnabled() {
-        startMatchButton.setDisable(playerNames.isEmpty());
+        playerNameField.clear();
+
+        addPlayerButtonEnable();
     }
 
     @FXML
@@ -72,13 +72,21 @@ public class LobbyController {
         Navigator navigator = new Navigator();
         navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.STARTING_MENU_FXML);
     }
+
     @FXML
     public void startMatch() {
         // TODO: Implement startGame
     }
-
     @FXML
     public void onPlayerNameChange(KeyEvent e) {
+        addPlayerButtonEnable();
+    }
+
+    private void startMatchButtonEnable() {
+        startMatchButton.setDisable(playerNames.isEmpty());
+    }
+
+    private void addPlayerButtonEnable() {
         addPlayerButton.setDisable(playerNameField.getText().isEmpty());
     }
 }
