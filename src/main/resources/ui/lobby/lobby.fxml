@@ -1,49 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@lobby.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.lobby.LobbyController">
    <children>
-      <ListView fx:id="playerList" layoutX="17.0" layoutY="52.0" prefHeight="331.0" prefWidth="315.0" />
-      <Text layoutX="17.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players" wrappingWidth="253.396484375">
+      <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players" wrappingWidth="283.0">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="476.0" layoutY="58.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="27.0" prefWidth="109.0" text="Add player">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="353.0" layoutY="168.0" mnemonicParsing="false" onAction="#startGame" prefHeight="155.0" prefWidth="232.0" text="Start Match" textAlignment="CENTER">
+      <Button layoutX="338.0" layoutY="139.0" mnemonicParsing="false" onAction="#startGame" prefHeight="155.0" prefWidth="240.0" text="Start Match" textAlignment="CENTER">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button layoutX="353.0" layoutY="348.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="35.0" prefWidth="232.0" text="Return to Menu">
+      <Button layoutX="338.0" layoutY="348.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="35.0" prefWidth="240.0" text="Return to Menu">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="476.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Remove Player">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <Button layoutX="353.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Rename Player">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <TextField layoutX="353.0" layoutY="58.0" prefHeight="13.0" prefWidth="116.0" promptText="Marco">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
+      <ScrollPane hbarPolicy="NEVER" layoutX="24.0" layoutY="58.0" prefHeight="324.0" prefWidth="283.0" styleClass="root">
+         <content>
+            <GridPane fx:id="playerList" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="278.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <HBox layoutX="338.0" layoutY="48.0" prefHeight="56.0" prefWidth="240.0">
+         <children>
+            <TextField fx:id="playerNameField" prefHeight="55.0" prefWidth="154.0" promptText="Marco" style="-fx-background-radius: 10 0 0 10;" styleClass="textfield">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addPlayer" prefHeight="54.0" prefWidth="86.0" style="-fx-background-radius: 0 10 10 0;" text="Add player">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
