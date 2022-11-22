@@ -5,7 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import ui.lobby.Lobby;
+import ui.navigator.Navigator;
+import utils.NavigationConstants;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class MainMenuController {
     }
     @FXML
     public void startGame(ActionEvent e) throws Exception {
-        Lobby lobby = new Lobby();
-        lobby.showStage((Stage) ((Node) e.getSource()).getScene().getWindow());
+        Navigator navigator = new Navigator();
+        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.LOBBY_FXML);
     }
 }
