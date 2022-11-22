@@ -7,27 +7,34 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ui.mainMenu.MainMenu;
+import ui.navigator.Navigator;
+import utils.NavigationConstants;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class LobbyController {
-    private HashSet<String> currentPlayers = new HashSet<>();
+    @FXML
+    public Button addPlayerButton;
     @FXML
     private GridPane playerList;
     @FXML
     private TextField playerNameField;
     @FXML
+    private Button startMatchButton;
+
+    private ArrayList<String> playerNames = new ArrayList<>();
+    @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
-        currentPlayers.add(playerName);
+        if (playerName.isEmpty()) {
+            return;
+        }
+        playerNames.add(playerName);
 
         Pane rowContainer = new Pane();
         rowContainer.setPadding(new javafx.geometry.Insets(20, 0, 20, 0));
@@ -46,19 +53,32 @@ public class LobbyController {
         removePlayerButton.relocate(180, 0);
 
         removePlayerButton.setOnAction(event -> {
-            currentPlayers.remove(playerName);
+            playerNames.remove(playerName);
             playerList.getChildren().remove(rowContainer);
+            checkStartMatchButtonEnabled();
         });
 
         playerList.addRow(playerList.getRowCount(), rowContainer);
+
+        checkStartMatchButtonEnabled();
     }
+
+    private void checkStartMatchButtonEnabled() {
+        startMatchButton.setDisable(playerNames.isEmpty());
+    }
+
     @FXML
     public void returnToMainMenu(ActionEvent e) throws Exception {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.showStage((Stage) ((Node) e.getSource()).getScene().getWindow());
+        Navigator navigator = new Navigator();
+        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.STARTING_MENU_FXML);
     }
     @FXML
-    public void startGame() {
+    public void startMatch() {
         // TODO: Implement startGame
+    }
+
+    @FXML
+    public void onPlayerNameChange(KeyEvent e) {
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty());
     }
 }
