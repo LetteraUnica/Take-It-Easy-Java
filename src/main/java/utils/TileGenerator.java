@@ -27,7 +27,7 @@ public class TileGenerator {
         TileGenerator tiles = new TileGenerator();
         String allTilesString = tiles.generateTiles();
         System.out.print(allTilesString);
-        try (PrintWriter out = new PrintWriter("/home/marcosicklinger/SDM-final-project/src/main/resources/tiles/tileJSON.txt")) {
+        try (PrintWriter out = new PrintWriter("src/main/resources/tiles/tileJSON.txt")) {
             out.println(allTilesString);
         }
     }
