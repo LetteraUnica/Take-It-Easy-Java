@@ -14,7 +14,7 @@ public class Navigator {
         return new Scene(root);
     }
 
-    public void navigateTo(Stage stage, String to) throws Exception {
+    public void navigateTo(Stage stage, String to) throws IOException {
         Scene scene = initializeScene(to);
         stage.setScene(scene);
         stage.show();
