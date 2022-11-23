@@ -15,4 +15,6 @@ module ui {
     opens ui.lobby to javafx.fxml;
     exports ui.navigator;
     opens ui.navigator to javafx.fxml;
+
+    opens beans to com.google.gson;
 }

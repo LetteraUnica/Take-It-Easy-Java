@@ -21,7 +21,8 @@ public class TileListLoader {
     public void loadTileList(String filename) throws FileNotFoundException {
         BufferedReader file = new BufferedReader(new FileReader(filename));
         Type jsonListType = new TypeToken<List<Tile>>(){}.getType();
-        this.allTiles = new Gson().fromJson(file, jsonListType);
+        List<Tile> jsonList = new Gson().fromJson(file, jsonListType);
+        allTiles.addAll(jsonList);
     }
 
     public ArrayList<Tile> getTileList() {

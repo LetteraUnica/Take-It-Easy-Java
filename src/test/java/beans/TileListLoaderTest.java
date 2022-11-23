@@ -16,7 +16,7 @@ public class TileListLoaderTest {
     private final ArrayList<Tile> tileList;
 
     public TileListLoaderTest() throws FileNotFoundException {
-        String filename = "src/main/resources/tiles/tileJSON.txt";
+        String filename = getClass().getResource("tileJSON.txt").getFile();
         tileListLoader.loadTileList(filename);
         this.tileList = tileListLoader.getTileList();
     }
