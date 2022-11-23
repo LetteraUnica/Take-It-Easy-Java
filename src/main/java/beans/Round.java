@@ -2,9 +2,9 @@ package beans;
 
 public class Round {
 
-    private final int currentPlayer;
+    private int currentPlayer;
 
-    private final Tile currentTile;
+    private Tile currentTile;
 
 
     public Round(int currentPlayer, Tile currentTile) {
@@ -13,10 +13,22 @@ public class Round {
 
     }
 
-    public int getCurrentPlayer() {return currentPlayer;}
-
-    public Tile getCurrentTile() {return currentTile;}
-
-
+    public int getCurrentPlayer() {
+        return this.currentPlayer;
     }
+
+    public Tile getCurrentTile() {
+        return this.currentTile;
+    }
+
+
+    public void setCurrentPlayer(int newPlayer) {
+        this.currentPlayer = newPlayer;
+    }
+
+    public void setCurrentTile(Tile newTile) {
+        this.currentTile = newTile;
+    }
+
+}
 
