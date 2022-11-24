@@ -16,6 +16,7 @@ import ui.navigator.Navigator;
 import ui.navigator.NavigationConstants;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LobbyController {
     @FXML
@@ -27,7 +28,7 @@ public class LobbyController {
     @FXML
     private Button startMatchButton;
 
-    private final ArrayList<String> playerNames = new ArrayList<>();
+    private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
@@ -87,6 +88,6 @@ public class LobbyController {
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty());
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || playerNames.contains(playerNameField.getText()));
     }
 }
