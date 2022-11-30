@@ -1,4 +1,4 @@
-package engine.game;
+package engine.controller;
 
 public interface GameInterface {
 }

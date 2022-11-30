@@ -1,4 +1,4 @@
-package engine.board;
+package engine.model.board;
 
 public interface BoardInterface {
 }

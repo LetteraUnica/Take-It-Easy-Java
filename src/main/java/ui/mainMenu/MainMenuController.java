@@ -5,8 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import ui.navigator.Navigator;
 import ui.navigator.NavigationConstants;
+import ui.navigator.Navigator;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,10 +21,12 @@ public class MainMenuController {
     public void exitGame(ActionEvent e) {
         Platform.exit();
     }
+
     @FXML
     public void howToPlay(ActionEvent e) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI(HOW_TO_PLAY_URL));
     }
+
     @FXML
     public void startGame(ActionEvent e) throws Exception {
         Navigator navigator = new Navigator();

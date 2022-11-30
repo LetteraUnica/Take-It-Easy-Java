@@ -1,8 +1,8 @@
-package engine.tile;
+package engine.model.tile;
 
 import java.util.List;
 
-public class Tile implements TileInterface{
+public class Tile implements TileInterface {
     private final int idTile;
     private final int leftPath;
     private final int rightPath;

@@ -16,9 +16,7 @@ module ui {
     exports ui.navigator;
     opens ui.navigator to javafx.fxml;
 
-    opens engine to com.google.gson;
-    opens engine.tile to com.google.gson;
-    opens engine.match to com.google.gson;
-    opens engine.board to com.google.gson;
+    opens engine.model.tile to com.google.gson;
+    opens engine.state to com.google.gson;
     opens utils to com.google.gson;
 }

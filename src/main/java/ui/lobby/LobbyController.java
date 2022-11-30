@@ -12,12 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import ui.navigator.Navigator;
 import ui.navigator.NavigationConstants;
+import ui.navigator.Navigator;
 
 import java.util.ArrayList;
 
 public class LobbyController {
+    private final ArrayList<String> playerNames = new ArrayList<>();
     @FXML
     public Button addPlayerButton;
     @FXML
@@ -27,7 +28,6 @@ public class LobbyController {
     @FXML
     private Button startMatchButton;
 
-    private final ArrayList<String> playerNames = new ArrayList<>();
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
@@ -77,6 +77,7 @@ public class LobbyController {
     public void startMatch() {
         // TODO: Implement startGame
     }
+
     @FXML
     public void onPlayerNameChange(KeyEvent e) {
         addPlayerButtonEnable();
