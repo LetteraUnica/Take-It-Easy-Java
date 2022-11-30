@@ -1,6 +1,6 @@
 package utils;
 
-import beans.Tile;
+import engine.tile.Tile;
 import com.google.gson.Gson;
 
 import java.io.IOException;

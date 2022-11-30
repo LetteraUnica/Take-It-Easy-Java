@@ -1,7 +1,8 @@
-package beans;
+package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import engine.tile.Tile;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,11 +11,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileListLoader {
+public class TileLoader {
 
-    private ArrayList<Tile> allTiles;
+    private final ArrayList<Tile> allTiles;
 
-    public TileListLoader() {
+    public TileLoader() {
         allTiles = new ArrayList<>();
     }
 

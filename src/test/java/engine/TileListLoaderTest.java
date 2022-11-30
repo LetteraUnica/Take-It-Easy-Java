@@ -1,5 +1,7 @@
-package beans;
+package engine;
 
+import engine.tile.Tile;
+import utils.TileLoader;
 import org.junit.jupiter.api.Test;
 import utils.Constants;
 
@@ -12,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TileListLoaderTest {
 
-    TileListLoader tileListLoader = new TileListLoader();
+    TileLoader tileLoader = new TileLoader();
     private final ArrayList<Tile> tileList;
 
     public TileListLoaderTest() throws FileNotFoundException {
         String filename = getClass().getResource("tileJSON.txt").getFile();
-        tileListLoader.loadTileList(filename);
-        this.tileList = tileListLoader.getTileList();
+        tileLoader.loadTileList(filename);
+        this.tileList = tileLoader.getTileList();
     }
 
     @Test

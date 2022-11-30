@@ -1,22 +1,24 @@
-package beans;
+package engine.tile;
+import utils.TileLoader;
+
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.Random;
 
-public class TileController {
+public class TileCollection {
 
     private final ArrayList<Tile> availableTiles;
     private final Random randomGenerator;
 
-    public TileController() throws FileNotFoundException {
-        TileListLoader tileListLoader = new TileListLoader();
+    public TileCollection() throws FileNotFoundException {
+        TileLoader tileLoader = new TileLoader();
         String filename = "src/main/resources/tiles/tileJSON.txt";
-        tileListLoader.loadTileList(filename);
-        this.availableTiles = new ArrayList<>(tileListLoader.getTileList());
+        tileLoader.loadTileList(filename);
+        this.availableTiles = new ArrayList<>(tileLoader.getTileList());
         this.randomGenerator = new Random();
     }
 
-    public ArrayList<Tile> getavailableTiles() {return new ArrayList<>(this.availableTiles);
+    public List<TileInterface> getAvailableTiles() {return new ArrayList<>(this.availableTiles);
     }
 
 

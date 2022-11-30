@@ -1,15 +1,18 @@
-package beans;
+package engine.match;
+
+import engine.board.Board;
+import engine.board.BoardInterface;
 
 import java.util.Map;
 
-public class Match {
-        private Map boards;
+public class Match implements MatchInterface{
+    private Map boards;
 
     public Match(Map boards) {
         this.boards = boards;
     }
 
-    public void addBoard( Board board){
+    public void addBoard(Board board){
 
     }
     public void deleteBoard(String name){

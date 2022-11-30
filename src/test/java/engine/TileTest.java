@@ -1,5 +1,6 @@
-package beans;
+package engine;
 
+import engine.tile.Tile;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
