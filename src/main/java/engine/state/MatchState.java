@@ -1,6 +1,6 @@
 package engine.state;
 
-import engine.model.board.Board;
+import engine.model.board.BoardClassic;
 import engine.model.tile.Tile;
 import exceptions.FatalGameErrorException;
 import utils.TileLoader;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MatchState {
-    private HashMap<Integer, Board> boards;
+    private HashMap<Integer, BoardClassic> boards;
     private List<Tile> tileCollection;
 
     public MatchState() throws FatalGameErrorException {
@@ -29,7 +29,7 @@ public class MatchState {
         ;
     }
 
-    public void addBoard(Board board) {
+    public void addBoard(BoardClassic boardClassic) {
 
     }
 
@@ -41,8 +41,8 @@ public class MatchState {
 
     }
 
-    public Board getBoard(String name) {
-        return (Board) boards.get(name);
+    public BoardClassic getBoard(String name) {
+        return (BoardClassic) boards.get(name);
     }
 
     public Map getBoards() {
