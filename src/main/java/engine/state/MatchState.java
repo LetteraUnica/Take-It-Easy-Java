@@ -26,7 +26,6 @@ public class MatchState {
     private void initializeTileCollection() throws FileNotFoundException {
         TileLoader tileLoader = new TileLoader();
         this.tileCollection = tileLoader.loadTileList();
-        ;
     }
 
     public void addBoard(Board board) {
