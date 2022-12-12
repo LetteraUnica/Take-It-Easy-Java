@@ -21,8 +21,7 @@ public class TileLoader {
             TileGenerator tileGenerator = new TileGenerator();
             return tileGenerator.generateTileList();
         }
-        Type jsonListType = new TypeToken<List<Tile>>() {
-        }.getType();
+        Type jsonListType = new TypeToken<List<Tile>>(){}.getType();
         return new Gson().fromJson(file, jsonListType);
     }
 }
