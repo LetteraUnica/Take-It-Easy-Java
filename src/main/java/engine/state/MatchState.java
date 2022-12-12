@@ -12,17 +12,23 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchState {
-    private HashMap<Integer, BoardInterface> boards;
+    private ArrayList<BoardInterface> boards;
     private ArrayList<TileInterface> tileCache;
     private TileInterface currentTile;
+    private Integer currentPlayer;
 
     public MatchState() throws FatalGameErrorException {
+        currentPlayer = 0;
         try {
             initializeTileCollection();
         } catch (FileNotFoundException e) {
             throw new FatalGameErrorException();
         }
     }
+
+    public int getCurrentPlayer() { return currentPlayer; }
+
+    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
 
     private void initializeTileCollection() throws FileNotFoundException {
         TileLoader tileLoader = new TileLoader();
@@ -39,18 +45,18 @@ public class MatchState {
     }
 
     public void addBoard(BoardInterface board) {
-        boards.put(boards.size() + 1, board);
+        boards.add(board);
     }
 
-    public void deleteBoard(Integer playerId) {
-        boards.entrySet().removeIf(entry -> entry.getKey().equals(playerId));
+    public void deleteBoard(Integer playerIndex) {
+        boards.remove(playerIndex);
     }
 
     public BoardInterface getBoard(Integer playerId) {
         return (BoardInterface) boards.get(playerId);
     }
 
-    public Map<Integer, BoardInterface> getBoards() {
+    public ArrayList<BoardInterface> getBoards() {
         return boards;
     }
 
@@ -58,4 +64,9 @@ public class MatchState {
         return boards.size();
     }
 
+    public TileInterface getCurrentTile() { return currentTile; }
+
+    public int getPlayerScore(){
+        return 0;
+    }
 }
