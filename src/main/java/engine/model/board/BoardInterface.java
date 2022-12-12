@@ -13,6 +13,6 @@ public interface BoardInterface {
 
     public int getScore();
 
-    public List<List<Float>> getEuclideanCoordinates();
+    public float[][] getEuclideanCoordinates();
 
 }

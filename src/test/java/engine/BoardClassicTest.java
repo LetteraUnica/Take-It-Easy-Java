@@ -13,9 +13,9 @@ public class BoardClassicTest {
 
     }
     @Test
-    void getHexagonalGrid() {
+    void getEuclideanCoordinates() {
         BoardClassic board = new BoardClassic("Boris");
-        float[][][] coordinates = board.getHexagonalGrid(3,9);
+        float[][] coordinates = board.getEuclideanCoordinates();
 
     }
 }

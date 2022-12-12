@@ -1,8 +1,13 @@
-package utils;
+package utils.boardUtils;
 
-public class HexagonalUtils {
+public class HexagonalGrid {
 
+    private final Integer width,length;
 
+    public HexagonalGrid(int width, int length) {
+        this.width = width;
+        this.length = length;
+    }
 
 
     public float[][][] gridCenter(float[][][] coordinates){
@@ -47,4 +52,24 @@ public class HexagonalUtils {
         return coordinates;
     }
 
+
+    public float[][][] initializeEuclideanGrid(int width, int length){
+        float[][][] grid = new float[width][length][2];
+        for (int i = 0; i < width; ++i) {
+            for(int j = 0; j < length; ++j) {
+
+                grid[i][j][0] = i;
+                grid[i][j][1] = j;
+            }
+        }
+        return grid;
+    }
+
+    public float[][][] getHexagonalGrid(){
+        float[][][] grid =  initializeEuclideanGrid(this.width, this.length);
+        grid = gridCenter(grid);
+        grid = gridHexagonalise(grid);
+        grid = gridNormalize(grid);
+        return grid;
+    }
 }
