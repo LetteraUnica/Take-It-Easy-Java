@@ -66,7 +66,7 @@ public class MatchState {
 
     public TileInterface getCurrentTile() { return currentTile; }
 
-    public int getPlayerScore(){
+    public int getCurrentPlayerScore() {
         return 0;
     }
 }
