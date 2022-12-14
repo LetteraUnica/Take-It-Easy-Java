@@ -1,5 +1,7 @@
 package engine.controller;
 
+import engine.model.board.Board;
+import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
@@ -28,21 +30,22 @@ public class GameController implements GameInterface {
 
     @Override
     public void addPlayer(String newPlayerName) {
-
+//        BoardInterface newBoard = new Board(newPlayerName);
+//        matchState.addBoard(newBoard);
     }
 
     @Override
-    public void removePlayer() {
-
+    public void removePlayer(int playerIndex) {
+        matchState.deleteBoard(playerIndex);
     }
 
     @Override
-    public int getPlayerScore() {
-        return 0;
+    public int getCurrentPlayerScore() {
+        return matchState.getCurrentPlayerScore();
     }
 
     @Override
     public boolean isGameOver() {
-        return false;
+        return matchState.getCacheSize() == 0;
     }
 }
