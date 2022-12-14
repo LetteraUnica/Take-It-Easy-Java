@@ -9,3 +9,7 @@ c
 3src/main/java/ui/navigator/NavigationConstants.java,a\b\ab419d67d7fae25fc5e255f2e8390f46643cb68c
 Y
 )src/main/java/ui/navigator/Navigator.java,5\5\555345ff3c4758f077f806e978a99763da17ede2
+d
+4src/main/java/engine/model/board/BoardInterface.java,7/d/7d48e164564eca4738fdcb561f938fcc65b3787d
+e
+5src/main/java/exceptions/FatalGameErrorException.java,c/d/cd6d61e2ed534931057e76b44d5b8540e1ffecd6
