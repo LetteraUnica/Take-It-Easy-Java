@@ -1,4 +1,4 @@
-package utils.boardUtils;
+package utils.boardutils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,6 @@ public class CubeCoordinates {
         center = center.cubeAdd(center.cubeDirection(4).cubeScale(radius));
         for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < radius; j++) {
-//                    System.out.println(j);
                     results.add(center);
                     center = center.cubeNeighbor(i);
                 }
@@ -86,7 +85,6 @@ public class CubeCoordinates {
 
     public int[] toEuclidean(){
         int[] coordinates= new int[2];
-
         if (this.x % 2 == 0){
         coordinates[0]=(this.x)/2;
         coordinates[1]=(this.y+coordinates[0])*2;

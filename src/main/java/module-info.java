@@ -19,5 +19,5 @@ module ui {
     opens engine.model.tile to com.google.gson;
     opens engine.state to com.google.gson;
     opens utils to com.google.gson;
-    opens utils.boardUtils to com.google.gson;
+    opens utils.boardutils to com.google.gson;
 }

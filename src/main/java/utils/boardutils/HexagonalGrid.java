@@ -1,4 +1,4 @@
-package utils.boardUtils;
+package utils.boardutils;
 
 public class HexagonalGrid {
 
