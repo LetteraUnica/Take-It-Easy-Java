@@ -16,6 +16,7 @@ import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LobbyController {
     private final ArrayList<String> playerNames = new ArrayList<>();
@@ -88,6 +89,6 @@ public class LobbyController {
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty());
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || playerNames.contains(playerNameField.getText()));
     }
 }
