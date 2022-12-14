@@ -12,9 +12,9 @@ public interface GameInterface {
 
     public void addPlayer(String newPlayerName);
 
-    public void removePlayer();
+    public void removePlayer(int playerIndex);
 
-    public int getPlayerScore();
+    public int getCurrentPlayerScore();
 
     public boolean isGameOver();
 
