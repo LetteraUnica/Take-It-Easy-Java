@@ -1,6 +1,7 @@
 package engine.state;
 
 import engine.model.board.BoardInterface;
+import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
 import utils.TileLoader;
@@ -12,8 +13,8 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchState {
-    private ArrayList<BoardInterface> boards;
-    private ArrayList<TileInterface> tileCache;
+    private ArrayList<BoardInterface> boards =  new ArrayList<>();
+    private ArrayList<TileInterface> tileCache = new ArrayList<>();
     private TileInterface currentTile;
     private Integer currentPlayer;
 
@@ -24,6 +25,7 @@ public class MatchState {
         } catch (FileNotFoundException e) {
             throw new FatalGameErrorException();
         }
+        System.out.println(getCacheSize());
     }
 
     public int getCurrentPlayer() { return currentPlayer; }
@@ -31,8 +33,8 @@ public class MatchState {
     public void nextPlayer() { currentPlayer = currentPlayer + 1; }
 
     private void initializeTileCollection() throws FileNotFoundException {
-        TileLoader tileLoader = new TileLoader();
-        tileCache.addAll(tileLoader.loadTileList());
+        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
+        tileCache.addAll(tileList);
     }
 
     public Integer getCacheSize() {
