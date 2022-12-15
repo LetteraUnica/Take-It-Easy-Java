@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -15,11 +14,11 @@ import javafx.stage.Stage;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashSet;
 
 public class LobbyController {
-    private final ArrayList<String> playerNames = new ArrayList<>();
+    private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public Button addPlayerButton;
     @FXML
@@ -75,12 +74,13 @@ public class LobbyController {
     }
 
     @FXML
-    public void startMatch() {
-        // TODO: Implement startGame
+    public void startMatch(ActionEvent e) throws IOException {
+        Navigator navigator = new Navigator();
+        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.MAIN_GAME_FXML);
     }
 
     @FXML
-    public void onPlayerNameChange(KeyEvent e) {
+    public void onPlayerNameChange() {
         addPlayerButtonEnable();
     }
 
