@@ -25,3 +25,11 @@
 
     -fx-cursor: "text";
 }
+
+.rectangle{
+    -fx-arc-height: 30;
+    -fx-arc-width: 30;
+    -fx-fill: -base-color;
+    -fx-smooth: true;
+    -fx-stroke-width: 0;
+}
