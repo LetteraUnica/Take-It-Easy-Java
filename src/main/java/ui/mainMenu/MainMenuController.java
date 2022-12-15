@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static ui.Utils.getStage;
+
 public class MainMenuController {
 
     public static final String HOW_TO_PLAY_URL = "https://www.ultraboardgames.com/take-it-easy/game-rules.php";
@@ -28,8 +30,8 @@ public class MainMenuController {
     }
 
     @FXML
-    public void startGame(ActionEvent e) throws Exception {
+    public void startGame(ActionEvent e) throws IOException {
         Navigator navigator = new Navigator();
-        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.LOBBY_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.LOBBY_FXML);
     }
 }

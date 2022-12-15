@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" stylesheets="@../lobby/lobby.css"
+            prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/application.css"
             xmlns="http://javafx.com/javafx/19" fx:controller="ui.lobby.LobbyController">
     <children>
         <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players"
@@ -21,7 +21,7 @@
             </font>
         </Button>
         <Button layoutX="338.0" layoutY="348.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="35.0"
-                prefWidth="240.0" text="Return to Menu">
+                prefWidth="240.0" text="Return to Menu" styleClass="secondary-button">
             <font>
                 <Font size="16.0"/>
             </font>

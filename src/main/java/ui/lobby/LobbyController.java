@@ -17,6 +17,8 @@ import ui.navigator.Navigator;
 import java.io.IOException;
 import java.util.HashSet;
 
+import static ui.Utils.getStage;
+
 public class LobbyController {
     private final HashSet<String> playerNames = new HashSet<>();
     @FXML
@@ -70,13 +72,13 @@ public class LobbyController {
     @FXML
     public void returnToMainMenu(ActionEvent e) throws Exception {
         Navigator navigator = new Navigator();
-        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.STARTING_MENU_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.STARTING_MENU_FXML);
     }
 
     @FXML
     public void startMatch(ActionEvent e) throws IOException {
         Navigator navigator = new Navigator();
-        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.MAIN_GAME_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.MAIN_GAME_FXML);
     }
 
     @FXML
