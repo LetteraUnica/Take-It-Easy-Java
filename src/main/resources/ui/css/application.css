@@ -1,8 +1,9 @@
 .root{
     -base-color: #eeeeee;
     -primary_color: "indianred";
+    -primary-highlight-color: "crimson";
     -secondary-color: #8e8e8e;
-    -highlight-color: "crimson";
+    -secondary-highlight-color: #666666;
 
     -fx-background-color: -base-color;
 }
@@ -16,7 +17,19 @@
 }
 
 .button:hover{
-    -fx-background-color: -highlight-color;
+    -fx-background-color: -primary-highlight-color;
+}
+
+.secondary-button{
+    -fx-background-color: -secondary-color;
+    -fx-background-radius: 20;
+    -fx-text-fill: -base-color;
+
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover{
+    -fx-background-color: -secondary-highlight-color;
 }
 
 .textfield{
