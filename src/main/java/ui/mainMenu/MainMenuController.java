@@ -1,10 +1,10 @@
 package ui.mainMenu;
 
+import engine.controller.GameInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+import ui.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
@@ -15,17 +15,19 @@ import java.net.URISyntaxException;
 
 import static ui.Utils.getStage;
 
-public class MainMenuController {
+public class MainMenuController implements UIControllerInterface {
 
     public static final String HOW_TO_PLAY_URL = "https://www.ultraboardgames.com/take-it-easy/game-rules.php";
-
+    @Override
+    public void initController(GameInterface gameController) {
+    }
     @FXML
-    public void exitGame(ActionEvent e) {
+    public void exitGame() {
         Platform.exit();
     }
 
     @FXML
-    public void howToPlay(ActionEvent e) throws URISyntaxException, IOException {
+    public void howToPlay() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI(HOW_TO_PLAY_URL));
     }
 
@@ -34,4 +36,6 @@ public class MainMenuController {
         Navigator navigator = new Navigator();
         navigator.navigateTo(getStage(e), NavigationConstants.LOBBY_FXML);
     }
+
+
 }

@@ -1,5 +1,7 @@
 package ui.lobby;
 
+import engine.controller.GameInterface;
+import exceptions.ReassignedControllerExeption;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import ui.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
@@ -17,7 +20,7 @@ import java.util.HashSet;
 
 import static ui.Utils.getStage;
 
-public class LobbyController {
+public class LobbyController implements UIControllerInterface {
     private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public Button addPlayerButton;
@@ -28,12 +31,23 @@ public class LobbyController {
     @FXML
     private Button startMatchButton;
 
+    private GameInterface gameController;
+
+    @Override
+    public void initController(GameInterface gameController) throws ReassignedControllerExeption {
+        if (this.gameController != null) {
+            throw new ReassignedControllerExeption("Controller can only be initialized once");
+        }
+        this.gameController = gameController;
+    }
+
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
         playerNames.add(playerName);
 
         Pane rowContainer = createRowContainer();
+
         addPlayerName(playerName, rowContainer);
         addRemoveButton(playerName, rowContainer);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
@@ -78,9 +92,9 @@ public class LobbyController {
     }
 
     @FXML
-    public void startMatch(ActionEvent e) throws IOException {
+    public void startMatch(ActionEvent e) throws IOException, ReassignedControllerExeption {
         Navigator navigator = new Navigator();
-        navigator.navigateTo(getStage(e), NavigationConstants.MAIN_GAME_FXML);
+        navigator.navigateWithController(getStage(e), NavigationConstants.MAIN_GAME_FXML, gameController);
     }
 
     @FXML
