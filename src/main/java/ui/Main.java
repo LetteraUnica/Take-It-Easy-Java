@@ -15,6 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setResizable(false);
         setLogo(primaryStage);
         Navigator navigator = new Navigator();
         navigator.navigateTo(primaryStage, NavigationConstants.STARTING_MENU_FXML);
