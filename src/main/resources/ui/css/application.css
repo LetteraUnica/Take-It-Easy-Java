@@ -1,9 +1,9 @@
 .root{
-    -base-color: #eeeeee;
-    -primary_color: "indianred";
-    -primary-highlight-color: "crimson";
+    -base-color: #ffffff;
+    -primary_color: #4285f4;
+    -primary-highlight-color: #1967d2;
     -secondary-color: #8e8e8e;
-    -secondary-highlight-color: #666666;
+    -secondary-highlight-color: #555555;
 
     -fx-background-color: -base-color;
 }
@@ -42,7 +42,13 @@
 .rectangle{
     -fx-arc-height: 30;
     -fx-arc-width: 30;
-    -fx-fill: -base-color;
+    -fx-fill: -secondary-color;
     -fx-smooth: true;
     -fx-stroke-width: 0;
+}
+
+.scroll-pane {
+    -fx-background: -base-color;
+    -fx-border-color: -base-color;
+    -fx-background-color: -base-color;
 }
