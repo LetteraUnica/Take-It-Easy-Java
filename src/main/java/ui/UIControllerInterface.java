@@ -1,8 +1,8 @@
 package ui;
 
 import engine.controller.GameInterface;
-import exceptions.ReassignedControllerExeption;
+import exceptions.ReassignedControllerException;
 
 public interface UIControllerInterface {
-    void initController(GameInterface gameController) throws ReassignedControllerExeption;
+    void initController(GameInterface gameController) throws ReassignedControllerException;
 }

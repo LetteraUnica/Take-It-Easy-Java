@@ -35,6 +35,7 @@ public class Tile implements TileInterface {
         return topPath;
     }
 
+    @Override
     public List<Integer> getValues() {
         return List.of(leftPath, rightPath, topPath);
     }

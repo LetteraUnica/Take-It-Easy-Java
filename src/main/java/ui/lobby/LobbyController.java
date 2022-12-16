@@ -1,7 +1,7 @@
 package ui.lobby;
 
 import engine.controller.GameInterface;
-import exceptions.ReassignedControllerExeption;
+import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +18,7 @@ import ui.navigator.Navigator;
 import java.io.IOException;
 import java.util.HashSet;
 
-import static ui.Utils.getStage;
+import static utils.ui.UIUtils.getStage;
 
 public class LobbyController implements UIControllerInterface {
     private final HashSet<String> playerNames = new HashSet<>();
@@ -34,9 +34,9 @@ public class LobbyController implements UIControllerInterface {
     private GameInterface gameController;
 
     @Override
-    public void initController(GameInterface gameController) throws ReassignedControllerExeption {
+    public void initController(GameInterface gameController) throws ReassignedControllerException {
         if (this.gameController != null) {
-            throw new ReassignedControllerExeption("Controller can only be initialized once");
+            throw new ReassignedControllerException();
         }
         this.gameController = gameController;
     }
@@ -92,7 +92,7 @@ public class LobbyController implements UIControllerInterface {
     }
 
     @FXML
-    public void startMatch(ActionEvent e) throws IOException, ReassignedControllerExeption {
+    public void startMatch(ActionEvent e) throws IOException, ReassignedControllerException {
         Navigator navigator = new Navigator();
         navigator.navigateWithController(getStage(e), NavigationConstants.MAIN_GAME_FXML, gameController);
     }

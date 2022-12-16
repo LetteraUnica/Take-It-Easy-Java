@@ -1,7 +1,7 @@
 package ui.mainGame;
 
 import engine.controller.GameInterface;
-import exceptions.ReassignedControllerExeption;
+import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +13,7 @@ import ui.navigator.Navigator;
 
 import java.io.IOException;
 
-import static ui.Utils.getStage;
+import static utils.ui.UIUtils.getStage;
 
 public class MainGameController implements UIControllerInterface {
     @FXML
@@ -42,7 +42,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    public void returnToLobby(ActionEvent e) throws IOException, ReassignedControllerExeption {
+    public void returnToLobby(ActionEvent e) throws IOException, ReassignedControllerException {
         Navigator navigator = new Navigator();
         navigator.navigateWithController(getStage(e), NavigationConstants.LOBBY_FXML, gameController);
     }
