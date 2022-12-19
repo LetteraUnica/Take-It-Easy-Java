@@ -9,7 +9,5 @@ c
 3src/main/java/ui/navigator/NavigationConstants.java,a\b\ab419d67d7fae25fc5e255f2e8390f46643cb68c
 Y
 )src/main/java/ui/navigator/Navigator.java,5\5\555345ff3c4758f077f806e978a99763da17ede2
-^
-.src/main/java/engine/match/MatchInterface.java,0\6\06912e251b62a4d7f1c6f9c570f4c90ba216c73d
-f
-6src/main/java/engine/tile/TileCollectionInterface.java,0\d\0dc3a109729690089a801b0e2386ba4268a8e173
+e
+5src/main/java/exceptions/FatalGameErrorException.java,c/d/cd6d61e2ed534931057e76b44d5b8540e1ffecd6

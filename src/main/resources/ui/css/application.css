@@ -1,0 +1,27 @@
+.root{
+    -base-color: #eeeeee;
+    -primary_color: "indianred";
+    -secondary-color: #8e8e8e;
+    -highlight-color: "crimson";
+
+    -fx-background-color: -base-color;
+}
+
+.button{
+    -fx-background-color: -primary_color;
+    -fx-background-radius: 20;
+    -fx-text-fill: -base-color;
+
+    -fx-cursor: hand;
+}
+
+.button:hover{
+    -fx-background-color: -highlight-color;
+}
+
+.textfield{
+    -fx-background-color: -base-color;
+    -fx-text-fill: "black";
+
+    -fx-cursor: "text";
+}

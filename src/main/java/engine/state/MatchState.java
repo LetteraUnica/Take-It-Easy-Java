@@ -1,55 +1,76 @@
 package engine.state;
 
-import engine.model.board.Board;
+import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
+import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
 import utils.TileLoader;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchState {
-    private HashMap<Integer, Board> boards;
-    private List<Tile> tileCollection;
+    private final ArrayList<BoardInterface> boards =  new ArrayList<>();
+    private final ArrayList<TileInterface> tileCache = new ArrayList<>();
+    private TileInterface currentTile;
+    private Integer currentPlayer;
 
     public MatchState() throws FatalGameErrorException {
-        try {
-            initializeTileCollection();
-        } catch (FileNotFoundException e) {
-            throw new FatalGameErrorException();
-        }
-
+        currentPlayer = 0;
+        initializeTileCollection();
     }
 
-    private void initializeTileCollection() throws FileNotFoundException {
-        TileLoader tileLoader = new TileLoader();
-        this.tileCollection = tileLoader.loadTileList();
-        ;
+    public int getCurrentPlayer() { return currentPlayer; }
+
+    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
+
+    private void initializeTileCollection() {
+        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
+        tileCache.addAll(tileList);
     }
 
-    public void addBoard(Board board) {
-
+    public Integer getCacheSize() {
+        return tileCache.size();
     }
 
-    public void deleteBoard(String name) {
-
+    public void drawTile() {
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize() + 1);
+        currentTile = tileCache.remove(chosenTileIndex);
     }
 
-    public void renameBoard(String oldName, String newName) {
-
+    public void addBoard(BoardInterface board) {
+        boards.add(board);
     }
 
-    public Board getBoard(String name) {
-        return (Board) boards.get(name);
+    public void deleteBoard(Integer playerIndex) {
+        boards.remove(playerIndex);
     }
 
-    public Map getBoards() {
+    public BoardInterface getBoardOfPlayer(Integer playerId) {
+        return boards.get(playerId);
+    }
+
+    public List<BoardInterface> getBoards() {
         return boards;
     }
 
     public int getNumberOfPlayers() {
         return boards.size();
+    }
+
+    public TileInterface getCurrentTile() { return currentTile; }
+
+    public int getAllPlayerScore() {
+        return 0;
+    }
+
+    public List<String> getPlayersNicknames() {
+        List<String> nicknames = new ArrayList<>();
+        for (BoardInterface playerBoard: boards) {
+            nicknames.add(playerBoard.getNickname());
+        }
+        return nicknames;
     }
 }

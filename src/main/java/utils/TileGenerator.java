@@ -12,7 +12,7 @@ public class TileGenerator {
         return new Gson().toJson(tileList);
     }
 
-    public List<Tile> generateTileList() {
+    public ArrayList<Tile> generateTileList() {
         ArrayList<Tile> tileList = new ArrayList<>();
         int id = 0;
         for (int leftValue : Constants.leftPathValues) {
