@@ -4,9 +4,8 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
-import utils.TileLoader;
+import utils.tile.TileLoader;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,14 +21,14 @@ public class MatchState {
         initializeTileCollection();
     }
 
-    public int getCurrentPlayer() { return currentPlayer; }
-
-    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
-
     private void initializeTileCollection() {
         ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
         tileCache.addAll(tileList);
     }
+
+    public int getCurrentPlayer() { return currentPlayer; }
+
+    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
 
     public Integer getCacheSize() {
         return tileCache.size();
@@ -44,7 +43,7 @@ public class MatchState {
         boards.add(board);
     }
 
-    public void deleteBoard(Integer playerIndex) {
+    public void deleteBoard(int playerIndex) {
         boards.remove(playerIndex);
     }
 
@@ -61,10 +60,6 @@ public class MatchState {
     }
 
     public TileInterface getCurrentTile() { return currentTile; }
-
-    public int getAllPlayerScore() {
-        return 0;
-    }
 
     public List<String> getPlayersNicknames() {
         List<String> nicknames = new ArrayList<>();
