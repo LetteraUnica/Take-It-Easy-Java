@@ -7,17 +7,17 @@ module ui {
     requires org.json;
     requires java.desktop;
 
-    opens ui to javafx.fxml;
     exports ui;
-    exports ui.mainMenu;
     opens ui.mainMenu to javafx.fxml;
-    exports ui.lobby;
     opens ui.lobby to javafx.fxml;
-    exports ui.navigator;
+    opens ui.mainGame to javafx.fxml;
     opens ui.navigator to javafx.fxml;
 
     opens engine.model.tile to com.google.gson;
     opens engine.state to com.google.gson;
-    opens utils to com.google.gson;
     opens utils.boardutils to com.google.gson;
+    opens ui to javafx.fxml;
+    exports utils.ui;
+    opens utils.ui to javafx.fxml;
+    opens utils.tile to com.google.gson;
 }

@@ -1,86 +1,104 @@
 package ui.lobby;
 
+import engine.controller.GameInterface;
+import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import ui.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashSet;
 
-public class LobbyController {
-    private final ArrayList<String> playerNames = new ArrayList<>();
+import static utils.ui.UIUtils.getStage;
+
+public class LobbyController implements UIControllerInterface {
+    private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public Button addPlayerButton;
     @FXML
-    private GridPane playerList;
+    private GridPane playerListPane;
     @FXML
     private TextField playerNameField;
     @FXML
     private Button startMatchButton;
 
+    private GameInterface gameController;
+
+    @Override
+    public void initController(GameInterface gameController) throws ReassignedControllerException {
+        if (this.gameController != null) {
+            throw new ReassignedControllerException();
+        }
+        this.gameController = gameController;
+    }
+
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
-        if (playerName.isEmpty()) {
-            return;
-        }
         playerNames.add(playerName);
 
-        Pane rowContainer = new Pane();
-        rowContainer.setPadding(new javafx.geometry.Insets(20, 0, 20, 0));
-        rowContainer.setPrefHeight(30);
+        Pane rowContainer = createRowContainer();
 
+        addPlayerName(playerName, rowContainer);
+        addRemoveButton(playerName, rowContainer);
+        playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
+
+        playerNameField.clear();
+        startMatchButtonEnable();
+        addPlayerButtonEnable();
+    }
+
+    private void addRemoveButton(String playerName, Pane rowContainer) {
+        Button removePlayerButton = new Button("Remove");
+        rowContainer.getChildren().add(removePlayerButton);
+        removePlayerButton.setStyle("-fx-font-size:14");
+        removePlayerButton.relocate(180, 0);
+        removePlayerButton.setOnAction(event -> {
+            playerNames.remove(playerName);
+            playerListPane.getChildren().remove(rowContainer);
+            startMatchButtonEnable();
+        });
+    }
+
+    private static void addPlayerName(String playerName, Pane rowContainer) {
         Label playerNameText = new Label(playerName);
+        rowContainer.getChildren().add(playerNameText);
         playerNameText.setFont(Font.font(20));
         playerNameText.setMaxWidth(140);
         playerNameText.setTextOverrun(OverrunStyle.ELLIPSIS);
-        rowContainer.getChildren().add(playerNameText);
         playerNameText.relocate(0, 0);
+    }
 
-        Button removePlayerButton = new Button("Remove");
-        removePlayerButton.setStyle("-fx-font-size:14");
-        rowContainer.getChildren().add(removePlayerButton);
-        removePlayerButton.relocate(180, 0);
-
-        removePlayerButton.setOnAction(event -> {
-            playerNames.remove(playerName);
-            playerList.getChildren().remove(rowContainer);
-            startMatchButtonEnable();
-        });
-
-        playerList.addRow(playerList.getRowCount(), rowContainer);
-
-        startMatchButtonEnable();
-
-        playerNameField.clear();
-
-        addPlayerButtonEnable();
+    private static Pane createRowContainer() {
+        Pane rowContainer = new Pane();
+        rowContainer.setPadding(new javafx.geometry.Insets(20, 0, 20, 0));
+        rowContainer.setPrefHeight(30);
+        return rowContainer;
     }
 
     @FXML
     public void returnToMainMenu(ActionEvent e) throws Exception {
         Navigator navigator = new Navigator();
-        navigator.navigateTo((Stage) ((Node) e.getSource()).getScene().getWindow(), NavigationConstants.STARTING_MENU_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.STARTING_MENU_FXML);
     }
 
     @FXML
-    public void startMatch() {
-        // TODO: Implement startGame
+    public void startMatch(ActionEvent e) throws IOException, ReassignedControllerException {
+        Navigator navigator = new Navigator();
+        navigator.navigateWithController(getStage(e), NavigationConstants.MAIN_GAME_FXML, gameController);
     }
 
     @FXML
-    public void onPlayerNameChange(KeyEvent e) {
+    public void onPlayerNameChange() {
         addPlayerButtonEnable();
     }
 
