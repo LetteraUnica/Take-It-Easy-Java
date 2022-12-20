@@ -55,13 +55,21 @@ public class MatchState {
         return boards;
     }
 
-    public int getNumberOfPlayers() {
+    public int getNumberOfBoards() {
         return boards.size();
     }
 
     public TileInterface getCurrentTile() { return currentTile; }
 
-    public List<String> getPlayersNicknames() {
+    public List<Integer> getAllBoardsScore() {
+        List<Integer> scores = new ArrayList<>();
+        for (BoardInterface playerBoard: boards) {
+            scores.add(playerBoard.getScore());
+        }
+        return scores;
+    }
+
+    public List<String> getBoardsNicknames() {
         List<String> nicknames = new ArrayList<>();
         for (BoardInterface playerBoard: boards) {
             nicknames.add(playerBoard.getNickname());
