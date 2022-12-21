@@ -4,9 +4,8 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
-import utils.TileLoader;
+import utils.tile.TileLoader;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
