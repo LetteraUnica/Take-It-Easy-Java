@@ -40,17 +40,36 @@ public class BoardClassic implements BoardInterface {
             cellsMap.put(coordinatesCells.get(j), j);
         }
 
+        int score = 0;
         for (int i =0; i<3;++i) {
-            NavigableSet<CubeCoordinates> availableCells = (NavigableSet<CubeCoordinates>) cellsMap.keySet();
-            while (0 < availableCells.size()) {
+            TreeSet<CubeCoordinates> availableCells = new TreeSet<>(cellsMap.keySet());
+            while (!availableCells.isEmpty()) {
                 ArrayList<CubeCoordinates> line = new ArrayList<>();
                 CubeCoordinates pickedCell = availableCells.first();
                 line.add(pickedCell);
-                cellsMap.remove(pickedCell);
+                availableCells.remove(pickedCell);
+                exploreDirection(line,pickedCell, i, availableCells, cellsMap);
+                exploreDirection(line,pickedCell, i*2, availableCells, cellsMap);
+                TreeSet<Integer> paths = new TreeSet<>();
+                for (CubeCoordinates cubeCoordinates : line) {
+                    paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getRightPath());
+                    }
+                if(paths.size()==1){
+                    score = score + line.size()*paths.first();
+                }
+                }
 
             }
-        }
-        return 0;
+        return score;
+    }
+
+
+    public void exploreDirection(List<CubeCoordinates> line,CubeCoordinates currentCell, int direction, SortedSet<CubeCoordinates> availableCells, Map<CubeCoordinates, Integer> cellsMap){
+        if (cellsMap.containsKey(currentCell)){
+        line.add(currentCell);
+        availableCells.remove(currentCell);
+        currentCell = currentCell.cubeNeighbor(direction);
+        exploreDirection(line, currentCell, direction, availableCells, cellsMap);}
     }
 
     @Override
