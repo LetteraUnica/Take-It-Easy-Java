@@ -16,12 +16,10 @@ import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import static utils.ui.UIUtils.getStage;
 
 public class LobbyController implements UIControllerInterface {
-    private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public Button addPlayerButton;
     @FXML
@@ -44,10 +42,9 @@ public class LobbyController implements UIControllerInterface {
     @FXML
     public void addPlayer() {
         String playerName = playerNameField.getText();
-        playerNames.add(playerName);
+        gameController.addPlayer(playerName);
 
         Pane rowContainer = createRowContainer();
-
         addPlayerName(playerName, rowContainer);
         addRemoveButton(playerName, rowContainer);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
@@ -63,7 +60,7 @@ public class LobbyController implements UIControllerInterface {
         removePlayerButton.setStyle("-fx-font-size:14");
         removePlayerButton.relocate(180, 0);
         removePlayerButton.setOnAction(event -> {
-            playerNames.remove(playerName);
+            gameController.removePlayer(gameController.getNicknames().indexOf(playerName));
             playerListPane.getChildren().remove(rowContainer);
             startMatchButtonEnable();
         });
@@ -103,10 +100,10 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void startMatchButtonEnable() {
-        startMatchButton.setDisable(playerNames.isEmpty());
+        startMatchButton.setDisable(gameController.getNicknames().isEmpty());
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || playerNames.contains(playerNameField.getText()));
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getNicknames().contains(playerNameField.getText()));
     }
 }
