@@ -17,7 +17,9 @@ public interface GameInterface {
 
     public void removePlayer(int playerIndex);
 
-    public int getCurrentPlayerScore();
+    public List<Integer> getScores();
+
+    public List<String> getNicknames();
 
     public boolean isGameOver();
 

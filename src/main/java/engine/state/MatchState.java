@@ -21,14 +21,14 @@ public class MatchState {
         initializeTileCollection();
     }
 
-    public int getCurrentPlayer() { return currentPlayer; }
-
-    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
-
     private void initializeTileCollection() {
         ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
         tileCache.addAll(tileList);
     }
+
+    public int getCurrentPlayer() { return currentPlayer; }
+
+    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
 
     public Integer getCacheSize() {
         return tileCache.size();
@@ -43,7 +43,7 @@ public class MatchState {
         boards.add(board);
     }
 
-    public void deleteBoard(Integer playerIndex) {
+    public void deleteBoard(int playerIndex) {
         boards.remove(playerIndex);
     }
 
@@ -55,17 +55,21 @@ public class MatchState {
         return boards;
     }
 
-    public int getNumberOfPlayers() {
+    public int getNumberOfBoards() {
         return boards.size();
     }
 
     public TileInterface getCurrentTile() { return currentTile; }
 
-    public int getAllPlayerScore() {
-        return 0;
+    public List<Integer> getAllBoardsScore() {
+        List<Integer> scores = new ArrayList<>();
+        for (BoardInterface playerBoard: boards) {
+            scores.add(playerBoard.getScore());
+        }
+        return scores;
     }
 
-    public List<String> getPlayersNicknames() {
+    public List<String> getBoardsNicknames() {
         List<String> nicknames = new ArrayList<>();
         for (BoardInterface playerBoard: boards) {
             nicknames.add(playerBoard.getNickname());

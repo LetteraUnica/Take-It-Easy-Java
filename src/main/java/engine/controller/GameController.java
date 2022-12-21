@@ -1,15 +1,21 @@
 package engine.controller;
 
 
+import engine.model.board.BoardClassic;
+import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
 
+import java.util.List;
+
 public class GameController implements GameInterface {
 
-    private MatchState matchState = new MatchState();
+    private MatchState matchState;
 
-    public GameController() throws FatalGameErrorException {}
+    public GameController() throws FatalGameErrorException {
+        matchState = new MatchState();
+    }
 
     @Override
     public TileInterface getCurrentTile() {
@@ -29,8 +35,8 @@ public class GameController implements GameInterface {
 
     @Override
     public void addPlayer(String newPlayerName) {
-//        BoardInterface newBoard = new Board(newPlayerName);
-//        matchState.addBoard(newBoard);
+        BoardInterface newBoard = new BoardClassic(newPlayerName);
+        matchState.addBoard(newBoard);
     }
 
     @Override
@@ -39,12 +45,16 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public int getCurrentPlayerScore() {
-        return matchState.getAllPlayerScore();
-    }
+    public List<Integer> getScores() { return matchState.getAllBoardsScore(); }
 
     @Override
     public boolean isGameOver() {
         return matchState.getCacheSize() == 0;
     }
+
+    @Override
+    public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
+
+
+
 }
