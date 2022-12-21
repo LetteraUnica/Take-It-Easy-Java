@@ -47,8 +47,18 @@
     -fx-stroke-width: 0;
 }
 
-.scroll-pane {
+.scroll-pane{
     -fx-background: -base-color;
     -fx-border-color: -base-color;
     -fx-background-color: -base-color;
+}
+
+.tile{
+    -fx-fill: -primary_color;
+    -fx-cursor: "hand";
+    -fx-smooth: true;
+}
+
+.tile:hover{
+    -fx-fill: -primary-highlight-color;
 }

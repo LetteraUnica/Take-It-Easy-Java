@@ -13,23 +13,22 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.mainGame.MainGameController">
-    <Button fx:id="placeTileButton" layoutX="25.0" layoutY="345.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="345.0" text="Place Tile">
+    <Button fx:id="placeTileButton" layoutX="241.0" layoutY="343.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="345.0" text="Place Tile">
         <font>
         <Font size="16.0" />
         </font>
     </Button>
-    <Text layoutX="400.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
+    <Text layoutX="30.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
         <font>
             <Font size="20.0" />
         </font>
     </Text>
-    <Button fx:id="returnToLobbyButton" layoutX="400.0" layoutY="345.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="167.0"
-            text="Return to Lobby" styleClass="secondary-button" onAction="#returnToLobby">
+    <Button fx:id="returnToLobbyButton" layoutX="30.0" layoutY="346.0" mnemonicParsing="false" onAction="#returnToLobby" prefHeight="38.0" prefWidth="167.0" styleClass="secondary-button" text="Return to Lobby">
         <font>
         <Font size="16.0" />
         </font>
     </Button>
-    <Pane fx:id="boardPane" layoutX="25.0" layoutY="21.0" prefHeight="306.0" prefWidth="345.0">
+    <Pane fx:id="boardPane" layoutX="241.0" layoutY="19.0" prefHeight="306.0" prefWidth="345.0">
         <Rectangle height="95.0" layoutX="245.0" layoutY="211.0" styleClass="rectangle" width="100.0" />
         <Text layoutX="256.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current tile" textAlignment="CENTER" wrappingWidth="77.13671875">
             <font>
@@ -38,8 +37,8 @@
         </Text>
     </Pane>
 
-    <ScrollPane hbarPolicy="NEVER" layoutX="384.0" layoutY="47.0" prefHeight="280.0" prefWidth="200.0" styleClass="root">
-        <GridPane fx:id="playerList" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="199.0">
+    <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="48.0" prefHeight="280.0" prefWidth="200.0" styleClass="root">
+        <GridPane fx:id="playerListPane" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="199.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>

@@ -40,8 +40,8 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void removePlayer(int playerIndex) {
-        matchState.deleteBoard(playerIndex);
+    public void removePlayer(String playerName) {
+        matchState.deleteBoard(getIndexOf(playerName));
     }
 
     @Override
@@ -53,8 +53,25 @@ public class GameController implements GameInterface {
     }
 
     @Override
+    public List<BoardInterface> getBoards() {
+        return matchState.getBoards();
+    }
+
+    @Override
+    public BoardInterface getBoardOfPlayer(String playerName) {
+        return getBoards().get(getIndexOf(playerName));
+    }
+
+    @Override
+    public String getCurrentPlayerName() {
+        return getNicknames().get(getCurrentPlayer());
+    }
+
+    @Override
     public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
 
-
+    private int getIndexOf(String playerName) {
+        return getNicknames().indexOf(playerName);
+    }
 
 }

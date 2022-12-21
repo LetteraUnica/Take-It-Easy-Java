@@ -48,10 +48,10 @@ class MatchStateTest {
 
     @Test
     void testAddBoard() {
-        int numberOfBoards = state.getNumberOfPlayers();
+        int numberOfBoards = state.getNumberOfBoards();
         BoardInterface newBoard = new BoardClassic("macro");
         state.addBoard(newBoard);
-        assertEquals(numberOfBoards + 1, state.getNumberOfPlayers());
+        assertEquals(numberOfBoards + 1, state.getNumberOfBoards());
     }
 
     @Test
@@ -60,9 +60,9 @@ class MatchStateTest {
         state.addBoard(newBoard1);
         BoardInterface newBoard2 = new BoardClassic("chic");
         state.addBoard(newBoard2);
-        int numberOfBoards = state.getNumberOfPlayers();
+        int numberOfBoards = state.getNumberOfBoards();
         state.deleteBoard(0);
-        assertEquals(numberOfBoards - 1, state.getNumberOfPlayers());
+        assertEquals(numberOfBoards - 1, state.getNumberOfBoards());
     }
 
     @Test
@@ -75,7 +75,7 @@ class MatchStateTest {
         state.addBoard(newBoard3);
         BoardInterface newBoard4 = new BoardClassic("pallo");
         state.addBoard(newBoard4);
-        assertEquals(4, state.getNumberOfPlayers());
+        assertEquals(4, state.getNumberOfBoards());
     }
 
 //    @Test
@@ -92,7 +92,7 @@ class MatchStateTest {
         BoardInterface newBoard4 = new BoardClassic("pallo");
         state.addBoard(newBoard4);
         List<String> trueNames = new ArrayList<>(Arrays.asList("macro", "chic", "pinco", "pallo"));
-        List<String> names = state.getPlayersNicknames();
+        List<String> names = state.getBoardsNicknames();
         assertEquals(trueNames, names);
     }
 
