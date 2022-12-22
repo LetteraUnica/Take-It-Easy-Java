@@ -57,6 +57,8 @@
     -fx-fill: -primary_color;
     -fx-cursor: "hand";
     -fx-smooth: true;
+    -fx-stroke: -secondary-highlight-color;
+    -fx-stroke-width: 5;
 }
 
 .tile:hover{
