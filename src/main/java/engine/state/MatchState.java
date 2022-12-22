@@ -4,7 +4,7 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
-import utils.TileLoader;
+import utils.tile.TileLoader;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class MatchState {
         boards.add(board);
     }
 
-    public void deleteBoard(Integer playerIndex) {
-        boards.remove(playerIndex);
+    public void deleteBoard(int playerIndex) {
+        boards.remove( playerIndex);
     }
 
     public BoardInterface getBoardOfPlayer(Integer playerId) {

@@ -5,7 +5,7 @@ import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
 import org.junit.jupiter.api.Test;
-import utils.TileLoader;
+import utils.tile.TileLoader;
 
 import java.util.ArrayList;
 

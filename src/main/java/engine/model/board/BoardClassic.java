@@ -1,9 +1,11 @@
 package engine.model.board;
 
+import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import utils.boardutils.CubeCoordinates;
 import utils.boardutils.HexagonalGrid;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 
 
@@ -23,6 +25,7 @@ public class BoardClassic implements BoardInterface {
     public ArrayList<TileInterface> getBoard() {
         return board;
     }
+
 
     @Override
     public String getNickname() {
@@ -58,7 +61,6 @@ public class BoardClassic implements BoardInterface {
                     score = score + line.size()*paths.first();
                 }
                 }
-
             }
         return score;
     }
@@ -73,7 +75,7 @@ public class BoardClassic implements BoardInterface {
     }
 
     @Override
-    public float[][] getEuclideanCoordinates() {
+    public List<Point2D> getEuclideanCoordinates() {
         CubeCoordinates center= new CubeCoordinates(0,0,0);
         ArrayList<CubeCoordinates> coordinatesCells= (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HexagonalGrid gridShape = new HexagonalGrid(3,10);
@@ -86,5 +88,17 @@ public class BoardClassic implements BoardInterface {
         }
         return displayCoordinates;
     }
-    
+
+    @Override
+    public BoardInterface copy() {
+
+        return null;
+    }
+
+
+    @Override
+    public void placeTile(Integer index, Tile placedTile) {
+        this.board.set(index, placedTile);
+    }
+
 }
