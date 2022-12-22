@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TileListLoaderTest {
 
     TileLoader tileLoader = new TileLoader();
-    private final List<Tile> tileList = tileLoader.loadTileList();;
+    private final List<Tile> tileList = tileLoader.loadTileList();
 
     @Test
     void testTileListLoader() {

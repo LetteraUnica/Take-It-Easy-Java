@@ -1,4 +1,4 @@
-package utils;
+package utils.tile;
 
 import com.google.gson.Gson;
 import engine.model.tile.Tile;

@@ -1,7 +1,6 @@
 package engine.controller;
 
-import engine.model.board.Board;
-import engine.model.board.BoardInterface;
+
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
@@ -41,7 +40,7 @@ public class GameController implements GameInterface {
 
     @Override
     public int getCurrentPlayerScore() {
-        return matchState.getCurrentPlayerScore();
+        return matchState.getAllPlayerScore();
     }
 
     @Override

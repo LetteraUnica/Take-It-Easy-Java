@@ -8,31 +8,25 @@ import utils.TileLoader;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchState {
-    private ArrayList<BoardInterface> boards =  new ArrayList<>();
-    private ArrayList<TileInterface> tileCache = new ArrayList<>();
+    private final ArrayList<BoardInterface> boards =  new ArrayList<>();
+    private final ArrayList<TileInterface> tileCache = new ArrayList<>();
     private TileInterface currentTile;
     private Integer currentPlayer;
 
     public MatchState() throws FatalGameErrorException {
         currentPlayer = 0;
-        try {
-            initializeTileCollection();
-        } catch (FileNotFoundException e) {
-            throw new FatalGameErrorException();
-        }
-        System.out.println(getCacheSize());
+        initializeTileCollection();
     }
 
     public int getCurrentPlayer() { return currentPlayer; }
 
     public void nextPlayer() { currentPlayer = currentPlayer + 1; }
 
-    private void initializeTileCollection() throws FileNotFoundException {
+    private void initializeTileCollection() {
         ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
         tileCache.addAll(tileList);
     }
@@ -54,11 +48,11 @@ public class MatchState {
         boards.remove(playerIndex);
     }
 
-    public BoardInterface getBoard(Integer playerId) {
-        return (BoardInterface) boards.get(playerId);
+    public BoardInterface getBoardOfPlayer(Integer playerId) {
+        return boards.get(playerId);
     }
 
-    public ArrayList<BoardInterface> getBoards() {
+    public List<BoardInterface> getBoards() {
         return boards;
     }
 
@@ -68,7 +62,15 @@ public class MatchState {
 
     public TileInterface getCurrentTile() { return currentTile; }
 
-    public int getCurrentPlayerScore() {
+    public int getAllPlayerScore() {
         return 0;
+    }
+
+    public List<String> getPlayersNicknames() {
+        List<String> nicknames = new ArrayList<>();
+        for (BoardInterface playerBoard: boards) {
+            nicknames.add(playerBoard.getNickname());
+        }
+        return nicknames;
     }
 }
