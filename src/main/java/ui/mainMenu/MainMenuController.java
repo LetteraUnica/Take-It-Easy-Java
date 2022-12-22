@@ -18,9 +18,11 @@ import static utils.ui.UIUtils.getStage;
 public class MainMenuController implements UIControllerInterface {
 
     public static final String HOW_TO_PLAY_URL = "https://www.ultraboardgames.com/take-it-easy/game-rules.php";
+
     @Override
     public void initController(GameInterface gameController) {
     }
+
     @FXML
     public void exitGame() {
         Platform.exit();
