@@ -80,19 +80,20 @@ public class BoardClassic implements BoardInterface {
         ArrayList<CubeCoordinates> coordinatesCells= (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HexagonalGrid gridShape = new HexagonalGrid(3,10);
         float[][][] gridNumeric = gridShape.getHexagonalGrid();
-        float[][] displayCoordinates = new float[coordinatesCells.size()][2];
-        for (int i=0; i< coordinatesCells.size(); ++i){
-            CubeCoordinates cell = coordinatesCells.get(i);
-            for (int j = 0; j < 2; j++)
-                displayCoordinates[i][j] = gridNumeric[cell.toEuclidean()[0]+1][ cell.toEuclidean()[1]+5][j];
+        List<Point2D> displayCoordinates = new ArrayList<>();
+        for (CubeCoordinates cell : coordinatesCells) {
+            displayCoordinates.add(new Point2D.Float(gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][0], gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][1]));
         }
         return displayCoordinates;
     }
 
     @Override
     public BoardInterface copy() {
-
-        return null;
+        BoardInterface copiedBoard = new BoardClassic(this.nickname);
+        for (int i=0; i<this.board.size(); ++i){
+            copiedBoard.placeTile(i, (Tile) this.board.get(i));
+        }
+        return copiedBoard;
     }
 
 
