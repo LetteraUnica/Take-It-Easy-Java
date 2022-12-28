@@ -55,6 +55,10 @@ public class GameController implements GameInterface {
     @Override
     public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
 
+    @Override
+    public List<BoardInterface> getAllBoards() { return matchState.getBoards(); }
 
+    @Override
+    public BoardInterface getSinglePlayerBoard(int playerIndex) { return matchState.getBoardOfPlayer(playerIndex); }
 
 }

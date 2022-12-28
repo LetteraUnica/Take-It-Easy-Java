@@ -1,5 +1,6 @@
 package engine.controller;
 
+import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public interface GameInterface {
     public List<Integer> getScores();
 
     public List<String> getNicknames();
+
+    public List<BoardInterface> getAllBoards();
+
+    public BoardInterface getSinglePlayerBoard(int playerIndex);
 
     public boolean isGameOver();
 
