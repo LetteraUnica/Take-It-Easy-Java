@@ -3,6 +3,7 @@ package engine;
 import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
+import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,19 @@ class MatchStateTest {
         BoardInterface newBoard4 = new BoardClassic("pallo");
         state.addBoard(newBoard4);
         assertEquals(4, state.getNumberOfBoards());
+    }
+    
+    @Test
+    void testGetCurrentTile() {
+        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
+        state.drawTile();
+        boolean isInTileList = false;
+        for (TileInterface tile: tileList) {
+            if (state.getCurrentTile().equals(tile)) {
+                isInTileList = true;
+            }
+        }
+        assertTrue(isInTileList);
     }
 
     @Test
