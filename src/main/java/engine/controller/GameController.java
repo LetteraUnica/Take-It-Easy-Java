@@ -28,9 +28,13 @@ public class GameController implements GameInterface {
     }
 
     @Override
+    public void nextPlayer() {
+        matchState.nextPlayer();
+    }
+
+    @Override
     public void nextTurn() {
         matchState.drawTile();
-        matchState.nextPlayer();
     }
 
     @Override
@@ -56,9 +60,9 @@ public class GameController implements GameInterface {
     public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
 
     @Override
-    public List<BoardInterface> getAllBoards() { return matchState.getBoards(); }
+    public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
 
     @Override
-    public BoardInterface getSinglePlayerBoard(int playerIndex) { return matchState.getBoardOfPlayer(playerIndex); }
+    public BoardInterface getSinglePlayer(int playerIndex) { return matchState.getBoardOfPlayer(playerIndex); }
 
 }
