@@ -28,9 +28,7 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void nextPlayer() {
-        matchState.nextPlayer();
-    }
+    public void nextPlayer() { matchState.nextPlayer(); }
 
     @Override
     public void nextTurn() {
@@ -53,7 +51,7 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isGameOver() {
-        return matchState.getCacheSize() == 0;
+        return matchState.getCacheSize() == 8;
     }
 
     @Override
