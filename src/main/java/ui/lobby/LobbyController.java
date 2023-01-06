@@ -40,7 +40,7 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void initializePlayerList() {
-        for (String playerName : gameController.getNicknames()){
+        for (String playerName : gameController.getNicknames()) {
             addPlayer(playerName);
         }
     }
