@@ -5,23 +5,19 @@ import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import ui.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
+import utils.ui.UIUtils;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import static utils.ui.UIUtils.getStage;
 
 public class LobbyController implements UIControllerInterface {
-    private final HashSet<String> playerNames = new HashSet<>();
     @FXML
     public Button addPlayerButton;
     @FXML
@@ -39,16 +35,26 @@ public class LobbyController implements UIControllerInterface {
             throw new ReassignedControllerException();
         }
         this.gameController = gameController;
+
+        initializePlayerList();
+    }
+
+    private void initializePlayerList() {
+        for (String playerName : gameController.getNicknames()) {
+            addPlayer(playerName);
+        }
     }
 
     @FXML
-    public void addPlayer() {
+    public void addPlayerButtonPressed() {
         String playerName = playerNameField.getText();
-        playerNames.add(playerName);
+        gameController.addPlayer(playerName);
+        addPlayer(playerName);
+    }
 
-        Pane rowContainer = createRowContainer();
-
-        addPlayerName(playerName, rowContainer);
+    private void addPlayer(String playerName) {
+        Pane rowContainer = UIUtils.createRowContainer();
+        UIUtils.addPlayerName(playerName, rowContainer, 140, 20);
         addRemoveButton(playerName, rowContainer);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
 
@@ -63,26 +69,10 @@ public class LobbyController implements UIControllerInterface {
         removePlayerButton.setStyle("-fx-font-size:14");
         removePlayerButton.relocate(180, 0);
         removePlayerButton.setOnAction(event -> {
-            playerNames.remove(playerName);
+            gameController.removePlayer(playerName);
             playerListPane.getChildren().remove(rowContainer);
             startMatchButtonEnable();
         });
-    }
-
-    private static void addPlayerName(String playerName, Pane rowContainer) {
-        Label playerNameText = new Label(playerName);
-        rowContainer.getChildren().add(playerNameText);
-        playerNameText.setFont(Font.font(20));
-        playerNameText.setMaxWidth(140);
-        playerNameText.setTextOverrun(OverrunStyle.ELLIPSIS);
-        playerNameText.relocate(0, 0);
-    }
-
-    private static Pane createRowContainer() {
-        Pane rowContainer = new Pane();
-        rowContainer.setPadding(new javafx.geometry.Insets(20, 0, 20, 0));
-        rowContainer.setPrefHeight(30);
-        return rowContainer;
     }
 
     @FXML
@@ -103,10 +93,10 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void startMatchButtonEnable() {
-        startMatchButton.setDisable(playerNames.isEmpty());
+        startMatchButton.setDisable(gameController.getNicknames().isEmpty());
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || playerNames.contains(playerNameField.getText()));
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getNicknames().contains(playerNameField.getText()));
     }
 }

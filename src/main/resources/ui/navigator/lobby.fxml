@@ -56,7 +56,7 @@
             </font>
         </TextField>
         <Button fx:id="addPlayerButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false"
-                onAction="#addPlayer" prefHeight="54.0" prefWidth="86.0" style="-fx-background-radius: 0 10 10 0;"
+                onAction="#addPlayerButtonPressed" prefHeight="54.0" prefWidth="86.0" style="-fx-background-radius: 0 10 10 0;"
                 text="Add player">
             <font>
                 <Font size="14.0"/>

@@ -2,6 +2,7 @@ package engine.controller;
 
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
+import javafx.beans.binding.BooleanBinding;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface GameInterface {
 
     public void addPlayer(String newPlayerName);
 
-    public void removePlayer(int playerIndex);
+    public void removePlayer(String playerName);
 
     public List<Integer> getScores();
 
@@ -29,4 +30,9 @@ public interface GameInterface {
 
     public boolean isGameOver();
 
+    public List<BoardInterface> getBoards();
+
+    public BoardInterface getBoardOfPlayer(String playerName);
+
+    String getCurrentPlayerName();
 }

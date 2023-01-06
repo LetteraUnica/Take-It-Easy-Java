@@ -2,10 +2,10 @@ package engine.model.board;
 
 
 import engine.model.tile.TileInterface;
+import javafx.geometry.Point2D;
 import utils.boardutils.CubeCoordinates;
 import utils.boardutils.HexagonalGrid;
 
-import java.awt.geom.Point2D;
 import java.util.*;
 
 
@@ -91,7 +91,7 @@ public class BoardClassic implements BoardInterface {
         float[][][] gridNumeric = gridShape.getHexagonalGrid();
         List<Point2D> displayCoordinates = new ArrayList<>();
         for (CubeCoordinates cell : coordinatesCells) {
-            displayCoordinates.add(new Point2D.Float(gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][0], gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][1]));
+            displayCoordinates.add(new Point2D(gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][0], gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][1]));
         }
         return displayCoordinates;
     }

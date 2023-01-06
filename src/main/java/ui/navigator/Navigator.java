@@ -1,6 +1,8 @@
 package ui.navigator;
 
+import engine.controller.GameController;
 import engine.controller.GameInterface;
+import exceptions.FatalGameErrorException;
 import exceptions.ReassignedControllerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +14,15 @@ import java.io.IOException;
 
 public class Navigator {
 
+    private static void injectGameController(GameInterface gameController, FXMLLoader loader) throws ReassignedControllerException {
+        UIControllerInterface uiControllerInterface = loader.getController();
+        uiControllerInterface.initController(gameController);
+    }
+
     public void navigateTo(Stage stage, String to) throws IOException {
         try {
-            navigateWithController(stage, to, null);
-        } catch (ReassignedControllerException ignored) {
+            navigateWithController(stage, to, new GameController());
+        } catch (ReassignedControllerException | FatalGameErrorException ignored) {
         }
     }
 
@@ -28,10 +35,5 @@ public class Navigator {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    private static void injectGameController(GameInterface gameController, FXMLLoader loader) throws ReassignedControllerException {
-        UIControllerInterface iuControllerInterface = loader.getController();
-        iuControllerInterface.initController(gameController);
     }
 }
