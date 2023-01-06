@@ -12,6 +12,8 @@ public interface GameInterface {
 
     public int getCurrentPlayer();
 
+    public void nextPlayer();
+
     public void nextTurn();
 
     public void addPlayer(String newPlayerName);
@@ -21,6 +23,10 @@ public interface GameInterface {
     public List<Integer> getScores();
 
     public List<String> getNicknames();
+
+    public List<BoardInterface> getPlayers();
+
+    public BoardInterface getSinglePlayer(int playerIndex);
 
     public boolean isGameOver();
 

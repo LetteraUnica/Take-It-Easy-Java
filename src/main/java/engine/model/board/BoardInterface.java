@@ -1,7 +1,9 @@
 package engine.model.board;
 
+import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 public interface BoardInterface {
@@ -12,6 +14,13 @@ public interface BoardInterface {
 
     public int getScore();
 
-    public float[][] getEuclideanCoordinates();
+    public List<Point2D> getEuclideanCoordinates();
+
+    public BoardInterface copy();
+
+
+    void placeTile(Integer index, TileInterface placedTile);
+
+    public boolean isBoardFull();
 
 }

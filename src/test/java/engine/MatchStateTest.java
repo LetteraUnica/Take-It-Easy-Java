@@ -3,6 +3,7 @@ package engine;
 import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
+import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MatchStateTest {
 
@@ -66,7 +68,7 @@ class MatchStateTest {
     }
 
     @Test
-    void testGetNumberOfPlayers() {
+    void testGetNumberOfBoards() {
         BoardInterface newBoard1 = new BoardClassic("macro");
         state.addBoard(newBoard1);
         BoardInterface newBoard2 = new BoardClassic("chic");
@@ -77,12 +79,36 @@ class MatchStateTest {
         state.addBoard(newBoard4);
         assertEquals(4, state.getNumberOfBoards());
     }
+    
+    @Test
+    void testGetCurrentTile() {
+        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
+        state.drawTile();
+        boolean isInTileList = false;
+        for (TileInterface tile: tileList) {
+            if (state.getCurrentTile().equals(tile)) {
+                isInTileList = true;
+            }
+        }
+        assertTrue(isInTileList);
+    }
 
 //    @Test
-//    void testGetAllPlayersScore() {}
+//    void testGetAllBoardsScore() {
+//        BoardInterface newBoard1 = new BoardClassic("macro");
+//        state.addBoard(newBoard1);
+//        BoardInterface newBoard2 = new BoardClassic("chic");
+//        state.addBoard(newBoard2);
+//        BoardInterface newBoard3 = new BoardClassic("pinco");
+//        state.addBoard(newBoard3);
+//        BoardInterface newBoard4 = new BoardClassic("pallo");
+//        state.addBoard(newBoard4);
+//        List<Integer> trueScores = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
+//        assertEquals(trueScores, state.getAllBoardsScore());
+//    }
 
     @Test
-    void testGetPlayersNicknames() {
+    void testGetBoardsNicknames() {
         BoardInterface newBoard1 = new BoardClassic("macro");
         state.addBoard(newBoard1);
         BoardInterface newBoard2 = new BoardClassic("chic");
@@ -94,6 +120,30 @@ class MatchStateTest {
         List<String> trueNames = new ArrayList<>(Arrays.asList("macro", "chic", "pinco", "pallo"));
         List<String> names = state.getBoardsNicknames();
         assertEquals(trueNames, names);
+    }
+
+    @Test
+    void testGetBoardOfPlayer() {
+        BoardInterface newBoard1 = new BoardClassic("macro");
+        state.addBoard(newBoard1);
+        BoardInterface newBoard2 = new BoardClassic("chic");
+        state.addBoard(newBoard2);
+        BoardInterface boardOfMacro = state.getBoardOfPlayer(0);
+        assertEquals(boardOfMacro.getNickname(), newBoard1.getNickname());
+        BoardInterface boardOfChic = state.getBoardOfPlayer(1);
+        assertEquals(boardOfChic.getNickname(), newBoard2.getNickname());
+    }
+
+    @Test
+    void testGetBoards() {
+        List<String> nicknames = Arrays.asList("macro", "chic");
+        for (String player: nicknames) {
+            state.addBoard(new BoardClassic(player));
+        }
+        List<BoardInterface> boards = state.getBoards();
+        for (int i=0; i < state.getNumberOfBoards(); i++) {
+            assertEquals(state.getBoards().get(i).getNickname(), boards.get(i).getNickname());
+        }
     }
 
 }

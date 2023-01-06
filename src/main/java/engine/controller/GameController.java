@@ -28,9 +28,11 @@ public class GameController implements GameInterface {
     }
 
     @Override
+    public void nextPlayer() { matchState.nextPlayer(); }
+
+    @Override
     public void nextTurn() {
         matchState.drawTile();
-        matchState.nextPlayer();
     }
 
     @Override
@@ -40,8 +42,8 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void removePlayer(String playerName) {
-        matchState.deleteBoard(getIndexOf(playerName));
+    public void removePlayer(int playerIndex) {
+        matchState.deleteBoard(playerIndex);
     }
 
     @Override
@@ -49,29 +51,16 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isGameOver() {
-        return matchState.getCacheSize() == 0;
-    }
-
-    @Override
-    public List<BoardInterface> getBoards() {
-        return matchState.getBoards();
-    }
-
-    @Override
-    public BoardInterface getBoardOfPlayer(String playerName) {
-        return getBoards().get(getIndexOf(playerName));
-    }
-
-    @Override
-    public String getCurrentPlayerName() {
-        return getNicknames().get(getCurrentPlayer());
+        return matchState.getCacheSize() == 8;
     }
 
     @Override
     public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
 
-    private int getIndexOf(String playerName) {
-        return getNicknames().indexOf(playerName);
-    }
+    @Override
+    public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
+
+    @Override
+    public BoardInterface getSinglePlayer(int playerIndex) { return matchState.getBoardOfPlayer(playerIndex); }
 
 }

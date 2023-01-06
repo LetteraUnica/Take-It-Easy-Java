@@ -35,7 +35,7 @@ public class MatchState {
     }
 
     public void drawTile() {
-        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize() + 1);
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize());
         currentTile = tileCache.remove(chosenTileIndex);
     }
 
