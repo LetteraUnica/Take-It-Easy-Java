@@ -2,5 +2,5 @@ language: java
 install: skip
 
 os: linux
-dist: ubuntu
+dist: xenial
 jdk: openjdk17
