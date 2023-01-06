@@ -3,7 +3,7 @@ package utils.boardutils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CubeCoordinates {
+public class CubeCoordinates implements Comparable<CubeCoordinates> {
     private Integer x, y, z;
 
 
@@ -97,6 +97,19 @@ public class CubeCoordinates {
 
     }
 
+    @Override
+    public int compareTo(CubeCoordinates cubeCoordinates) {
+        /*
+        System.out.println(this.x);
+        System.out.println( cubeCoordinates.getX() );
+        System.out.println(this.y);
+        System.out.println( cubeCoordinates.getY());
+        System.out.println( "RISULTATO" + Math.abs(this.x-cubeCoordinates.getX()) +Math.abs(this.y- cubeCoordinates.getY()));
+
+         */
+        return  Math.abs(this.x-cubeCoordinates.getX()) +Math.abs(this.y- cubeCoordinates.getY());
+
+    }
 }
 
 
