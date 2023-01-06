@@ -14,4 +14,6 @@ public interface TileInterface {
     public List<Integer> getValues();
 
     public String toString();
+
+    public boolean equals(TileInterface tile);
 }
