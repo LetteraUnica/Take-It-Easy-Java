@@ -2,8 +2,8 @@ package engine.model.board;
 
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
+import javafx.geometry.Point2D;
 
-import java.awt.geom.Point2D;
 import java.util.List;
 
 public interface BoardInterface {

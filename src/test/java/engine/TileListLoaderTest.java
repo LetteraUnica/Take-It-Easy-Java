@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import utils.tile.Constants;
 import utils.tile.TileLoader;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
