@@ -1,1 +1,6 @@
 language: java
+install: skip
+
+os: linux
+dist: ubuntu
+jdk: openjdk17
