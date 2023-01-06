@@ -1,9 +1,11 @@
 package engine.model.board;
 
+
 import engine.model.tile.TileInterface;
 import utils.boardutils.CubeCoordinates;
 import utils.boardutils.HexagonalGrid;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 
 
@@ -24,6 +26,7 @@ public class BoardClassic implements BoardInterface {
         return board;
     }
 
+
     @Override
     public String getNickname() {
         return nickname;
@@ -35,37 +38,88 @@ public class BoardClassic implements BoardInterface {
         ArrayList<CubeCoordinates> coordinatesCells = (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HashMap<CubeCoordinates, Integer> cellsMap = new HashMap<>();
 
-
         for (int j = 0; j < this.board.size(); ++j) {
             cellsMap.put(coordinatesCells.get(j), j);
         }
 
+        int score = 0;
         for (int i =0; i<3;++i) {
-            NavigableSet<CubeCoordinates> availableCells = (NavigableSet<CubeCoordinates>) cellsMap.keySet();
-            while (0 < availableCells.size()) {
+            System.out.println("ORA Inizializzo");
+            TreeSet<CubeCoordinates> availableCells = new TreeSet<>(cellsMap.keySet());
+            System.out.println(availableCells.size());
+            int l=0;
+
+            //while (!availableCells.isEmpty()) {
+            while (l<3) {
+                l+=1;
                 ArrayList<CubeCoordinates> line = new ArrayList<>();
                 CubeCoordinates pickedCell = availableCells.first();
                 line.add(pickedCell);
-                cellsMap.remove(pickedCell);
+                System.out.print("ORA RIMUOVO"+ pickedCell.getX()+ pickedCell.getY());
+                availableCells.remove(pickedCell);
+                exploreDirection(line,pickedCell, i, availableCells, cellsMap);
+                exploreDirection(line,pickedCell, i*2, availableCells, cellsMap);
 
+                TreeSet<Integer> paths = new TreeSet<>();
+                System.out.println(availableCells.size());
+                for (CubeCoordinates cubeCoordinates : line) {
+                    paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getRightPath());
+                    }
+                if(paths.size()==1){
+                    score = score + line.size()*paths.first();
+                }
+
+                }
             }
-        }
-        return 0;
+        return score;
+    }
+
+
+    public void exploreDirection(List<CubeCoordinates> line,CubeCoordinates currentCell, int direction, SortedSet<CubeCoordinates> availableCells, Map<CubeCoordinates, Integer> cellsMap){
+        if (cellsMap.containsKey(currentCell)){
+        line.add(currentCell);
+        availableCells.remove(currentCell);
+        currentCell = currentCell.cubeNeighbor(direction);
+        exploreDirection(line, currentCell, direction, availableCells, cellsMap);}
     }
 
     @Override
-    public float[][] getEuclideanCoordinates() {
+    public List<Point2D> getEuclideanCoordinates() {
         CubeCoordinates center= new CubeCoordinates(0,0,0);
         ArrayList<CubeCoordinates> coordinatesCells= (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HexagonalGrid gridShape = new HexagonalGrid(3,10);
         float[][][] gridNumeric = gridShape.getHexagonalGrid();
-        float[][] displayCoordinates = new float[coordinatesCells.size()][2];
-        for (int i=0; i< coordinatesCells.size(); ++i){
-            CubeCoordinates cell = coordinatesCells.get(i);
-            for (int j = 0; j < 2; j++)
-                displayCoordinates[i][j] = gridNumeric[cell.toEuclidean()[0]+1][ cell.toEuclidean()[1]+5][j];
+        List<Point2D> displayCoordinates = new ArrayList<>();
+        for (CubeCoordinates cell : coordinatesCells) {
+            displayCoordinates.add(new Point2D.Float(gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][0], gridNumeric[cell.toEuclidean()[0] + 1][cell.toEuclidean()[1] + 5][1]));
         }
         return displayCoordinates;
     }
-    
+
+    @Override
+    public BoardInterface copy() {
+        BoardInterface copiedBoard = new BoardClassic(this.nickname);
+        for (int i=0; i<this.board.size(); ++i){
+            copiedBoard.placeTile(i,  this.board.get(i));
+        }
+        return copiedBoard;
+    }
+
+
+    @Override
+    public void placeTile(Integer index, TileInterface placedTile) {
+        this.board.set(index, placedTile);
+    }
+
+    @Override
+    public boolean isBoardFull() {
+        for (TileInterface tileInterface : this.board) {
+            if (tileInterface == null) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 }
