@@ -53,14 +53,26 @@
     -fx-background-color: -base-color;
 }
 
-.tile{
+.cell{
     -fx-fill: -primary_color;
-    -fx-cursor: "hand";
     -fx-smooth: true;
-    -fx-stroke: -secondary-highlight-color;
-    -fx-stroke-width: 5;
+    -fx-stroke: -primary-highlight-color;
+    -fx-stroke-width: 3;
 }
 
-.tile:hover{
+.cell:hover{
     -fx-fill: -primary-highlight-color;
+}
+
+.tile{
+    -fx-fill: -primary_color;
+    -fx-smooth: true;
+    -fx-stroke: -secondary-highlight-color;
+    -fx-stroke-width: 3;
+}
+
+.tileText{
+    -fx-font-size: 15;
+    -fx-font-weight: 700;
+    -fx-fill: -base-color;
 }
