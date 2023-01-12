@@ -11,6 +11,7 @@ module ui {
     opens ui.mainMenu to javafx.fxml;
     opens ui.lobby to javafx.fxml;
     opens ui.mainGame to javafx.fxml;
+    opens ui.gameOver to javafx.fxml;
     opens ui.navigator to javafx.fxml;
 
     opens engine.model.tile to com.google.gson;
