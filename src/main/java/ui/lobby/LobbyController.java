@@ -78,7 +78,7 @@ public class LobbyController implements UIControllerInterface {
     @FXML
     public void returnToMainMenu(ActionEvent e) throws Exception {
         Navigator navigator = new Navigator();
-        navigator.navigateTo(getStage(e), NavigationConstants.STARTING_MENU_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.MAIN_MENU_FXML);
     }
 
     @FXML

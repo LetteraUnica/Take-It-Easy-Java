@@ -65,9 +65,9 @@
 }
 
 .tile{
-    -fx-fill: -primary_color;
+    -fx-fill: -primary-highlight-color;
     -fx-smooth: true;
-    -fx-stroke: -secondary-highlight-color;
+    -fx-stroke: -primary-highlight-color;
     -fx-stroke-width: 3;
 }
 

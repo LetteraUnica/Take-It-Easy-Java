@@ -18,7 +18,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         setLogo(primaryStage);
         Navigator navigator = new Navigator();
-        navigator.navigateTo(primaryStage, NavigationConstants.STARTING_MENU_FXML);
+        navigator.navigateTo(primaryStage, NavigationConstants.MAIN_MENU_FXML);
     }
 
     private void setLogo(Stage primaryStage) {

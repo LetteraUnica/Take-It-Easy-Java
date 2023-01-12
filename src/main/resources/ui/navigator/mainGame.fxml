@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.mainGame.MainGameController">
-    <Button fx:id="placeTileButton" layoutX="240.0" layoutY="343.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="300.0" text="Place Tile">
+    <Button fx:id="placeTileButton" layoutX="240.0" layoutY="351.0" mnemonicParsing="false" onAction="#placeTile" prefHeight="38.0" prefWidth="296.0" text="Place Tile">
         <font>
         <Font size="16.0" />
         </font>
@@ -22,12 +22,12 @@
             <Font size="20.0" />
         </font>
     </Text>
-    <Button layoutX="23.0" layoutY="343.0" mnemonicParsing="false" onAction="#returnToLobby" prefHeight="38.0" prefWidth="190.0" styleClass="secondary-button" text="Return to Lobby">
+    <Button layoutX="23.0" layoutY="351.0" mnemonicParsing="false" onAction="#returnToLobby" prefHeight="38.0" prefWidth="190.0" styleClass="secondary-button" text="Return to Lobby">
         <font>
         <Font size="16.0" />
         </font>
     </Button>
-    <Pane fx:id="boardPane" layoutX="240.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
+    <Pane fx:id="boardPane" layoutX="236.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
     <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="41.0" prefHeight="280.0" prefWidth="190.0" styleClass="root">
         <GridPane fx:id="playerListPane" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="199.0">
             <columnConstraints>
@@ -41,12 +41,10 @@
             </padding>
         </GridPane>
     </ScrollPane>
-    <Pane fx:id="currentTilePane" layoutX="495.0" layoutY="252.0" prefHeight="69.0" prefWidth="91.0">
-        <Text layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current tile"
-              textAlignment="CENTER" wrappingWidth="77.13671875">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Text>
-    </Pane>
+    <Pane fx:id="currentTilePane" layoutX="503.0" layoutY="252.0" prefHeight="84.0" prefWidth="91.0" />
+   <Text layoutX="510.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current tile" textAlignment="CENTER" wrappingWidth="77.13671875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
 </AnchorPane>
