@@ -190,7 +190,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    public void returnToLobby(ActionEvent e) throws IOException, ReassignedControllerException {
+    public void returnToLobby(ActionEvent e) throws IOException {
         Navigator navigator = new Navigator();
         navigator.navigateTo(getStage(e), NavigationConstants.LOBBY_FXML);
     }
