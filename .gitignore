@@ -23,6 +23,6 @@
 hs_err_pid*
 
 # java directories
-.gradle/
+# .gradle/
 .idea/
 build/
