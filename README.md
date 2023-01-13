@@ -49,27 +49,42 @@ Once all players have filled their boards with tiles, a victory screen will be d
 
 ## Development details
 After an initial exploration phase carried out by all group members we decided to follow the MVC design pattern and started laying out the main component of the application, we then splitted the work evenly between the three of us:
-* Lorenzo Cavuoti was responsible for the UI development, which was carried out using JavaFX.
-
-#### Riscivetele meglio
+* Lorenzo Cavuoti was responsible for the UI development, which was carried out using JavaFX and SceneBuilder.
 * Marco Sicklinger worked on the Controller
 * Marco Sciorilli worked on the model
 
-Both the model and controller were developed using a test-driven approach, while the UI was tested by hand.
+Throuought the project weekly meetings were performed in order to check on each-other development and see if any of us needed help in case the assigned tasks were longer than expected. 
+
+Both the model and controller were developed using a test-driven approach, while the UI was tested manually.
 
 The whole project was written in Java 17 and uses gradle version 7.4 for setting up the build. We also used travis CI for build automation, however we only used it in the last phase of the project as the free trial only lasts one month.
 
 The development was mainly done in IntelliJ IDEA on both Linux and Windows machines, and using github for version control. 
 
-### Other dependencies
+
+## Development Overview
+
+After conducting an initial exploration phase as a team, we chose to implement the MVC design pattern for our application. We then divided the work evenly among the group members:
+
+* Lorenzo Cavuoti was responsible for UI development using JavaFX and SceneBuilder.
+* Marco Sicklinger focused on the controller.
+* Marco Sciorilli worked on the model.
+
+To ensure effective collaboration and progress tracking, we held weekly meetings throughout the project. We also implemented a test-driven approach for the model and controller, while the UI was tested manually.
+
+The project was written in Java 17 and built using gradle version 7.4. We also utilized Travis CI for build automation in the final phase of the project, as the free version only lasts one month. Development was primarily done using IntelliJ IDEA on both Linux and Windows machines, and version control was managed through Github.
+
+### Dependencies
+* Java 17.0.5
+* Gradle 7.4
 * gson 2.10
 * junit 5.9.0
 * javafx 17.0.2
 
 
+## Architecture
+To write
 
-
-Repository for the final project of the Software Development Methods exam 
 
 ## References
 Take it easy rules: https://en.wikipedia.org/wiki/Take_It_Easy_(game)
