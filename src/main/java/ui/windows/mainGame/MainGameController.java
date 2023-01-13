@@ -1,4 +1,4 @@
-package ui.mainGame;
+package ui.windows.mainGame;
 
 import engine.controller.GameInterface;
 import engine.model.board.BoardInterface;
@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
-import ui.UIControllerInterface;
+import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 

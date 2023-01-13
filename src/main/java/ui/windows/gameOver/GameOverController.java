@@ -1,4 +1,4 @@
-package ui.gameOver;
+package ui.windows.gameOver;
 
 import engine.controller.GameInterface;
 import engine.model.board.BoardInterface;
@@ -6,7 +6,7 @@ import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import ui.UIControllerInterface;
+import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 

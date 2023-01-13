@@ -28,7 +28,7 @@ public class MatchState {
 
     public int getCurrentPlayer() { return currentPlayer; }
 
-    public void nextPlayer() { currentPlayer = currentPlayer + 1; }
+    public void nextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
 
     public Integer getCacheSize() {
         return tileCache.size();

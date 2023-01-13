@@ -1,10 +1,10 @@
-package ui.mainMenu;
+package ui.windows.mainMenu;
 
 import engine.controller.GameInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import ui.UIControllerInterface;
+import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 

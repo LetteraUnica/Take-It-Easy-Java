@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.lobby.LobbyController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.windows.lobby.LobbyController">
     <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current players"
           wrappingWidth="283.0">
         <font>
