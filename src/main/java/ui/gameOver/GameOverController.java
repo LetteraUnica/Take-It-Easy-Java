@@ -37,7 +37,6 @@ public class GameOverController implements UIControllerInterface {
         }
 
         winnerText.setText(text);
-
     }
 
     private List<String> getWinners() {
