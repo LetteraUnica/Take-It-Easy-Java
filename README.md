@@ -19,6 +19,9 @@ The authors of the project are Lorenzo Cavuoti, Marco Sicklinger and Marco Scior
 1. Points are earned by aligning tiles with the same value on the line that corresponds to their orientation.
 2. When all tiles in a line have the same number, the line is worth that number multiplied by the number of tiles on the line.
 
+As an example, in the figure below, the 8-line is worth 24 points while the 4-line above it is worth 0 points, as it is not completed.
+
+![points.png](images/points.png)
 
 ## In-game controls
 
@@ -28,6 +31,7 @@ To make the game as user-friendly as possible, we've kept the user interface sim
 
 When you launch the application, you can start a new game by clicking the "Start Game" button in the game menu. This will take you to the lobby, where you can add or remove players.
 
+![main_menu.png](images/main_menu.png)
 
 ### Adding Players
 
@@ -39,28 +43,19 @@ You can remove players by clicking the "Remove" button next to their name. The "
 
 Once you've added all the players you want, you can start the match with the "Start Match" button.
 
+![lobby.png](images/lobby.png)
 ### Placing Tiles
 
 During your turn, you can place a tile in any available slot (indicated by a light blue color) by clicking on it with your mouse. Confirm the placement by clicking the "Place Tile" button. You can also view the boards of other players by clicking the "View" button on the left side of the screen. To return to your own board, click the "Return" button on the right side.
 Win Screen
 
-Once all players have filled their boards with tiles, a victory screen will be displayed. Here, you can see the winner, start a new game, or return to the main menu.
+![empty_board.png](images/empty_board.png)
 
+### Victory screen
 
-## Development details
-After an initial exploration phase carried out by all group members we decided to follow the MVC design pattern and started laying out the main component of the application, we then splitted the work evenly between the three of us:
-* Lorenzo Cavuoti was responsible for the UI development, which was carried out using JavaFX and SceneBuilder.
-* Marco Sicklinger worked on the Controller
-* Marco Sciorilli worked on the model
+Once all players have filled their boards with tiles, the victory screen will be displayed. Here, you can see the winner, start a new game, or return to the main menu.
 
-Throuought the project weekly meetings were performed in order to check on each-other development and see if any of us needed help in case the assigned tasks were longer than expected. 
-
-Both the model and controller were developed using a test-driven approach, while the UI was tested manually.
-
-The whole project was written in Java 17 and uses gradle version 7.4 for setting up the build. We also used travis CI for build automation, however we only used it in the last phase of the project as the free trial only lasts one month.
-
-The development was mainly done in IntelliJ IDEA on both Linux and Windows machines, and using github for version control. 
-
+![win_screen.png](images/win_screen.png)
 
 ## Development Overview
 
