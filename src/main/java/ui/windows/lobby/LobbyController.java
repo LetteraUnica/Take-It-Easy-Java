@@ -54,7 +54,7 @@ public class LobbyController implements UIControllerInterface {
 
     private void addPlayer(String playerName) {
         Pane rowContainer = UIUtils.createRowContainer();
-        UIUtils.addPlayerName(playerName, rowContainer, 140, 20);
+        UIUtils.addPlayerName(playerName, rowContainer, 140, 16);
         addRemoveButton(playerName, rowContainer);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
 

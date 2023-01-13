@@ -90,7 +90,7 @@ public class MainGameController implements UIControllerInterface {
 
     private void addPlayer(String playerName) {
         Pane rowContainer = createRowContainer();
-        addPlayerName(playerName, rowContainer, 100, 16);
+        addPlayerName(playerName, rowContainer, 90, 16);
         if (Objects.equals(playerName, gameController.getCurrentPlayer())) {
             addButtonToPlayerList(playerName, rowContainer, "Return");
         } else {
@@ -103,7 +103,7 @@ public class MainGameController implements UIControllerInterface {
         Button viewPlayerButton = new Button(buttonText);
         rowContainer.getChildren().add(viewPlayerButton);
         viewPlayerButton.setStyle("-fx-font-size:14");
-        viewPlayerButton.relocate(110, 0);
+        viewPlayerButton.relocate(100, 0);
         viewPlayerButton.setOnAction(event -> {
             viewedPlayer = playerName;
             updateView();
