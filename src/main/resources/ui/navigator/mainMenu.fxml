@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/application.css"
-            xmlns="http://javafx.com/javafx/19" fx:controller="ui.mainMenu.MainMenuController">
+            xmlns="http://javafx.com/javafx/19" fx:controller="ui.windows.mainMenu.MainMenuController">
     <children>
         <Button layoutX="308.0" layoutY="318.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="51.0"
                 prefWidth="169.0" text="Exit" styleClass="secondary-button">

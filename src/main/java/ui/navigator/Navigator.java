@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.UIControllerInterface;
+import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
 

@@ -18,9 +18,9 @@ public interface BoardInterface {
 
     public BoardInterface copy();
 
-
     void placeTile(Integer index, TileInterface placedTile);
 
     public boolean isBoardFull();
 
+    TileInterface getTile(int tileId);
 }

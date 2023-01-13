@@ -1,4 +1,4 @@
-package ui.lobby;
+package ui.windows.lobby;
 
 import engine.controller.GameInterface;
 import exceptions.ReassignedControllerException;
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import ui.UIControllerInterface;
+import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 import utils.ui.UIUtils;
@@ -78,7 +78,7 @@ public class LobbyController implements UIControllerInterface {
     @FXML
     public void returnToMainMenu(ActionEvent e) throws Exception {
         Navigator navigator = new Navigator();
-        navigator.navigateTo(getStage(e), NavigationConstants.STARTING_MENU_FXML);
+        navigator.navigateTo(getStage(e), NavigationConstants.MAIN_MENU_FXML);
     }
 
     @FXML

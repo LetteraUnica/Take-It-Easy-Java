@@ -15,6 +15,7 @@ public class GameController implements GameInterface {
 
     public GameController() throws FatalGameErrorException {
         matchState = new MatchState();
+        matchState.drawTile();
     }
 
     @Override
@@ -23,8 +24,8 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public int getCurrentPlayer() {
-        return matchState.getCurrentPlayer();
+    public String getCurrentPlayer() {
+        return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer());
     }
 
     @Override
@@ -32,7 +33,14 @@ public class GameController implements GameInterface {
 
     @Override
     public void nextTurn() {
-        matchState.drawTile();
+        if (isLastPlayer()) {
+            matchState.drawTile();
+        }
+        matchState.nextPlayer();
+    }
+
+    private boolean isLastPlayer() {
+        return matchState.getCurrentPlayer() == matchState.getBoards().size() - 1;
     }
 
     @Override
@@ -42,8 +50,13 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void removePlayer(int playerIndex) {
+    public void removePlayer(String playerName) {
+        int playerIndex = getPlayerIndex(playerName);
         matchState.deleteBoard(playerIndex);
+    }
+
+    private int getPlayerIndex(String playerName) {
+        return matchState.getBoardsNicknames().indexOf(playerName);
     }
 
     @Override
@@ -51,7 +64,22 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isGameOver() {
-        return matchState.getCacheSize() == 8;
+        return (matchState.getCacheSize() == 8) && isLastPlayer();
+    }
+
+    @Override
+    public BoardInterface getBoardOfPlayer(String playerName) {
+        return matchState.getBoardOfPlayer(getPlayerIndex(playerName));
+    }
+
+    @Override
+    public TileInterface getTileOfPlayer(String playerName, int tileId) {
+        return matchState.getBoardOfPlayer(getPlayerIndex(playerName)).getTile(tileId);
+    }
+
+    @Override
+    public void placeTile(int candidateTilePlacement) {
+        matchState.getBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
     }
 
     @Override
@@ -59,8 +87,5 @@ public class GameController implements GameInterface {
 
     @Override
     public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
-
-    @Override
-    public BoardInterface getSinglePlayer(int playerIndex) { return matchState.getBoardOfPlayer(playerIndex); }
 
 }

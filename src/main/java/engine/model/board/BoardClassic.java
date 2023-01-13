@@ -19,8 +19,6 @@ public class BoardClassic implements BoardInterface {
         this.nickname = nickname;
     }
 
-
-
     @Override
     public ArrayList<TileInterface> getBoard() {
         return board;
@@ -105,7 +103,6 @@ public class BoardClassic implements BoardInterface {
         return copiedBoard;
     }
 
-
     @Override
     public void placeTile(Integer index, TileInterface placedTile) {
         this.board.set(index, placedTile);
@@ -120,6 +117,11 @@ public class BoardClassic implements BoardInterface {
         }
         return true;
 
+    }
+
+    @Override
+    public TileInterface getTile(int tileId) {
+        return board.get(tileId);
     }
 
 }
