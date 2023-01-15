@@ -93,20 +93,6 @@ class MatchStateTest {
         assertTrue(isInTileList);
     }
 
-//    @Test
-//    void testGetAllBoardsScore() {
-//        BoardInterface newBoard1 = new BoardClassic("macro");
-//        state.addBoard(newBoard1);
-//        BoardInterface newBoard2 = new BoardClassic("chic");
-//        state.addBoard(newBoard2);
-//        BoardInterface newBoard3 = new BoardClassic("pinco");
-//        state.addBoard(newBoard3);
-//        BoardInterface newBoard4 = new BoardClassic("pallo");
-//        state.addBoard(newBoard4);
-//        List<Integer> trueScores = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
-//        assertEquals(trueScores, state.getAllBoardsScore());
-//    }
-
     @Test
     void testGetBoardsNicknames() {
         BoardInterface newBoard1 = new BoardClassic("macro");
