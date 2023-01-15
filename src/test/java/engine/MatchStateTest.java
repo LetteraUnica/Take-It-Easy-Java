@@ -34,14 +34,6 @@ class MatchStateTest {
     }
 
     @Test
-    void testNextPlayer() {
-        int currentPlayer = state.getCurrentPlayer();
-        state.nextPlayer();
-        int nextPlayer = state.getCurrentPlayer();
-        assertEquals(nextPlayer, currentPlayer + 1);
-    }
-
-    @Test
     void testDrawTileReducesCacheSize() {
         int currentCacheSize = state.getCacheSize();
         state.drawTile();
@@ -54,6 +46,16 @@ class MatchStateTest {
         BoardInterface newBoard = new BoardClassic("macro");
         state.addBoard(newBoard);
         assertEquals(numberOfBoards + 1, state.getNumberOfBoards());
+    }
+
+    @Test
+    void testNextPlayer() {
+        state.addBoard(new BoardClassic("caio"));
+        state.addBoard(new BoardClassic("tizio"));
+        int currentPlayer = state.getCurrentPlayer();
+        state.nextPlayer();
+        int nextPlayer = state.getCurrentPlayer();
+        assertEquals(nextPlayer, currentPlayer + 1);
     }
 
     @Test
@@ -92,20 +94,6 @@ class MatchStateTest {
         }
         assertTrue(isInTileList);
     }
-
-//    @Test
-//    void testGetAllBoardsScore() {
-//        BoardInterface newBoard1 = new BoardClassic("macro");
-//        state.addBoard(newBoard1);
-//        BoardInterface newBoard2 = new BoardClassic("chic");
-//        state.addBoard(newBoard2);
-//        BoardInterface newBoard3 = new BoardClassic("pinco");
-//        state.addBoard(newBoard3);
-//        BoardInterface newBoard4 = new BoardClassic("pallo");
-//        state.addBoard(newBoard4);
-//        List<Integer> trueScores = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
-//        assertEquals(trueScores, state.getAllBoardsScore());
-//    }
 
     @Test
     void testGetBoardsNicknames() {

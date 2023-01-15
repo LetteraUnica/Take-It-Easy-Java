@@ -2,29 +2,48 @@ package engine;
 
 import engine.controller.GameController;
 import engine.controller.GameInterface;
-import engine.model.tile.Tile;
+import engine.model.board.BoardInterface;
+import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
 import org.junit.jupiter.api.Test;
-import utils.tile.TileLoader;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class GameControllerTest {
+class GameControllerTest {
 
     GameInterface controller = new GameController();
 
     public GameControllerTest() throws FatalGameErrorException {}
 
     @Test
+    void testRemovePlayer() {
+        controller.addPlayer("pinco");
+        controller.addPlayer("pallo");
+        controller.removePlayer("pallo");
+        List<String> players = controller.getNicknames();
+        assertFalse(players.contains("pallo"));
+    }
+
+    @Test
+    void testGetBoardOfPlayer() {
+        controller.addPlayer("pinco");
+        BoardInterface boardOfPallo = controller.getBoardOfPlayer("pinco");
+        assertEquals("pinco", boardOfPallo.getNickname());
+    }
+
+    @Test
     void testIsGameOver() {
-        assertFalse(controller.isGameOver());
-        int numberOfTiles = ((ArrayList<Tile>) new TileLoader().loadTileList()).size();
-        System.out.println(numberOfTiles);
-        for (int i = 0; i < numberOfTiles; i++) {
-            controller.nextTurn();
+        controller.addPlayer("pincopallo");
+        int i = 0;
+        while (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
+            TileInterface currentTile = controller.getCurrentTile();
+            controller.getBoardOfPlayer("pincopallo").placeTile(i, currentTile);
+            i++;
+            if (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
+                controller.nextTurn();
+            }
         }
         assertTrue(controller.isGameOver());
     }
