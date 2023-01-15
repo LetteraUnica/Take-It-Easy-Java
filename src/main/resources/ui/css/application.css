@@ -53,14 +53,21 @@
     -fx-background-color: -base-color;
 }
 
-.cell{
+.opponentCell{
     -fx-fill: -primary_color;
     -fx-smooth: true;
     -fx-stroke: -primary-highlight-color;
     -fx-stroke-width: 3;
 }
 
-.cell:hover{
+.playerCell{
+    -fx-fill: -primary_color;
+    -fx-smooth: true;
+    -fx-stroke: -primary-highlight-color;
+    -fx-stroke-width: 3;
+}
+
+.playerCell:hover{
     -fx-fill: -primary-highlight-color;
 }
 

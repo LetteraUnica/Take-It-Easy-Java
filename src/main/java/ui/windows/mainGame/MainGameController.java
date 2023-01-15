@@ -130,23 +130,32 @@ public class MainGameController implements UIControllerInterface {
         double minY = hexagonCenterCoordinates.stream().min(Comparator.comparing(Point2D::getY)).get().getY();
         for (int tileId = 0; tileId < hexagonCenterCoordinates.size(); tileId++) {
             Point2D centerPoint = hexagonCenterCoordinates.get(tileId);
-            double x = rescaleCoordinate(centerPoint.getX(), minX, maxX, boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
-            double y = rescaleCoordinate(centerPoint.getY(), minY, maxY, boardPane.getPrefHeight() - 2 * boardPane.getInsets().getBottom());
             Polygon cell = drawHexagonalTile(Constants.tileRadius);
             boardPane.getChildren().add(cell);
+            double x = rescaleCoordinate(centerPoint.getX(), minX, maxX, boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
+            double y = rescaleCoordinate(centerPoint.getY(), minY, maxY, boardPane.getPrefHeight() - 2 * boardPane.getInsets().getBottom());
             cell.relocate(x, y);
-            cell.getStyleClass().add("cell");
+            if (isCurrentPlayer(playerName)) {
+                cell.getStyleClass().add("playerCell");
+            }
+            else {
+                cell.getStyleClass().add("opponentCell");
+            }
             TileInterface tile = gameController.getTileOfPlayer(playerName, tileId);
-            if (tileId == candidateTilePlacement && gameController.getCurrentPlayer().equals(playerName)) {
+            if (tileId == candidateTilePlacement && isCurrentPlayer(playerName)) {
                 tile = gameController.getCurrentTile();
             }
             if (tile != null) {
                 cell.getStyleClass().add("tile");
                 addNumbersToTile(tile, boardPane, x + 15, y + 5);
-            } else if (gameController.getCurrentPlayer().equals(viewedPlayer)) {
+            } else if (isCurrentPlayer(viewedPlayer)) {
                 addTileInteraction(tileId, cell);
             }
         }
+    }
+
+    private boolean isCurrentPlayer(String playerName) {
+        return gameController.getCurrentPlayer().equals(playerName);
     }
 
     private void addTileInteraction(int tileId, Polygon cell) {
