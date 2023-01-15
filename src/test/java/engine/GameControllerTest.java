@@ -3,19 +3,15 @@ package engine;
 import engine.controller.GameController;
 import engine.controller.GameInterface;
 import engine.model.board.BoardInterface;
-import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.FatalGameErrorException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import utils.tile.TileLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameControllerTest {
+class GameControllerTest {
 
     GameInterface controller = new GameController();
 
