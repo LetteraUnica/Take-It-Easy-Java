@@ -64,7 +64,7 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isGameOver() {
-        return (matchState.getCacheSize() == 8) && isLastPlayer();
+        return (getPlayers().stream().allMatch(BoardInterface::isBoardFull)) && isLastPlayer();
     }
 
     @Override

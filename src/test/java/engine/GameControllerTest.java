@@ -42,10 +42,12 @@ public class GameControllerTest {
         controller.addPlayer("pincopallo");
         int i = 0;
         while (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
-            controller.nextTurn();
             TileInterface currentTile = controller.getCurrentTile();
             controller.getBoardOfPlayer("pincopallo").placeTile(i, currentTile);
             i++;
+            if (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
+                controller.nextTurn();
+            }
         }
         assertTrue(controller.isGameOver());
     }

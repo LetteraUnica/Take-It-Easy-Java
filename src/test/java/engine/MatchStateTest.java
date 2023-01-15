@@ -34,14 +34,6 @@ class MatchStateTest {
     }
 
     @Test
-    void testNextPlayer() {
-        int currentPlayer = state.getCurrentPlayer();
-        state.nextPlayer();
-        int nextPlayer = state.getCurrentPlayer();
-        assertEquals(nextPlayer, currentPlayer + 1);
-    }
-
-    @Test
     void testDrawTileReducesCacheSize() {
         int currentCacheSize = state.getCacheSize();
         state.drawTile();
@@ -54,6 +46,16 @@ class MatchStateTest {
         BoardInterface newBoard = new BoardClassic("macro");
         state.addBoard(newBoard);
         assertEquals(numberOfBoards + 1, state.getNumberOfBoards());
+    }
+
+    @Test
+    void testNextPlayer() {
+        state.addBoard(new BoardClassic("caio"));
+        state.addBoard(new BoardClassic("tizio"));
+        int currentPlayer = state.getCurrentPlayer();
+        state.nextPlayer();
+        int nextPlayer = state.getCurrentPlayer();
+        assertEquals(nextPlayer, currentPlayer + 1);
     }
 
     @Test
