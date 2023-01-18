@@ -29,8 +29,8 @@ public class BoardClassicTest {
             TileInterface testStandardTile = new Tile(i,i,i,i);
             testBoard.placeTile(i, testStandardTile);
         }
-        assertEquals(testBoard.getBoard().get(3).getIdTile(), 3);
-        assertEquals(testBoard.getBoard().get(3).getValues(), new ArrayList<>(Collections.nCopies(3, 3)));
+        assertEquals( 3, testBoard.getBoard().get(3).getIdTile());
+        assertEquals( new ArrayList<>(Collections.nCopies(3, 3)), testBoard.getBoard().get(3).getValues());
     }
 
     @Test
@@ -43,6 +43,7 @@ public class BoardClassicTest {
         assertEquals("testName", testBoard.copy().getNickname());
         assertEquals(testBoard.getBoard(), testBoard.copy().getBoard());
     }
+
     @Test
     void getScore(){
         BoardInterface testBoard = new BoardClassic("testName");
@@ -50,7 +51,7 @@ public class BoardClassicTest {
             TileInterface testStandardTile = new Tile(i,1,1,1);
             testBoard.placeTile(i, testStandardTile);
         }
-        assertEquals(57, 57);
+        assertEquals( 57, testBoard.getScore());
     }
 
 
