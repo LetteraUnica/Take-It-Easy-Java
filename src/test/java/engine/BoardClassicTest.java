@@ -5,7 +5,6 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import org.junit.jupiter.api.Test;
-
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
