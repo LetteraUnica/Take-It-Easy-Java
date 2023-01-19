@@ -35,20 +35,12 @@ public class BoardClassic implements BoardInterface {
         CubeCoordinates center = new CubeCoordinates(0, 0, 0);
         ArrayList<CubeCoordinates> coordinatesCells = (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HashMap<CubeCoordinates, Integer> cellsMap = new HashMap<>();
-
         for (int j = 0; j < this.board.size(); ++j) {
             cellsMap.put(coordinatesCells.get(j), j);
         }
-
-
         int score = 0;
         for (int i =0; i<3;++i) {
-
             HashSet<CubeCoordinates> availableCells = new HashSet<>(cellsMap.keySet());
-
-
-
-
             while (!availableCells.isEmpty()) {
                 ArrayList<CubeCoordinates> line = new ArrayList<>();
                 CubeCoordinates pickedCell = availableCells.iterator().next();
@@ -56,21 +48,17 @@ public class BoardClassic implements BoardInterface {
                 availableCells.remove(pickedCell);
                 exploreDirection(line,pickedCell.cubeNeighbor(i), i, availableCells, cellsMap);
                 exploreDirection(line,pickedCell.cubeNeighbor(i+3), i+3, availableCells, cellsMap);
-
                 HashSet<Integer> paths = new HashSet<>();
-
                 for (CubeCoordinates cubeCoordinates : line) {
                     paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getValues().get(i));
                     }
                 if(paths.size()==1){
                     score = score + line.size()*paths.iterator().next();
                 }
-
                 }
             }
         return score;
     }
-
 
     public void exploreDirection(List<CubeCoordinates> line,CubeCoordinates currentCell, int direction, Set<CubeCoordinates> availableCells, Map<CubeCoordinates, Integer> cellsMap){
         if (cellsMap.containsKey(currentCell)){
@@ -79,7 +67,6 @@ public class BoardClassic implements BoardInterface {
         currentCell = currentCell.cubeNeighbor(direction);
         exploreDirection(line, currentCell, direction, availableCells, cellsMap);
         }
-
     }
 
     @Override
