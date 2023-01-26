@@ -1,4 +1,4 @@
-package utils.ui;
+package ui.utils;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Node;

@@ -18,9 +18,9 @@ module ui {
     opens engine.state to com.google.gson;
     opens utils.boardutils to com.google.gson;
     opens ui to javafx.fxml;
-    exports utils.ui;
-    opens utils.ui to javafx.fxml;
     opens utils.tile to com.google.gson;
     exports ui.windows;
     opens ui.windows to javafx.fxml;
+    exports ui.utils;
+    opens ui.utils to javafx.fxml;
 }

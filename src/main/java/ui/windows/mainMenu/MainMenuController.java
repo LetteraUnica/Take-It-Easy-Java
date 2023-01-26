@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static utils.ui.UIUtils.getStage;
+import static ui.utils.UIUtils.getStage;
 
 public class MainMenuController implements UIControllerInterface {
 

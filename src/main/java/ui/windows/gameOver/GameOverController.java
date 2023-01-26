@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static utils.ui.UIUtils.getStage;
+import static ui.utils.UIUtils.getStage;
 
 public class GameOverController implements UIControllerInterface {
     @FXML

@@ -24,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-import static utils.ui.UIUtils.*;
+import static ui.utils.UIUtils.*;
 
 public class MainGameController implements UIControllerInterface {
     @FXML

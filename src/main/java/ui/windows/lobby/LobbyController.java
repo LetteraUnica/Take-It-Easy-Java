@@ -11,11 +11,11 @@ import javafx.scene.layout.Pane;
 import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
-import utils.ui.UIUtils;
+import ui.utils.UIUtils;
 
 import java.io.IOException;
 
-import static utils.ui.UIUtils.getStage;
+import static ui.utils.UIUtils.getStage;
 
 public class LobbyController implements UIControllerInterface {
     @FXML
@@ -41,26 +41,27 @@ public class LobbyController implements UIControllerInterface {
 
     private void initializePlayerList() {
         for (String playerName : gameController.getNicknames()) {
-            addPlayer(playerName);
+            addToPlayerList(playerName);
         }
+        startMatchButtonEnable();
     }
 
     @FXML
     public void addPlayerButtonPressed() {
         String playerName = playerNameField.getText();
         gameController.addPlayer(playerName);
-        addPlayer(playerName);
-    }
-
-    private void addPlayer(String playerName) {
-        Pane rowContainer = UIUtils.createRowContainer();
-        UIUtils.addPlayerName(playerName, rowContainer, 140, 16);
-        addRemoveButton(playerName, rowContainer);
-        playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
+        addToPlayerList(playerName);
 
         playerNameField.clear();
         startMatchButtonEnable();
         addPlayerButtonEnable();
+    }
+
+    private void addToPlayerList(String playerName) {
+        Pane rowContainer = UIUtils.createRowContainer();
+        UIUtils.addPlayerName(playerName, rowContainer, 140, 16);
+        addRemoveButton(playerName, rowContainer);
+        playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
     }
 
     private void addRemoveButton(String playerName, Pane rowContainer) {
@@ -76,7 +77,7 @@ public class LobbyController implements UIControllerInterface {
     }
 
     @FXML
-    public void returnToMainMenu(ActionEvent e) throws Exception {
+    public void returnToMainMenu(ActionEvent e) throws IOException {
         Navigator navigator = new Navigator();
         navigator.navigateTo(getStage(e), NavigationConstants.MAIN_MENU_FXML);
     }
