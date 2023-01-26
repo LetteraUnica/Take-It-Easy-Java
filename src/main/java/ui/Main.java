@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -14,7 +15,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
         primaryStage.setResizable(false);
         setLogo(primaryStage);
         Navigator navigator = new Navigator();

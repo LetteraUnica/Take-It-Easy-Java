@@ -8,10 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 import ui.utils.UIUtils;
+import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
 

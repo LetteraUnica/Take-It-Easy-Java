@@ -45,4 +45,10 @@ public class UIUtils {
     public static double rescaleCoordinate(double coordinate, double minValue, double maxValue, double desiredRange) {
         return (coordinate - minValue) / (maxValue - minValue) * desiredRange;
     }
+
+    public static Polygon drawHexagonalTile(double radius) {
+        Polygon tile = new Polygon();
+        setPolygonSides(tile, radius, 6);
+        return tile;
+    }
 }

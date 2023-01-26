@@ -3,7 +3,7 @@ package ui.windows.mainGame;
 import engine.controller.GameInterface;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
-import exceptions.FatalGameErrorException;
+import exceptions.NotEnoughTilesException;
 import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,9 +15,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
-import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
+import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -41,25 +41,18 @@ public class MainGameController implements UIControllerInterface {
     private int candidateTilePlacement = -1;
     private String viewedPlayer;
 
-    private static Polygon drawHexagonalTile(double radius) {
-        Polygon tile = new Polygon();
-        setPolygonSides(tile, radius, 6);
-        return tile;
-    }
-
     @Override
     public void initController(GameInterface gameController) {
         this.gameController = gameController;
         viewedPlayer = this.gameController.getCurrentPlayer();
-
         updateView();
     }
 
     private void updateView() {
         try {
             drawBoard(viewedPlayer);
-        } catch (FatalGameErrorException e) {
-            throw new RuntimeException(e);
+        } catch (NotEnoughTilesException e) {
+            e.printStackTrace();
         }
         updatePlaceTileButton();
         initializePlayerList();
@@ -78,24 +71,21 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private void updatePlaceTileButton() {
-        placeTileButton.setDisable(candidateTilePlacement == -1 || !Objects.equals(viewedPlayer, gameController.getCurrentPlayer()));
+        placeTileButton.setDisable(candidateTilePlacement == -1 || !viewedPlayer.equals(gameController.getCurrentPlayer()));
     }
 
     private void initializePlayerList() {
         playerListPane.getChildren().clear();
         for (String playerName : gameController.getNicknames()) {
-            addPlayer(playerName);
+            addToPlayerList(playerName);
         }
     }
 
-    private void addPlayer(String playerName) {
+    private void addToPlayerList(String playerName) {
         Pane rowContainer = createRowContainer();
         addPlayerName(playerName, rowContainer, 90, 16);
-        if (Objects.equals(playerName, gameController.getCurrentPlayer())) {
-            addButtonToPlayerList(playerName, rowContainer, "Return");
-        } else {
-            addButtonToPlayerList(playerName, rowContainer, "View");
-        }
+        String button_text = playerName.equals(gameController.getCurrentPlayer()) ? "Return" : "View";
+        addButtonToPlayerList(playerName, rowContainer, button_text);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
     }
 
@@ -112,19 +102,20 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    private void drawBoard(String playerName) throws FatalGameErrorException {
+    private void drawBoard(String playerName) throws NotEnoughTilesException {
         boardPane.getChildren().clear();
         BoardInterface board = gameController.getBoardOfPlayer(playerName);
         List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
         if (hexagonCenterCoordinates.size() < 1) {
-            throw new FatalGameErrorException();
+            throw new NotEnoughTilesException("The board has no tiles.");
         }
 
-        int n_hexagons = 5;
-        double angle = Math.PI / 6;
-        insertBoardPanePadding(Constants.tileRadius, n_hexagons, angle);
+        insertBoardPanePadding();
 
-        double maxX = hexagonCenterCoordinates.stream().max(Comparator.comparing(Point2D::getX)).get().getX();
+        double maxX = Objects.requireNonNull(hexagonCenterCoordinates
+                .stream()
+                .max(Comparator.comparing(Point2D::getX))
+                .orElse(null)).getX();
         double minX = hexagonCenterCoordinates.stream().min(Comparator.comparing(Point2D::getX)).get().getX();
         double maxY = hexagonCenterCoordinates.stream().max(Comparator.comparing(Point2D::getY)).get().getY();
         double minY = hexagonCenterCoordinates.stream().min(Comparator.comparing(Point2D::getY)).get().getY();
@@ -132,13 +123,14 @@ public class MainGameController implements UIControllerInterface {
             Point2D centerPoint = hexagonCenterCoordinates.get(tileId);
             Polygon cell = drawHexagonalTile(Constants.tileRadius);
             boardPane.getChildren().add(cell);
-            double x = rescaleCoordinate(centerPoint.getX(), minX, maxX, boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
-            double y = rescaleCoordinate(centerPoint.getY(), minY, maxY, boardPane.getPrefHeight() - 2 * boardPane.getInsets().getBottom());
+            double x = rescaleCoordinate(centerPoint.getX(), minX, maxX,
+                    boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
+            double y = rescaleCoordinate(centerPoint.getY(), minY, maxY,
+                    boardPane.getPrefHeight() - 2 * boardPane.getInsets().getBottom());
             cell.relocate(x, y);
             if (isCurrentPlayer(playerName)) {
                 cell.getStyleClass().add("playerCell");
-            }
-            else {
+            } else {
                 cell.getStyleClass().add("opponentCell");
             }
             TileInterface tile = gameController.getTileOfPlayer(playerName, tileId);
@@ -166,34 +158,36 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private void addNumbersToTile(TileInterface tile, Pane boardPane, double x, double y) {
-        Group tileNumbers = setNumberLocation(tile, Constants.tileRadius * 0.55);
+        Group tileNumbers = setNumberLocation(tile);
         boardPane.getChildren().add(tileNumbers);
         tileNumbers.relocate(x, y);
     }
 
-    private Group setNumberLocation(TileInterface tile, double radius) {
+    private Group setNumberLocation(TileInterface tile) {
         double startAngle = -Math.PI / 2;
         double increment = Math.PI * 2 / 3;
         List<Integer> tileValues = List.of(tile.getTopPath(), tile.getRightPath(), tile.getLeftPath());
         Group tileNumbers = new Group();
         for (int i = 0; i < 3; i++) {
             Text text = new Text(String.valueOf(tileValues.get(i)));
-            text.setX(radius * Math.cos(startAngle + i * increment));
-            text.setY(radius * Math.sin(startAngle + i * increment));
+            text.setX(Constants.numberRadius * Math.cos(startAngle + i * increment));
+            text.setY(Constants.numberRadius * Math.sin(startAngle + i * increment));
             text.getStyleClass().add("tileText");
             tileNumbers.getChildren().add(text);
         }
         return tileNumbers;
     }
 
-    private void insertBoardPanePadding(double radius, int n_hexagons, double angle) {
+    private void insertBoardPanePadding() {
+        int n_hexagons = 5;
+        double angle = Math.PI / 6;
         double height_width_ratio = 2 * (n_hexagons - 1) * Math.cos(angle) / (n_hexagons * (1 + Math.cos(2 * angle)) - 2);
         boardPane.setPadding(
                 new Insets(
-                        radius * Math.cos(angle),
-                        radius * height_width_ratio,
-                        radius * Math.cos(angle),
-                        radius * height_width_ratio
+                        Constants.tileRadius * Math.cos(angle),
+                        Constants.tileRadius * height_width_ratio,
+                        Constants.tileRadius * Math.cos(angle),
+                        Constants.tileRadius * height_width_ratio
                 )
         );
     }
