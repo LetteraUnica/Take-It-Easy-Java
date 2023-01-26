@@ -78,7 +78,31 @@ The project was written in Java 17 and built using gradle version 7.4. We also u
 
 
 ## Architecture
-To write
+We organized the code in different packages, each performing a separate task:
+* The engine under main.java.engine implements the game logic.
+* The user interface under main.java.ui which implements the UI using the JavaFX library
+* An utils package main.utils, containing utility functions for the classes
+* An exceptions package main.exceptions, containing custom exceptions that can be thrown during program execution
+
+The application entrypoint is defined in the takeiteasy.Main class, which simply launches the takeiteasy.GUI.FXApplication.
+
+### Engine
+Da scrivere
+
+### UI
+The UI package is located in main.java.ui and is divided into various controller classes, each corresponding to a different window or screen that the user interacts with. The navigator class manages the movement between these windows.
+During the implementation of the UI, we ensured user-friendliness by disabling buttons that would lead to illegal actions such as adding a player that already exists or starting a match when no players are present. This approach not only enhances the user experience but also reduces the need for error handling in the code.
+
+The whole ui uses a unique css style sheet which allows to change the visual appearance with minimal effort, found in `main.resources.ui.css`.
+
+The UI is made up of four different views, each controlled by its own controller and implemented in JavaFX FXML files:
+
+* Main Menu: This is the first view that the user sees when they launch the program. It is located in the `ui.windows.mainMenu` package and has buttons for starting a game, accessing the game's rules, and exiting the program.
+* Lobby: This view can be accessed from the Main Menu and is located in the `ui.windows.lobby` package. Here, the user can add or remove players and start the game. The view communicates changes to the controller, which updates the model accordingly.
+* Main Game: This view, located in the `ui.windows.mainGame package`, is where the players play the game against each other. It has an additional UI logic layer that keeps track of the `viewedPlayer`, which is the player whose board is currently being displayed, , and the `candidateTilePlacement` which keeps track of the last clicked tile on the board, which corresponds to the tile placement of the current player.
+* Game Over: This view displays the winner(s) of the game and has options to return to the Main Menu or start a new game. It is located in the `ui.windows.gameOver` package.
+
+Finally, each controller implements the `UIControllerInterface` interface, defined in `main\java\ui\windows\UIControllerInterface.java`. The interface defines a single method, `initController(GameInterface gameController)`, which is essential for all UI controllers to connect to the gameController defined in the engine package. Connecting to the gameController is crucial as it enables navigation between different views of the game by maintaining the current state of the game. For example, when transitioning from the lobby view to the Main Game view, it is important to keep track of the player names, which can only be achieved by passing the gameController between the different UIControllers.
 
 
 ## References
