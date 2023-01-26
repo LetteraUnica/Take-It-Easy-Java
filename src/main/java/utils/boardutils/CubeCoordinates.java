@@ -2,15 +2,20 @@ package utils.boardutils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CubeCoordinates implements Comparable<CubeCoordinates> {
-    private Integer x, y, z;
+    private Integer x;
+    private Integer y;
+    private Integer z;
+    private int hashCode;
 
 
     public CubeCoordinates(Integer x, Integer y, Integer z) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.hashCode = Objects.hash(x, y);
     }
 
     public Integer getX() {
@@ -99,16 +104,22 @@ public class CubeCoordinates implements Comparable<CubeCoordinates> {
 
     @Override
     public int compareTo(CubeCoordinates cubeCoordinates) {
-        /*
-        System.out.println(this.x);
-        System.out.println( cubeCoordinates.getX() );
-        System.out.println(this.y);
-        System.out.println( cubeCoordinates.getY());
-        System.out.println( "RISULTATO" + Math.abs(this.x-cubeCoordinates.getX()) +Math.abs(this.y- cubeCoordinates.getY()));
-
-         */
         return  Math.abs(this.x-cubeCoordinates.getX()) +Math.abs(this.y- cubeCoordinates.getY());
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        CubeCoordinates that = (CubeCoordinates) o;
+        return x == that.x && y == that.y;
+    }
+    @Override
+    public int hashCode() {
+        return this.hashCode;
     }
 }
 

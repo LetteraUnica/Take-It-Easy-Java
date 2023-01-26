@@ -35,50 +35,38 @@ public class BoardClassic implements BoardInterface {
         CubeCoordinates center = new CubeCoordinates(0, 0, 0);
         ArrayList<CubeCoordinates> coordinatesCells = (ArrayList<CubeCoordinates>) center.navigateSpiral(2);
         HashMap<CubeCoordinates, Integer> cellsMap = new HashMap<>();
-
         for (int j = 0; j < this.board.size(); ++j) {
             cellsMap.put(coordinatesCells.get(j), j);
         }
-
         int score = 0;
         for (int i =0; i<3;++i) {
-            System.out.println("ORA Inizializzo");
-            TreeSet<CubeCoordinates> availableCells = new TreeSet<>(cellsMap.keySet());
-            System.out.println(availableCells.size());
-            int l=0;
-
-            //while (!availableCells.isEmpty()) {
-            while (l<3) {
-                l+=1;
+            HashSet<CubeCoordinates> availableCells = new HashSet<>(cellsMap.keySet());
+            while (!availableCells.isEmpty()) {
                 ArrayList<CubeCoordinates> line = new ArrayList<>();
-                CubeCoordinates pickedCell = availableCells.first();
+                CubeCoordinates pickedCell = availableCells.iterator().next();
                 line.add(pickedCell);
-                System.out.print("ORA RIMUOVO"+ pickedCell.getX()+ pickedCell.getY());
                 availableCells.remove(pickedCell);
-                exploreDirection(line,pickedCell, i, availableCells, cellsMap);
-                exploreDirection(line,pickedCell, i*2, availableCells, cellsMap);
-
-                TreeSet<Integer> paths = new TreeSet<>();
-                System.out.println(availableCells.size());
+                exploreDirection(line,pickedCell.cubeNeighbor(i), i, availableCells, cellsMap);
+                exploreDirection(line,pickedCell.cubeNeighbor(i+3), i+3, availableCells, cellsMap);
+                HashSet<Integer> paths = new HashSet<>();
                 for (CubeCoordinates cubeCoordinates : line) {
-                    paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getRightPath());
+                    paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getValues().get(i));
                     }
                 if(paths.size()==1){
-                    score = score + line.size()*paths.first();
+                    score = score + line.size()*paths.iterator().next();
                 }
-
                 }
             }
         return score;
     }
 
-
-    public void exploreDirection(List<CubeCoordinates> line,CubeCoordinates currentCell, int direction, SortedSet<CubeCoordinates> availableCells, Map<CubeCoordinates, Integer> cellsMap){
+    public void exploreDirection(List<CubeCoordinates> line,CubeCoordinates currentCell, int direction, Set<CubeCoordinates> availableCells, Map<CubeCoordinates, Integer> cellsMap){
         if (cellsMap.containsKey(currentCell)){
         line.add(currentCell);
         availableCells.remove(currentCell);
         currentCell = currentCell.cubeNeighbor(direction);
-        exploreDirection(line, currentCell, direction, availableCells, cellsMap);}
+        exploreDirection(line, currentCell, direction, availableCells, cellsMap);
+        }
     }
 
     @Override
