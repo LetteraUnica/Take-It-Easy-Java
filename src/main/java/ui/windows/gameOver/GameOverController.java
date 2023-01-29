@@ -6,15 +6,15 @@ import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
+import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static utils.ui.UIUtils.getStage;
+import static ui.utils.UIUtils.getStage;
 
 public class GameOverController implements UIControllerInterface {
     @FXML

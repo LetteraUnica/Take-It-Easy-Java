@@ -1,4 +1,4 @@
-package utils.ui;
+package ui.utils;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -44,5 +44,11 @@ public class UIUtils {
 
     public static double rescaleCoordinate(double coordinate, double minValue, double maxValue, double desiredRange) {
         return (coordinate - minValue) / (maxValue - minValue) * desiredRange;
+    }
+
+    public static Polygon drawHexagonalTile(double radius) {
+        Polygon tile = new Polygon();
+        setPolygonSides(tile, radius, 6);
+        return tile;
     }
 }

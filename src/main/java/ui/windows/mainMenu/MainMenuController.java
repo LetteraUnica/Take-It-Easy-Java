@@ -4,16 +4,16 @@ import engine.controller.GameInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import ui.windows.UIControllerInterface;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
+import ui.windows.UIControllerInterface;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static utils.ui.UIUtils.getStage;
+import static ui.utils.UIUtils.getStage;
 
 public class MainMenuController implements UIControllerInterface {
 
