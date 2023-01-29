@@ -7,11 +7,15 @@ import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.FatalGameErrorException;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class GameController implements GameInterface {
 
-    private MatchState matchState;
+    private final MatchState matchState;
 
     public GameController() throws FatalGameErrorException {
         matchState = new MatchState();
@@ -27,9 +31,6 @@ public class GameController implements GameInterface {
     public String getCurrentPlayer() {
         return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer());
     }
-
-    @Override
-    public void nextPlayer() { matchState.nextPlayer(); }
 
     @Override
     public void nextTurn() {
@@ -64,7 +65,7 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isGameOver() {
-        return (getPlayers().stream().allMatch(BoardInterface::isBoardFull)) && isLastPlayer();
+        return getPlayers().stream().allMatch(BoardInterface::isBoardFull) && isLastPlayer();
     }
 
     @Override
@@ -80,6 +81,23 @@ public class GameController implements GameInterface {
     @Override
     public void placeTile(int candidateTilePlacement) {
         matchState.getBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
+    }
+
+    @Override
+    public boolean isCurrentPlayer(String playerName) {
+        return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer()).equals(playerName);
+    }
+
+    @Override
+    public List<String> getGameWinners() {
+        List<Integer> scores = matchState.getAllBoardsScore();
+        int[] winnersIndices =  IntStream.range(0, scores.size()).filter(playerIndex -> Objects.equals(scores.get(playerIndex), scores.stream().max(Integer::compare).get())).toArray();
+        return Arrays.stream(winnersIndices).mapToObj(matchState.getBoardsNicknames()::get).toList();
+    }
+
+    @Override
+    public int getWinnersScore() {
+        return Collections.max(matchState.getAllBoardsScore());
     }
 
     @Override

@@ -3,7 +3,6 @@ package engine.state;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
-import exceptions.FatalGameErrorException;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class MatchState {
     private TileInterface currentTile;
     private Integer currentPlayer;
 
-    public MatchState() throws FatalGameErrorException {
+    public MatchState() {
         currentPlayer = 0;
         initializeTileCollection();
     }

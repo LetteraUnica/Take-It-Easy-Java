@@ -7,29 +7,33 @@ import java.util.List;
 
 public interface GameInterface {
 
-    public TileInterface getCurrentTile();
+    TileInterface getCurrentTile();
 
-    public String getCurrentPlayer();
+    String getCurrentPlayer();
 
-    public void nextPlayer();
+    void nextTurn();
 
-    public void nextTurn();
+    void addPlayer(String newPlayerName);
 
-    public void addPlayer(String newPlayerName);
+    void removePlayer(String playerName);
 
-    public void removePlayer(String playerName);
+    List<Integer> getScores();
 
-    public List<Integer> getScores();
+    List<String> getNicknames();
 
-    public List<String> getNicknames();
+    List<BoardInterface> getPlayers();
 
-    public List<BoardInterface> getPlayers();
+    boolean isGameOver();
 
-    public boolean isGameOver();
+    BoardInterface getBoardOfPlayer(String playerName);
 
-    public BoardInterface getBoardOfPlayer(String playerName);
-
-    public TileInterface getTileOfPlayer(String playerName, int tileId);
+    TileInterface getTileOfPlayer(String playerName, int tileId);
 
     void placeTile(int candidateTilePlacement);
+
+    boolean isCurrentPlayer(String playerName);
+
+    List<String> getGameWinners();
+
+    int getWinnersScore();
 }
