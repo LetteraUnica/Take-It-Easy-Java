@@ -5,7 +5,6 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
