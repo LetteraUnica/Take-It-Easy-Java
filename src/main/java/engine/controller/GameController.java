@@ -5,7 +5,6 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
-import exceptions.FatalGameErrorException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +16,7 @@ public class GameController implements GameInterface {
 
     private final MatchState matchState;
 
-    public GameController() throws FatalGameErrorException {
+    public GameController() {
         matchState = new MatchState();
         matchState.drawTile();
     }
