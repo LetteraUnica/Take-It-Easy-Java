@@ -3,6 +3,8 @@ package ui.windows.mainGame;
 import engine.controller.GameInterface;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
+import exceptions.PlayerNameNotFoundException;
+import exceptions.TileCacheEmptyException;
 import exceptions.NotEnoughTilesException;
 import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
@@ -51,7 +53,7 @@ public class MainGameController implements UIControllerInterface {
     private void updateView() {
         try {
             drawBoard(viewedPlayer);
-        } catch (NotEnoughTilesException e) {
+        } catch (NotEnoughTilesException | PlayerNameNotFoundException e) {
             e.printStackTrace();
         }
         updatePlaceTileButton();
@@ -84,8 +86,8 @@ public class MainGameController implements UIControllerInterface {
     private void addToPlayerList(String playerName) {
         Pane rowContainer = createRowContainer();
         addPlayerName(playerName, rowContainer, 90, 16);
-        String button_text = playerName.equals(gameController.getCurrentPlayer()) ? "Return" : "View";
-        addButtonToPlayerList(playerName, rowContainer, button_text);
+        String buttonText = playerName.equals(gameController.getCurrentPlayer()) ? "Return" : "View";
+        addButtonToPlayerList(playerName, rowContainer, buttonText);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
     }
 
@@ -102,11 +104,11 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    private void drawBoard(String playerName) throws NotEnoughTilesException {
+    private void drawBoard(String playerName) throws NotEnoughTilesException, PlayerNameNotFoundException {
         boardPane.getChildren().clear();
         BoardInterface board = gameController.getBoardOfPlayer(playerName);
         List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
-        if (hexagonCenterCoordinates.size() < 1) {
+        if (hexagonCenterCoordinates.isEmpty()) {
             throw new NotEnoughTilesException("The board has no tiles.");
         }
 
@@ -199,7 +201,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException {
+    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException {
         gameController.placeTile(candidateTilePlacement);
         candidateTilePlacement = -1;
         if (gameController.isGameOver()) {

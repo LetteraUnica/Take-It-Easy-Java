@@ -2,7 +2,7 @@ package ui.navigator;
 
 import engine.controller.GameController;
 import engine.controller.GameInterface;
-import exceptions.FatalGameErrorException;
+import exceptions.TileCacheEmptyException;
 import exceptions.ReassignedControllerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +22,7 @@ public class Navigator {
     public void navigateTo(Stage stage, String to) throws IOException {
         try {
             navigateWithController(stage, to, new GameController());
-        } catch (ReassignedControllerException | FatalGameErrorException ignored) {
+        } catch (ReassignedControllerException | TileCacheEmptyException ignored) {
         }
     }
 
