@@ -149,9 +149,9 @@ class CubeCoordinatesTest {
         CubeCoordinates cubeCoordinates2 = new CubeCoordinates(1, 2, 3);
         CubeCoordinates cubeCoordinates3 = new CubeCoordinates(2, 2, 3);
 
-        assertTrue(cubeCoordinates1.equals(cubeCoordinates2));
-        assertFalse(cubeCoordinates1.equals(cubeCoordinates3));
-        assertFalse(cubeCoordinates1.equals(null));
-        assertFalse(cubeCoordinates1.equals("Not a CubeCoordinates object"));
+        assertEquals(cubeCoordinates1, cubeCoordinates2);
+        assertNotEquals(cubeCoordinates1, cubeCoordinates3);
+        assertNotEquals(null, cubeCoordinates1);
+        assertNotEquals("Not a CubeCoordinates object", cubeCoordinates1);
     }
 }
