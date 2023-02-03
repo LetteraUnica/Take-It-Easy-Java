@@ -1,12 +1,11 @@
 package ui.windows.mainGame;
 
 import engine.controller.GameInterface;
-import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
-import exceptions.TileCacheEmptyException;
-import exceptions.NotEnoughTilesException;
 import exceptions.ReassignedControllerException;
+import exceptions.TileCacheEmptyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -54,7 +53,7 @@ public class MainGameController implements UIControllerInterface {
     private void updateView() {
         try {
             drawBoard(viewedPlayer);
-        } catch (NotEnoughTilesException | PlayerNameNotFoundException e) {
+        } catch (PlayerNameNotFoundException | NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException e) {
             e.printStackTrace();
         }
         updatePlaceTileButton();
@@ -105,17 +104,12 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    private void drawBoard(String playerName) throws NotEnoughTilesException, PlayerNameNotFoundException {
+    private void drawBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
         boardPane.getChildren().clear();
-
-        BoardInterface board = gameController.getBoardOfPlayer(playerName);
-        List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
-        if (hexagonCenterCoordinates.isEmpty()) {
-            throw new NotEnoughTilesException("The board has no tiles.");
-        }
 
         insertBoardPanePadding();
 
+        List<Point2D> hexagonCenterCoordinates = gameController.getCoordinatesOfBoard(playerName);
         double maxX = Objects.requireNonNull(hexagonCenterCoordinates
                 .stream()
                 .max(Comparator.comparing(Point2D::getX))
