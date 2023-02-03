@@ -55,6 +55,27 @@ class BoardClassicTest {
     }
 
     @Test
+    void testgetScore2(){
+        BoardInterface testBoard = new BoardClassic("testName");
+        for (int i =0; i<19;++i){
+            TileInterface testStandardTile = new Tile(i,1,2,3);
+            testBoard.placeTile(i, testStandardTile);
+        }
+        assertEquals( 114, testBoard.getScore());
+    }
+    @Test
+    void testgetScore3(){
+        BoardInterface testBoard = new BoardClassic("testName");
+        for (int i =1; i<19;++i){
+            TileInterface testStandardTile = new Tile(i,1,2,3);
+            testBoard.placeTile(i, testStandardTile);
+        }
+        TileInterface testStandardTile = new Tile(0,5,5,5);
+        testBoard.placeTile(0, testStandardTile);
+        assertEquals( 84, testBoard.getScore());
+    }
+
+    @Test
     void testisBoardFull(){
         BoardInterface testBoard = new BoardClassic("testName");
         assertFalse(testBoard.isBoardFull());

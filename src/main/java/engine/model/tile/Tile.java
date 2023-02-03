@@ -8,7 +8,7 @@ public class Tile implements TileInterface {
     private final int rightPath;
     private final int topPath;
 
-    public Tile(int idTile, int leftPath, int rightPath, int topPath) {
+    public Tile(int idTile,  int rightPath,int leftPath, int topPath) {
         this.idTile = idTile;
         this.leftPath = leftPath;
         this.rightPath = rightPath;
@@ -37,7 +37,7 @@ public class Tile implements TileInterface {
 
     @Override
     public List<Integer> getValues() {
-        return List.of(leftPath, rightPath, topPath);
+        return List.of( rightPath,leftPath, topPath);
     }
 
     @Override
@@ -48,11 +48,6 @@ public class Tile implements TileInterface {
     @Override
     public boolean equals(TileInterface tile) {
         List<Integer> tileValues = tile.getValues();
-        if (tileValues.get(0) == leftPath && tileValues.get(1) == rightPath && tileValues.get(2) == topPath) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return tileValues.get(1) == leftPath && tileValues.get(0) == rightPath && tileValues.get(2) == topPath;
     }
 }

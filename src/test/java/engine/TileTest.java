@@ -14,8 +14,8 @@ class TileTest {
     void testTile() {
         Tile tile = new Tile(1, 2, 3, 4);
         assertEquals(1, tile.getIdTile());
-        assertEquals(2, tile.getLeftPath());
-        assertEquals(3, tile.getRightPath());
+        assertEquals(2, tile.getRightPath());
+        assertEquals(3, tile.getLeftPath());
         assertEquals(4, tile.getTopPath());
     }
 
