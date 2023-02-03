@@ -3,6 +3,8 @@ package engine.state;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
+import exceptions.NoBoardFoundException;
+import exceptions.TileCacheEmptyException;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -33,7 +35,10 @@ public class MatchState {
         return tileCache.size();
     }
 
-    public void drawTile() {
+    public void drawTile() throws TileCacheEmptyException {
+        if (tileCache.isEmpty()) {
+            throw new TileCacheEmptyException();
+        }
         int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize());
         currentTile = tileCache.remove(chosenTileIndex);
     }
@@ -42,7 +47,10 @@ public class MatchState {
         boards.add(board);
     }
 
-    public void deleteBoard(int playerIndex) {
+    public void deleteBoard(int playerIndex) throws NoBoardFoundException {
+        if (boards.isEmpty()) {
+            throw new NoBoardFoundException();
+        }
         boards.remove(playerIndex);
     }
 

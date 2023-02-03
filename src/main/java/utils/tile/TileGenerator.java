@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TileGenerator {
-    public String generateTileGson() {
-        List<Tile> tileList = generateTileList();
-        return new Gson().toJson(tileList);
-    }
 
     public ArrayList<Tile> generateTileList() {
         ArrayList<Tile> tileList = new ArrayList<>();

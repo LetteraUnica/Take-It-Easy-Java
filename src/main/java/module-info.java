@@ -6,6 +6,7 @@ module ui {
     requires com.google.gson;
     requires org.json;
     requires java.desktop;
+    requires org.jetbrains.annotations;
 
     exports ui;
     opens ui.windows.mainMenu to javafx.fxml;

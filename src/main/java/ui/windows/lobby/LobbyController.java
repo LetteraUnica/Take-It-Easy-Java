@@ -1,6 +1,8 @@
 package ui.windows.lobby;
 
 import engine.controller.GameInterface;
+import exceptions.NoBoardFoundException;
+import exceptions.PlayerNameNotFoundException;
 import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +72,11 @@ public class LobbyController implements UIControllerInterface {
         removePlayerButton.setStyle("-fx-font-size:14");
         removePlayerButton.relocate(180, 0);
         removePlayerButton.setOnAction(event -> {
-            gameController.removePlayer(playerName);
+            try {
+                gameController.removePlayer(playerName);
+            } catch (NoBoardFoundException | PlayerNameNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             playerListPane.getChildren().remove(rowContainer);
             startMatchButtonEnable();
         });

@@ -33,4 +33,5 @@ class TileListLoaderTest {
         this.tileList.remove(index);
         assertFalse(this.tileList.contains(tileToRemove));
     }
+
 }
