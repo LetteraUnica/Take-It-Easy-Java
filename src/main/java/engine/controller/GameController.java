@@ -19,7 +19,6 @@ public class GameController implements GameInterface {
     private final MatchState matchState;
 
     public GameController() throws TileCacheEmptyException {
-
         matchState = new MatchState();
         matchState.drawTile();
     }
@@ -44,7 +43,7 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isLastPlayer() {
-        return matchState.getCurrentPlayer() == matchState.getBoards().size() - 1;
+        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
     }
 
     @Override
