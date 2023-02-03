@@ -5,6 +5,9 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
+import exceptions.NoBoardFoundException;
+import exceptions.PlayerNameNotFoundException;
+import exceptions.TileCacheEmptyException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +18,8 @@ public class GameController implements GameInterface {
 
     private final MatchState matchState;
 
-    public GameController() {
+    public GameController() throws TileCacheEmptyException {
+
         matchState = new MatchState();
         matchState.drawTile();
     }
@@ -31,14 +35,15 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void nextTurn() {
+    public void nextTurn() throws TileCacheEmptyException {
         if (isLastPlayer()) {
             matchState.drawTile();
         }
         matchState.nextPlayer();
     }
 
-    private boolean isLastPlayer() {
+    @Override
+    public boolean isLastPlayer() {
         return matchState.getCurrentPlayer() == matchState.getBoards().size() - 1;
     }
 
@@ -49,12 +54,15 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public void removePlayer(String playerName) {
-        int playerIndex = getPlayerIndex(playerName);
-        matchState.deleteBoard(playerIndex);
+    public void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException {
+        matchState.deleteBoard(getPlayerIndex(playerName));
     }
 
-    private int getPlayerIndex(String playerName) {
+    @Override
+    public int getPlayerIndex(String playerName) throws PlayerNameNotFoundException {
+        if (!matchState.getBoardsNicknames().contains(playerName)) {
+            throw new PlayerNameNotFoundException(playerName);
+        }
         return matchState.getBoardsNicknames().indexOf(playerName);
     }
 
@@ -67,12 +75,12 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public BoardInterface getBoardOfPlayer(String playerName) {
+    public BoardInterface getBoardOfPlayer(String playerName) throws PlayerNameNotFoundException {
         return matchState.getBoardOfPlayer(getPlayerIndex(playerName));
     }
 
     @Override
-    public TileInterface getTileOfPlayer(String playerName, int tileId) {
+    public TileInterface getTileOfPlayer(String playerName, int tileId) throws PlayerNameNotFoundException {
         return matchState.getBoardOfPlayer(getPlayerIndex(playerName)).getTile(tileId);
     }
 
@@ -82,7 +90,10 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public boolean isCurrentPlayer(String playerName) {
+    public boolean isCurrentPlayer(String playerName) throws PlayerNameNotFoundException {
+        if (!matchState.getBoardsNicknames().contains(playerName)) {
+            throw new PlayerNameNotFoundException(playerName);
+        }
         return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer()).equals(playerName);
     }
 

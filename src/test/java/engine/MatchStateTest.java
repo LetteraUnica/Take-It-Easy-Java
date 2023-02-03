@@ -5,7 +5,8 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
-import exceptions.FatalGameErrorException;
+import exceptions.NoBoardFoundException;
+import exceptions.TileCacheEmptyException;
 import org.junit.jupiter.api.Test;
 import utils.tile.TileLoader;
 
@@ -20,8 +21,6 @@ class MatchStateTest {
 
     MatchState state = new MatchState();
 
-    public MatchStateTest() throws FatalGameErrorException {}
-
     @Test
     void testStartingMatchStateAvailableTiles() {
         ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
@@ -34,7 +33,7 @@ class MatchStateTest {
     }
 
     @Test
-    void testDrawTileReducesCacheSize() {
+    void testDrawTileReducesCacheSize() throws TileCacheEmptyException {
         int currentCacheSize = state.getCacheSize();
         state.drawTile();
         assertEquals(currentCacheSize - 1, state.getCacheSize());
@@ -59,7 +58,7 @@ class MatchStateTest {
     }
 
     @Test
-    void testDeleteBoard() {
+    void testDeleteBoard() throws NoBoardFoundException {
         BoardInterface newBoard1 = new BoardClassic("macro");
         state.addBoard(newBoard1);
         BoardInterface newBoard2 = new BoardClassic("chic");
@@ -83,7 +82,7 @@ class MatchStateTest {
     }
     
     @Test
-    void testGetCurrentTile() {
+    void testGetCurrentTile() throws TileCacheEmptyException {
         ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
         state.drawTile();
         boolean isInTileList = false;
