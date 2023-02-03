@@ -42,7 +42,8 @@ public class GameController implements GameInterface {
         matchState.nextPlayer();
     }
 
-    private boolean isLastPlayer() {
+    @Override
+    public boolean isLastPlayer() {
         return matchState.getCurrentPlayer() == matchState.getBoards().size() - 1;
     }
 
@@ -54,8 +55,7 @@ public class GameController implements GameInterface {
 
     @Override
     public void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException {
-        int playerIndex = getPlayerIndex(playerName);
-        matchState.deleteBoard(playerIndex);
+        matchState.deleteBoard(getPlayerIndex(playerName));
     }
 
     @Override

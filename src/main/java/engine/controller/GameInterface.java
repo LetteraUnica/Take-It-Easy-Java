@@ -16,6 +16,8 @@ public interface GameInterface {
 
     void nextTurn() throws TileCacheEmptyException;
 
+    boolean isLastPlayer();
+
     void addPlayer(String newPlayerName);
 
     void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException;
