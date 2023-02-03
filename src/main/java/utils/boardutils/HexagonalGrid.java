@@ -68,6 +68,6 @@ public class HexagonalGrid {
     }
 
     public float[][][] getHexagonalGrid(){
-        return this.gridCoordinates;
+        return gridCoordinates;
     }
 }
