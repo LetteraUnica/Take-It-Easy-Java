@@ -48,12 +48,12 @@ public class BoardClassic implements BoardInterface {
                 availableCells.remove(pickedCell);
                 exploreDirection(line,pickedCell.cubeNeighbor(i), i, availableCells, cellsMap);
                 exploreDirection(line,pickedCell.cubeNeighbor(i+3), i+3, availableCells, cellsMap);
-                HashSet<Integer> paths = new HashSet<>();
+                HashSet<Integer> path = new HashSet<>();
                 for (CubeCoordinates cubeCoordinates : line) {
-                    paths.add(this.board.get(cellsMap.get(cubeCoordinates)).getValues().get(i));
+                    path.add(this.board.get(cellsMap.get(cubeCoordinates)).getValues().get(i));
                     }
-                if(paths.size()==1){
-                    score = score + line.size()*paths.iterator().next();
+                if(path.size()==1){
+                    score = score + line.size()*path.iterator().next();
                 }
                 }
             }
