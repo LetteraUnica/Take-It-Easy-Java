@@ -6,8 +6,11 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.NoBoardFoundException;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
+import javafx.geometry.Point2D;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -106,6 +109,15 @@ public class GameController implements GameInterface {
     @Override
     public int getWinnersScore() {
         return Collections.max(matchState.getAllBoardsScore());
+    }
+
+    @Override
+    public List<Point2D> getCoordinatesOfBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+        List<Point2D> hexagonCenterCoordinates = getBoardOfPlayer(playerName).getEuclideanCoordinates();
+        if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOfPlayer(playerName).getBoard().size()) {
+            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
+        }
+        return hexagonCenterCoordinates;
     }
 
     @Override
