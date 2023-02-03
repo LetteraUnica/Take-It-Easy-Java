@@ -8,7 +8,6 @@ import engine.state.MatchState;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +19,7 @@ public class GameController implements GameInterface {
     private final MatchState matchState;
 
     public GameController() throws TileCacheEmptyException {
+
         matchState = new MatchState();
         matchState.drawTile();
     }
