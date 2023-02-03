@@ -1,17 +1,16 @@
 package ui.windows.gameOver;
 
 import engine.controller.GameInterface;
-import engine.model.board.BoardInterface;
 import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import static ui.utils.UIUtils.getStage;
@@ -28,30 +27,24 @@ public class GameOverController implements UIControllerInterface {
         }
         this.gameController = gameController;
 
-        List<String> winners = getWinners();
+        initWinnerText();
+    }
+
+    private void initWinnerText() {
+        winnerText.setText(getWinText());
+    }
+
+    @NotNull
+    private String getWinText() {
+        List<String> winners = gameController.getGameWinners();
+        int winnerScore = gameController.getWinnersScore();
         String text;
         if (winners.size() == 1) {
-            text = "The winner is " + winners.get(0) + " with " + getWinnerScore() + " points!";
+            text = "The winner is " + winners.get(0) + " with " + winnerScore + " points!";
         } else {
-            text = "The winners are " + winners.stream().reduce((prev, s) -> prev + " " + s).orElse("No winner") + " with " + getWinnerScore() + " points!";
+            text = "The winners are " + winners.stream().reduce((prev, s) -> prev + " " + s) + " with " + winnerScore + " points!";
         }
-
-        winnerText.setText(text);
-    }
-
-    private List<String> getWinners() {
-        int winnerScore = getWinnerScore();
-
-        return gameController
-                .getPlayers()
-                .stream()
-                .filter(board -> board.getScore() == winnerScore)
-                .map(BoardInterface::getNickname)
-                .toList();
-    }
-
-    private int getWinnerScore() {
-        return Collections.max(gameController.getScores());
+        return text;
     }
 
     @FXML
