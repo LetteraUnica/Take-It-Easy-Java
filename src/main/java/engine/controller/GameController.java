@@ -8,6 +8,7 @@ import engine.state.MatchState;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -115,4 +116,14 @@ public class GameController implements GameInterface {
     @Override
     public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
 
+//    @Override
+//    public List<Point2D> getBoardCenterCoordinates(String playerName) {
+//        BoardInterface board = getBoardOfPlayer(playerName);
+//        List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
+//        if (hexagonCenterCoordinates.isEmpty()) {
+//            throw new NotEnoughTilesException("The board has no tiles.");
+//        }
+//
+//        return hexagonCenterCoordinates;
+//    }
 }

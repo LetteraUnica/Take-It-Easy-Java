@@ -15,6 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import ui.navigator.NavigationConstants;
@@ -106,6 +107,7 @@ public class MainGameController implements UIControllerInterface {
     @FXML
     private void drawBoard(String playerName) throws NotEnoughTilesException, PlayerNameNotFoundException {
         boardPane.getChildren().clear();
+
         BoardInterface board = gameController.getBoardOfPlayer(playerName);
         List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
         if (hexagonCenterCoordinates.isEmpty()) {
@@ -169,12 +171,14 @@ public class MainGameController implements UIControllerInterface {
         double startAngle = -Math.PI / 2;
         double increment = Math.PI * 2 / 3;
         List<Integer> tileValues = List.of(tile.getTopPath(), tile.getRightPath(), tile.getLeftPath());
+        List<String> tileColors = List.of("#ffffff", "#FFA500", "#00FF00");
         Group tileNumbers = new Group();
         for (int i = 0; i < 3; i++) {
             Text text = new Text(String.valueOf(tileValues.get(i)));
             text.setX(Constants.numberRadius * Math.cos(startAngle + i * increment));
             text.setY(Constants.numberRadius * Math.sin(startAngle + i * increment));
             text.getStyleClass().add("tileText");
+            text.setFill(Paint.valueOf(tileColors.get(i)));
             tileNumbers.getChildren().add(text);
         }
         return tileNumbers;
