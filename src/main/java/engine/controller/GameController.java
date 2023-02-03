@@ -6,8 +6,10 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
 import exceptions.NoBoardFoundException;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
+import javafx.geometry.Point2D;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +22,6 @@ public class GameController implements GameInterface {
     private final MatchState matchState;
 
     public GameController() throws TileCacheEmptyException {
-
         matchState = new MatchState();
         matchState.drawTile();
     }
@@ -45,7 +46,7 @@ public class GameController implements GameInterface {
 
     @Override
     public boolean isLastPlayer() {
-        return matchState.getCurrentPlayer() == matchState.getBoards().size() - 1;
+        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
     }
 
     @Override
@@ -111,19 +112,18 @@ public class GameController implements GameInterface {
     }
 
     @Override
+    public List<Point2D> getCoordinatesOfBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+        List<Point2D> hexagonCenterCoordinates = getBoardOfPlayer(playerName).getEuclideanCoordinates();
+        if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOfPlayer(playerName).getBoard().size()) {
+            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
+        }
+        return hexagonCenterCoordinates;
+    }
+
+    @Override
     public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
 
     @Override
     public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
 
-//    @Override
-//    public List<Point2D> getBoardCenterCoordinates(String playerName) {
-//        BoardInterface board = getBoardOfPlayer(playerName);
-//        List<Point2D> hexagonCenterCoordinates = board.getEuclideanCoordinates();
-//        if (hexagonCenterCoordinates.isEmpty()) {
-//            throw new NotEnoughTilesException("The board has no tiles.");
-//        }
-//
-//        return hexagonCenterCoordinates;
-//    }
 }

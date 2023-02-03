@@ -8,8 +8,8 @@ import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import utils.BoardFiller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameControllerTest {
 
     GameInterface controller = new GameController();
+    BoardFiller filler = new BoardFiller();
 
     GameControllerTest() throws TileCacheEmptyException {}
-
-    private void fillBoards(@NotNull GameInterface controller) throws PlayerNameNotFoundException {
-        for (String playerName: controller.getNicknames()) {
-            BoardInterface testBoard = controller.getBoardOfPlayer(playerName);
-            for (int i = 0; i < 19; ++i) {
-                TileInterface testStandardTile = new Tile(i, 1, 1, 1);
-                testBoard.placeTile(i, testStandardTile);
-            }
-        }
-    }
 
     @Test
     void testRemovePlayer() throws NoBoardFoundException, PlayerNameNotFoundException {
@@ -76,7 +67,7 @@ class GameControllerTest {
     void testGetGameWinners() throws PlayerNameNotFoundException {
         controller.addPlayer("caio");
         controller.addPlayer("sempronio");
-        fillBoards(controller);
+        filler.fillAllBoardsHavingController(controller, new Tile(1, 1, 1,1), 0);
         ArrayList<String> winners = new ArrayList<>(List.of("caio"));
         assertNotEquals(controller.getGameWinners(), winners);
         winners.add("sempronio");
@@ -86,7 +77,7 @@ class GameControllerTest {
     @Test
     void testGetWinnersScore() throws PlayerNameNotFoundException {
         controller.addPlayer("caio");
-        fillBoards(controller);
+        filler.fillAllBoardsHavingController(controller, new Tile(1, 1, 1,1), 0);
         assertEquals(57, controller.getWinnersScore());
     }
 

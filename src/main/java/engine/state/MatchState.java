@@ -69,18 +69,10 @@ public class MatchState {
     public TileInterface getCurrentTile() { return currentTile; }
 
     public List<Integer> getAllBoardsScore() {
-        List<Integer> scores = new ArrayList<>();
-        for (BoardInterface playerBoard: boards) {
-            scores.add(playerBoard.getScore());
-        }
-        return scores;
+        return getBoards().stream().map(BoardInterface::getScore).toList();
     }
 
     public List<String> getBoardsNicknames() {
-        List<String> nicknames = new ArrayList<>();
-        for (BoardInterface playerBoard: boards) {
-            nicknames.add(playerBoard.getNickname());
-        }
-        return nicknames;
+        return getBoards().stream().map(BoardInterface::getNickname).toList();
     }
 }

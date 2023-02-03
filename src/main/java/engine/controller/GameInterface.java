@@ -3,8 +3,10 @@ package engine.controller;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
+import javafx.geometry.Point2D;
 
 import java.util.List;
 
@@ -43,4 +45,6 @@ public interface GameInterface {
     List<String> getGameWinners();
 
     int getWinnersScore();
+
+    List<Point2D> getCoordinatesOfBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 }

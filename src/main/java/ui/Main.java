@@ -3,6 +3,7 @@ package ui;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
 
@@ -15,14 +16,14 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(@NotNull Stage primaryStage) throws IOException {
         primaryStage.setResizable(false);
         setLogo(primaryStage);
         Navigator navigator = new Navigator();
         navigator.navigateTo(primaryStage, NavigationConstants.MAIN_MENU_FXML);
     }
 
-    private void setLogo(Stage primaryStage) {
+    private void setLogo(@NotNull Stage primaryStage) {
         Image icon = new Image(Objects.requireNonNull(getClass().getResource("icon.png")).toString());
         primaryStage.getIcons().add(icon);
     }

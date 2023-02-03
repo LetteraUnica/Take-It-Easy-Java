@@ -8,6 +8,7 @@ import engine.state.MatchState;
 import exceptions.NoBoardFoundException;
 import exceptions.TileCacheEmptyException;
 import org.junit.jupiter.api.Test;
+import utils.BoardFiller;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MatchStateTest {
 
     MatchState state = new MatchState();
+    BoardFiller filler = new BoardFiller();
 
     @Test
     void testStartingMatchStateAvailableTiles() {
@@ -131,6 +133,18 @@ class MatchStateTest {
         for (int i=0; i < state.getNumberOfBoards(); i++) {
             assertEquals(state.getBoards().get(i).getNickname(), boards.get(i).getNickname());
         }
+    }
+
+    @Test
+    void testGetAllBoardsScore() {
+        BoardInterface newBoard1 = new BoardClassic("macro");
+        state.addBoard(newBoard1);
+        BoardInterface newBoard2 = new BoardClassic("chic");
+        state.addBoard(newBoard2);
+        for (BoardInterface board: state.getBoards()) {
+            filler.fillSingleBoard(board, new Tile(1,1,1,1), 0);
+        }
+        assertTrue(state.getAllBoardsScore().stream().allMatch(score -> score == 57));
     }
 
 }
