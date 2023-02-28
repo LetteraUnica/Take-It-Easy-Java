@@ -79,7 +79,7 @@ The project was written in Java 17 and built using gradle version 7.4. We also u
 
 ## Architecture
 We organized the code in different packages, each performing a separate task:
-* The engine under main.java.engine implements the game logic.
+* The engine under main.java.engine implements the game logic and structure.
 * The user interface under main.java.ui which implements the UI using the JavaFX library
 * An utils package main.utils, containing utility functions for the classes
 * An exceptions package main.exceptions, containing custom exceptions that can be thrown during program execution
