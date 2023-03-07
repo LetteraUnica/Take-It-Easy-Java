@@ -97,21 +97,6 @@ class MatchStateTest {
     }
 
     @Test
-    void testGetBoardsNicknames() {
-        BoardInterface newBoard1 = new BoardClassic("macro");
-        state.addBoard(newBoard1);
-        BoardInterface newBoard2 = new BoardClassic("chic");
-        state.addBoard(newBoard2);
-        BoardInterface newBoard3 = new BoardClassic("pinco");
-        state.addBoard(newBoard3);
-        BoardInterface newBoard4 = new BoardClassic("pallo");
-        state.addBoard(newBoard4);
-        List<String> trueNames = new ArrayList<>(Arrays.asList("macro", "chic", "pinco", "pallo"));
-        List<String> names = state.getBoardsNicknames();
-        assertEquals(trueNames, names);
-    }
-
-    @Test
     void testGetBoardOfPlayer() {
         BoardInterface newBoard1 = new BoardClassic("macro");
         state.addBoard(newBoard1);
@@ -133,18 +118,6 @@ class MatchStateTest {
         for (int i=0; i < state.getNumberOfBoards(); i++) {
             assertEquals(state.getBoards().get(i).getNickname(), boards.get(i).getNickname());
         }
-    }
-
-    @Test
-    void testGetAllBoardsScore() {
-        BoardInterface newBoard1 = new BoardClassic("macro");
-        state.addBoard(newBoard1);
-        BoardInterface newBoard2 = new BoardClassic("chic");
-        state.addBoard(newBoard2);
-        for (BoardInterface board: state.getBoards()) {
-            filler.fillSingleBoard(board, new Tile(1,1,1,1), 0);
-        }
-        assertTrue(state.getAllBoardsScore().stream().allMatch(score -> score == 57));
     }
 
 }

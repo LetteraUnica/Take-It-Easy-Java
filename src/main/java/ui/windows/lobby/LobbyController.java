@@ -42,7 +42,7 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void initializePlayerList() {
-        for (String playerName : gameController.getNicknames()) {
+        for (String playerName : gameController.getPlayersNicknames()) {
             addToPlayerList(playerName);
         }
         startMatchButtonEnable();
@@ -100,10 +100,10 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void startMatchButtonEnable() {
-        startMatchButton.setDisable(gameController.getNicknames().isEmpty());
+        startMatchButton.setDisable(gameController.getPlayersNicknames().isEmpty());
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getNicknames().contains(playerNameField.getText()));
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getPlayersNicknames().contains(playerNameField.getText()));
     }
 }

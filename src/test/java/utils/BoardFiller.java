@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 public class BoardFiller {
 
     public void fillAllBoardsHavingController(@NotNull GameInterface controller, TileInterface tile, int startIndex) throws PlayerNameNotFoundException {
-        for (String playerName: controller.getNicknames()) {
-            BoardInterface testBoard = controller.getBoardOfPlayer(playerName);
+        for (String playerName: controller.getPlayersNicknames()) {
+            BoardInterface testBoard = controller.getBoardOf(playerName);
             fillSingleBoard(testBoard, tile, startIndex);
         }
     }

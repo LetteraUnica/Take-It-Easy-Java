@@ -68,11 +68,4 @@ public class MatchState {
 
     public TileInterface getCurrentTile() { return currentTile; }
 
-    public List<Integer> getAllBoardsScore() {
-        return getBoards().stream().map(BoardInterface::getScore).toList();
-    }
-
-    public List<String> getBoardsNicknames() {
-        return getBoards().stream().map(BoardInterface::getNickname).toList();
-    }
 }

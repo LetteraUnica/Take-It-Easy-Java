@@ -2,6 +2,7 @@ package engine;
 
 import engine.controller.GameController;
 import engine.controller.GameInterface;
+import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import utils.BoardFiller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,19 +25,26 @@ class GameControllerTest {
 
     GameControllerTest() throws TileCacheEmptyException {}
 
+    private boolean isCurrentPlayer(String playerName) throws PlayerNameNotFoundException {
+        if (!controller.getPlayersNicknames().contains(playerName)) {
+            throw new PlayerNameNotFoundException(playerName);
+        }
+        return controller.getCurrentPlayerName().equals(playerName);
+    }
+
     @Test
     void testRemovePlayer() throws NoBoardFoundException, PlayerNameNotFoundException {
         controller.addPlayer("pinco");
         controller.addPlayer("pallo");
         controller.removePlayer("pallo");
-        List<String> players = controller.getNicknames();
+        List<String> players = controller.getPlayersNicknames();
         assertFalse(players.contains("pallo"));
     }
 
     @Test
     void testGetBoardOfPlayer() throws PlayerNameNotFoundException {
         controller.addPlayer("pinco");
-        BoardInterface boardOfPallo = controller.getBoardOfPlayer("pinco");
+        BoardInterface boardOfPallo = controller.getBoardOf("pinco");
         assertEquals("pinco", boardOfPallo.getNickname());
     }
 
@@ -43,11 +52,11 @@ class GameControllerTest {
     void testIsGameOver() throws TileCacheEmptyException, PlayerNameNotFoundException {
         controller.addPlayer("pincopallo");
         int i = 0;
-        while (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
+        while (!(controller.getBoardOf("pincopallo").isBoardFull())) {
             TileInterface currentTile = controller.getCurrentTile();
-            controller.getBoardOfPlayer("pincopallo").placeTile(i, currentTile);
+            controller.getBoardOf("pincopallo").placeTile(i, currentTile);
             i++;
-            if (!(controller.getBoardOfPlayer("pincopallo").isBoardFull())) {
+            if (!(controller.getBoardOf("pincopallo").isBoardFull())) {
                 controller.nextTurn();
             }
         }
@@ -58,9 +67,9 @@ class GameControllerTest {
     void testIsCurrentPlayer() throws TileCacheEmptyException, PlayerNameNotFoundException {
         controller.addPlayer("pinco");
         controller.addPlayer("pallo");
-        assertTrue(controller.isCurrentPlayer("pinco"));
+        assertTrue(isCurrentPlayer("pinco"));
         controller.nextTurn();
-        assertTrue(controller.isCurrentPlayer("pallo"));
+        assertTrue(isCurrentPlayer("pallo"));
     }
 
     @Test
@@ -79,6 +88,28 @@ class GameControllerTest {
         controller.addPlayer("caio");
         filler.fillAllBoardsHavingController(controller, new Tile(1, 1, 1,1), 0);
         assertEquals(57, controller.getWinnersScore());
+    }
+
+    @Test
+    void testGetBoardsNicknames() {
+        controller.addPlayer("macro");
+        controller.addPlayer("chic");
+        controller.addPlayer("pinco");
+        controller.addPlayer("pallo");
+        List<String> trueNames = new ArrayList<>(Arrays.asList("macro", "chic", "pinco", "pallo"));
+        List<String> names = controller.getPlayersNicknames();
+        assertEquals(trueNames, names);
+    }
+
+    @Test
+    void testGetScores() throws PlayerNameNotFoundException {
+        controller.addPlayer("macro");
+        controller.addPlayer("chic");
+        List<String> gamePlayers = new ArrayList<>(Arrays.asList("macro", "chic"));
+        for (String player: gamePlayers) {
+            filler.fillSingleBoard(controller.getBoardOf(player), new Tile(1,1,1,1), 0);
+        }
+        assertTrue(controller.getScores().stream().allMatch(score -> score == 57));
     }
 
 }
