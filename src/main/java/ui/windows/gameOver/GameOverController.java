@@ -1,6 +1,6 @@
 package ui.windows.gameOver;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import exceptions.ReassignedControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,10 +18,10 @@ import static ui.utils.UIUtils.getStage;
 public class GameOverController implements UIControllerInterface {
     @FXML
     private Text winnerText;
-    private GameInterface gameController;
+    private GameControllerInterface gameController;
 
     @Override
-    public void initController(GameInterface gameController) throws ReassignedControllerException {
+    public void initController(GameControllerInterface gameController) throws ReassignedControllerException {
         if (this.gameController != null) {
             throw new ReassignedControllerException();
         }

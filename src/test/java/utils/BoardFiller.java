@@ -1,6 +1,6 @@
 package utils;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BoardFiller {
 
-    public void fillAllBoardsHavingController(@NotNull GameInterface controller, TileInterface tile, int startIndex) throws PlayerNameNotFoundException {
+    public void fillAllBoardsHavingController(@NotNull GameControllerInterface controller, TileInterface tile, int startIndex) throws PlayerNameNotFoundException {
         for (String playerName: controller.getPlayersNicknames()) {
             BoardInterface testBoard = controller.getBoardOf(playerName);
             fillSingleBoard(testBoard, tile, startIndex);

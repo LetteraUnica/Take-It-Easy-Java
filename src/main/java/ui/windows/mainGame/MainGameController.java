@@ -1,6 +1,6 @@
 package ui.windows.mainGame;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import engine.model.tile.TileInterface;
 import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
@@ -38,13 +38,13 @@ public class MainGameController implements UIControllerInterface {
     @FXML
     private Pane currentTilePane;
 
-    private GameInterface gameController;
+    private GameControllerInterface gameController;
 
     private int candidateTilePlacement = -1;
     private String viewedPlayer;
 
     @Override
-    public void initController(GameInterface gameController) {
+    public void initController(GameControllerInterface gameController) {
         this.gameController = gameController;
         viewedPlayer = this.gameController.getCurrentPlayerName();
         updateView();

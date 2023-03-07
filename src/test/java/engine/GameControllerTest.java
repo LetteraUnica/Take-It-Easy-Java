@@ -1,8 +1,7 @@
 package engine;
 
 import engine.controller.GameController;
-import engine.controller.GameInterface;
-import engine.model.board.BoardClassic;
+import engine.controller.GameControllerInterface;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameControllerTest {
 
-    GameInterface controller = new GameController();
+    GameControllerInterface controller = new GameController();
     BoardFiller filler = new BoardFiller();
 
     GameControllerTest() throws TileCacheEmptyException {}

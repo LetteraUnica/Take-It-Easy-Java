@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class GameController implements GameInterface {
+public class GameController implements GameControllerInterface {
 
     private final MatchState matchState;
 
@@ -74,7 +74,7 @@ public class GameController implements GameInterface {
 
     @Override
     public BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
-        return matchState.getBoardOfPlayer(getPlayerIndex(playerName));
+        return getGameBoards().get(getPlayerIndex(playerName));
     }
 
     @Override

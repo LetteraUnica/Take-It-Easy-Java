@@ -1,6 +1,6 @@
 package ui.windows.mainMenu;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ public class MainMenuController implements UIControllerInterface {
     public static final String HOW_TO_PLAY_URL = "https://www.ultraboardgames.com/take-it-easy/game-rules.php";
 
     @Override
-    public void initController(GameInterface gameController) {
+    public void initController(GameControllerInterface gameController) {
     }
 
     @FXML

@@ -1,7 +1,7 @@
 package ui.navigator;
 
 import engine.controller.GameController;
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import exceptions.TileCacheEmptyException;
 import exceptions.ReassignedControllerException;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Navigator {
 
-    private static void injectGameController(GameInterface gameController, FXMLLoader loader) throws ReassignedControllerException {
+    private static void injectGameController(GameControllerInterface gameController, FXMLLoader loader) throws ReassignedControllerException {
         UIControllerInterface uiControllerInterface = loader.getController();
         uiControllerInterface.initController(gameController);
     }
@@ -26,7 +26,7 @@ public class Navigator {
         }
     }
 
-    public void navigateWithController(Stage stage, String to, GameInterface gameController) throws IOException, ReassignedControllerException {
+    public void navigateWithController(Stage stage, String to, GameControllerInterface gameController) throws IOException, ReassignedControllerException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(to));
         Parent root = loader.load();
         if (gameController != null) {

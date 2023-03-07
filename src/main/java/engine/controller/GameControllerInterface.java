@@ -10,7 +10,7 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
-public interface GameInterface {
+public interface GameControllerInterface {
 
     TileInterface getCurrentTile();
 

@@ -1,6 +1,6 @@
 package ui.windows.lobby;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.ReassignedControllerException;
@@ -29,10 +29,10 @@ public class LobbyController implements UIControllerInterface {
     @FXML
     private Button startMatchButton;
 
-    private GameInterface gameController;
+    private GameControllerInterface gameController;
 
     @Override
-    public void initController(GameInterface gameController) throws ReassignedControllerException {
+    public void initController(GameControllerInterface gameController) throws ReassignedControllerException {
         if (this.gameController != null) {
             throw new ReassignedControllerException();
         }
