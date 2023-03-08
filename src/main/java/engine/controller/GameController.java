@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class GameController implements GameInterface {
+public class GameController implements GameControllerInterface {
 
     private final MatchState matchState;
 
@@ -32,8 +32,8 @@ public class GameController implements GameInterface {
     }
 
     @Override
-    public String getCurrentPlayer() {
-        return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer());
+    public String getCurrentPlayerName() {
+        return getPlayersNicknames().get(matchState.getCurrentPlayer());
     }
 
     @Override
@@ -60,70 +60,62 @@ public class GameController implements GameInterface {
         matchState.deleteBoard(getPlayerIndex(playerName));
     }
 
-    @Override
-    public int getPlayerIndex(String playerName) throws PlayerNameNotFoundException {
-        if (!matchState.getBoardsNicknames().contains(playerName)) {
+    private int getPlayerIndex(String playerName) throws PlayerNameNotFoundException {
+        if (!getPlayersNicknames().contains(playerName)) {
             throw new PlayerNameNotFoundException(playerName);
         }
-        return matchState.getBoardsNicknames().indexOf(playerName);
+        return getPlayersNicknames().indexOf(playerName);
     }
-
-    @Override
-    public List<Integer> getScores() { return matchState.getAllBoardsScore(); }
 
     @Override
     public boolean isGameOver() {
-        return getPlayers().stream().allMatch(BoardInterface::isBoardFull) && isLastPlayer();
+        return getGameBoards().stream().allMatch(BoardInterface::isBoardFull) && isLastPlayer();
     }
 
     @Override
-    public BoardInterface getBoardOfPlayer(String playerName) throws PlayerNameNotFoundException {
-        return matchState.getBoardOfPlayer(getPlayerIndex(playerName));
+    public BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
+        return getGameBoards().get(getPlayerIndex(playerName));
     }
 
     @Override
-    public TileInterface getTileOfPlayer(String playerName, int tileId) throws PlayerNameNotFoundException {
-        return matchState.getBoardOfPlayer(getPlayerIndex(playerName)).getTile(tileId);
+    public TileInterface getTileOf(String playerName, int tileId) throws PlayerNameNotFoundException {
+        return getBoardOf(playerName).getTile(tileId);
     }
 
     @Override
-    public void placeTile(int candidateTilePlacement) {
-        matchState.getBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
+    public void placeTileIn(int candidateTilePlacement) {
+        getGameBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
     }
 
     @Override
-    public boolean isCurrentPlayer(String playerName) throws PlayerNameNotFoundException {
-        if (!matchState.getBoardsNicknames().contains(playerName)) {
-            throw new PlayerNameNotFoundException(playerName);
-        }
-        return matchState.getBoardsNicknames().get(matchState.getCurrentPlayer()).equals(playerName);
+    public List<Integer> getScores() {
+        return getGameBoards().stream().map(BoardInterface::getScore).toList();
     }
 
     @Override
     public List<String> getGameWinners() {
-        List<Integer> scores = matchState.getAllBoardsScore();
+        List<Integer> scores = getScores();
         int[] winnersIndices =  IntStream.range(0, scores.size()).filter(playerIndex -> Objects.equals(scores.get(playerIndex), scores.stream().max(Integer::compare).get())).toArray();
-        return Arrays.stream(winnersIndices).mapToObj(matchState.getBoardsNicknames()::get).toList();
+        return Arrays.stream(winnersIndices).mapToObj(getPlayersNicknames()::get).toList();
     }
 
     @Override
     public int getWinnersScore() {
-        return Collections.max(matchState.getAllBoardsScore());
+        return Collections.max(getScores());
     }
 
     @Override
-    public List<Point2D> getCoordinatesOfBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
-        List<Point2D> hexagonCenterCoordinates = getBoardOfPlayer(playerName).getEuclideanCoordinates();
-        if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOfPlayer(playerName).getBoard().size()) {
+    public List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+        List<Point2D> hexagonCenterCoordinates = getBoardOf(playerName).getEuclideanCoordinates();
+        if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOf(playerName).getBoard().size()) {
             throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
         }
         return hexagonCenterCoordinates;
     }
 
     @Override
-    public List<String> getNicknames() { return matchState.getBoardsNicknames(); }
+    public List<String> getPlayersNicknames() { return getGameBoards().stream().map(BoardInterface::getNickname).toList(); }
 
-    @Override
-    public List<BoardInterface> getPlayers() { return matchState.getBoards(); }
+    private List<BoardInterface> getGameBoards() { return matchState.getBoards(); }
 
 }

@@ -10,11 +10,11 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
-public interface GameInterface {
+public interface GameControllerInterface {
 
     TileInterface getCurrentTile();
 
-    String getCurrentPlayer();
+    String getCurrentPlayerName();
 
     void nextTurn() throws TileCacheEmptyException;
 
@@ -24,27 +24,21 @@ public interface GameInterface {
 
     void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException;
 
-    int getPlayerIndex(String playerName) throws PlayerNameNotFoundException;
-
-    List<Integer> getScores();
-
-    List<String> getNicknames();
-
-    List<BoardInterface> getPlayers();
+    List<String> getPlayersNicknames();
 
     boolean isGameOver();
 
-    BoardInterface getBoardOfPlayer(String playerName) throws PlayerNameNotFoundException;
+    BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException;
 
-    TileInterface getTileOfPlayer(String playerName, int tileId) throws PlayerNameNotFoundException;
+    TileInterface getTileOf(String playerName, int tileId) throws PlayerNameNotFoundException;
 
-    void placeTile(int candidateTilePlacement);
+    void placeTileIn(int candidateTilePlacement);
 
-    boolean isCurrentPlayer(String playerName) throws PlayerNameNotFoundException;
+    List<Integer> getScores();
 
     List<String> getGameWinners();
 
     int getWinnersScore();
 
-    List<Point2D> getCoordinatesOfBoard(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+    List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 }

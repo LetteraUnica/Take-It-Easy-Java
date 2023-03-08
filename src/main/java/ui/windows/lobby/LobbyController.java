@@ -1,6 +1,6 @@
 package ui.windows.lobby;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.ReassignedControllerException;
@@ -29,10 +29,10 @@ public class LobbyController implements UIControllerInterface {
     @FXML
     private Button startMatchButton;
 
-    private GameInterface gameController;
+    private GameControllerInterface gameController;
 
     @Override
-    public void initController(GameInterface gameController) throws ReassignedControllerException {
+    public void initController(GameControllerInterface gameController) throws ReassignedControllerException {
         if (this.gameController != null) {
             throw new ReassignedControllerException();
         }
@@ -42,7 +42,7 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void initializePlayerList() {
-        for (String playerName : gameController.getNicknames()) {
+        for (String playerName : gameController.getPlayersNicknames()) {
             addToPlayerList(playerName);
         }
         startMatchButtonEnable();
@@ -100,10 +100,10 @@ public class LobbyController implements UIControllerInterface {
     }
 
     private void startMatchButtonEnable() {
-        startMatchButton.setDisable(gameController.getNicknames().isEmpty());
+        startMatchButton.setDisable(gameController.getPlayersNicknames().isEmpty());
     }
 
     private void addPlayerButtonEnable() {
-        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getNicknames().contains(playerNameField.getText()));
+        addPlayerButton.setDisable(playerNameField.getText().isEmpty() || gameController.getPlayersNicknames().contains(playerNameField.getText()));
     }
 }

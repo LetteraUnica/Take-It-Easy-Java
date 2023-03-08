@@ -1,6 +1,6 @@
 package ui.windows.mainGame;
 
-import engine.controller.GameInterface;
+import engine.controller.GameControllerInterface;
 import engine.model.tile.TileInterface;
 import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
 import exceptions.PlayerNameNotFoundException;
@@ -38,15 +38,15 @@ public class MainGameController implements UIControllerInterface {
     @FXML
     private Pane currentTilePane;
 
-    private GameInterface gameController;
+    private GameControllerInterface gameController;
 
     private int candidateTilePlacement = -1;
     private String viewedPlayer;
 
     @Override
-    public void initController(GameInterface gameController) {
+    public void initController(GameControllerInterface gameController) {
         this.gameController = gameController;
-        viewedPlayer = this.gameController.getCurrentPlayer();
+        viewedPlayer = this.gameController.getCurrentPlayerName();
         updateView();
     }
 
@@ -73,12 +73,12 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private void updatePlaceTileButton() {
-        placeTileButton.setDisable(candidateTilePlacement == -1 || !viewedPlayer.equals(gameController.getCurrentPlayer()));
+        placeTileButton.setDisable(candidateTilePlacement == -1 || !viewedPlayer.equals(gameController.getCurrentPlayerName()));
     }
 
     private void initializePlayerList() {
         playerListPane.getChildren().clear();
-        for (String playerName : gameController.getNicknames()) {
+        for (String playerName : gameController.getPlayersNicknames()) {
             addToPlayerList(playerName);
         }
     }
@@ -86,7 +86,7 @@ public class MainGameController implements UIControllerInterface {
     private void addToPlayerList(String playerName) {
         Pane rowContainer = createRowContainer();
         addPlayerName(playerName, rowContainer, 90, 16);
-        String buttonText = playerName.equals(gameController.getCurrentPlayer()) ? "Return" : "View";
+        String buttonText = playerName.equals(gameController.getCurrentPlayerName()) ? "Return" : "View";
         addButtonToPlayerList(playerName, rowContainer, buttonText);
         playerListPane.addRow(playerListPane.getRowCount(), rowContainer);
     }
@@ -109,7 +109,7 @@ public class MainGameController implements UIControllerInterface {
 
         insertBoardPanePadding();
 
-        List<Point2D> hexagonCenterCoordinates = gameController.getCoordinatesOfBoard(playerName);
+        List<Point2D> hexagonCenterCoordinates = gameController.getBoardCoordinatesOf(playerName);
         double maxX = Objects.requireNonNull(hexagonCenterCoordinates
                 .stream()
                 .max(Comparator.comparing(Point2D::getX))
@@ -131,7 +131,7 @@ public class MainGameController implements UIControllerInterface {
             } else {
                 cell.getStyleClass().add("opponentCell");
             }
-            TileInterface tile = gameController.getTileOfPlayer(playerName, tileId);
+            TileInterface tile = gameController.getTileOf(playerName, tileId);
             if (tileId == candidateTilePlacement && isCurrentPlayer(playerName)) {
                 tile = gameController.getCurrentTile();
             }
@@ -145,7 +145,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private boolean isCurrentPlayer(String playerName) {
-        return gameController.getCurrentPlayer().equals(playerName);
+        return gameController.getCurrentPlayerName().equals(playerName);
     }
 
     private void addTileInteraction(int tileId, Polygon cell) {
@@ -200,14 +200,14 @@ public class MainGameController implements UIControllerInterface {
 
     @FXML
     public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException {
-        gameController.placeTile(candidateTilePlacement);
+        gameController.placeTileIn(candidateTilePlacement);
         candidateTilePlacement = -1;
         if (gameController.isGameOver()) {
             Navigator navigator = new Navigator();
             navigator.navigateWithController(getStage(e), NavigationConstants.GAME_OVER_FXML, gameController);
         } else {
             gameController.nextTurn();
-            viewedPlayer = gameController.getCurrentPlayer();
+            viewedPlayer = gameController.getCurrentPlayerName();
             updateView();
         }
     }
