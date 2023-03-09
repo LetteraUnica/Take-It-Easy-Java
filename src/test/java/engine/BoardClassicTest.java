@@ -4,6 +4,7 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
+import exceptions.CellNotAvailableException;
 import org.junit.jupiter.api.Test;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testPlaceTile(){
+    void testPlaceTile() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =0; i<19;++i){
             TileInterface testStandardTile = new Tile(i,i,i,i);
@@ -34,7 +35,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testCopy(){
+    void testCopy() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =0; i<19;++i){
             TileInterface testStandardTile = new Tile(i,i,i,i);
@@ -45,7 +46,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testgetScore(){
+    void testgetScore() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =0; i<19;++i){
             TileInterface testStandardTile = new Tile(i,1,1,1);
@@ -55,7 +56,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testgetScore2(){
+    void testgetScore2() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =0; i<19;++i){
             TileInterface testStandardTile = new Tile(i,1,2,3);
@@ -64,7 +65,7 @@ class BoardClassicTest {
         assertEquals( 114, testBoard.getScore());
     }
     @Test
-    void testgetScore3(){
+    void testgetScore3() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =1; i<19;++i){
             TileInterface testStandardTile = new Tile(i,1,2,3);
@@ -76,7 +77,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testisBoardFull(){
+    void testisBoardFull() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         assertFalse(testBoard.isBoardFull());
         for (int i =0; i<19;++i){
@@ -107,7 +108,7 @@ class BoardClassicTest {
     }
 
     @Test
-    void testgetTile(){
+    void testgetTile() throws CellNotAvailableException {
         BoardInterface testBoard = new BoardClassic("testName");
         for (int i =0; i<19;++i){
             TileInterface testStandardTile = new Tile(i,i,i,i);

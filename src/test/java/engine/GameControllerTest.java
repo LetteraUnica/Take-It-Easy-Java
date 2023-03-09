@@ -5,6 +5,7 @@ import engine.controller.GameControllerInterface;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
+import exceptions.CellNotAvailableException;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
@@ -48,7 +49,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testIsGameOver() throws TileCacheEmptyException, PlayerNameNotFoundException {
+    void testIsGameOver() throws TileCacheEmptyException, PlayerNameNotFoundException, CellNotAvailableException {
         controller.addPlayer("pincopallo");
         int i = 0;
         while (!(controller.getBoardOf("pincopallo").isBoardFull())) {
@@ -72,7 +73,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetGameWinners() throws PlayerNameNotFoundException {
+    void testGetGameWinners() throws PlayerNameNotFoundException,CellNotAvailableException {
         controller.addPlayer("caio");
         controller.addPlayer("sempronio");
         filler.fillAllBoardsHavingController(controller, new Tile(1, 1, 1,1), 0);
@@ -83,7 +84,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetWinnersScore() throws PlayerNameNotFoundException {
+    void testGetWinnersScore() throws PlayerNameNotFoundException,CellNotAvailableException {
         controller.addPlayer("caio");
         filler.fillAllBoardsHavingController(controller, new Tile(1, 1, 1,1), 0);
         assertEquals(57, controller.getWinnersScore());
@@ -101,7 +102,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetScores() throws PlayerNameNotFoundException {
+    void testGetScores() throws PlayerNameNotFoundException,CellNotAvailableException {
         controller.addPlayer("macro");
         controller.addPlayer("chic");
         List<String> gamePlayers = new ArrayList<>(Arrays.asList("macro", "chic"));

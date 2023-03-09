@@ -2,10 +2,7 @@ package ui.windows.mainGame;
 
 import engine.controller.GameControllerInterface;
 import engine.model.tile.TileInterface;
-import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
-import exceptions.PlayerNameNotFoundException;
-import exceptions.ReassignedControllerException;
-import exceptions.TileCacheEmptyException;
+import exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -199,7 +196,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException {
+    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException, CellNotAvailableException {
         gameController.placeTileIn(candidateTilePlacement);
         candidateTilePlacement = -1;
         if (gameController.isGameOver()) {
