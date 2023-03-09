@@ -10,10 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class MatchState implements MatchStateInterface {
     private final ArrayList<BoardInterface> boards =  new ArrayList<>();
@@ -71,11 +69,6 @@ public class MatchState implements MatchStateInterface {
 
     @Override
     public List<BoardInterface> getBoards() {
-//        ArrayList<BoardInterface> boardList =  new ArrayList<>();
-//        for (BoardInterface board: boards) {
-//            boardList.add(board.copy());
-//        }
-//        return boardList;
         return boards.stream().map(BoardInterface::copy).toList();
     }
 
