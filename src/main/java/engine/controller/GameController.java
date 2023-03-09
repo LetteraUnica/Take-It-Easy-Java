@@ -95,7 +95,6 @@ public class GameController implements GameControllerInterface {
     @Override
     public List<String> getGameWinners() {
         List<Integer> scores = getScores();
-        System.out.println(scores);
         int[] winnersIndices =  IntStream.range(0, scores.size()).filter(playerIndex -> Objects.equals(scores.get(playerIndex), scores.stream().max(Integer::compare).get())).toArray();
         return Arrays.stream(winnersIndices).mapToObj(getPlayersNicknames()::get).toList();
     }
