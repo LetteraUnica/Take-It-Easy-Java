@@ -9,7 +9,6 @@ import engine.state.MatchStateInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.TileCacheEmptyException;
 import org.junit.jupiter.api.Test;
-import utils.BoardFiller;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -22,25 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MatchStateTest {
 
     MatchStateInterface state = new MatchState();
-    BoardFiller filler = new BoardFiller();
-
-//    @Test
-//    void testStartingMatchStateAvailableTiles() {
-//        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
-//        assertEquals(tileList.size(), state.getCacheSize());
-//    }
 
     @Test
     void testStartingCurrentPlayer() {
         assertEquals(0, state.getCurrentPlayer());
     }
-
-//    @Test
-//    void testDrawTileReducesCacheSize() throws TileCacheEmptyException {
-//        int currentCacheSize = state.getCacheSize();
-//        state.drawTile();
-//        assertEquals(currentCacheSize - 1, state.getCacheSize());
-//    }
 
     @Test
     void testAddBoard() {

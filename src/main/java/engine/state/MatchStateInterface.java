@@ -19,9 +19,14 @@ public interface MatchStateInterface {
 
     void deleteBoard(int playerIndex) throws NoBoardFoundException;
 
+    void fillBoardCell(int placementIndex);
+
     List<BoardInterface> getBoards();
 
     int getNumberOfBoards();
 
     TileInterface getCurrentTile();
+    
+    
+    
 }
