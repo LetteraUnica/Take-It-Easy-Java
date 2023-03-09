@@ -5,10 +5,7 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
-import exceptions.NoBoardFoundException;
-import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
-import exceptions.PlayerNameNotFoundException;
-import exceptions.TileCacheEmptyException;
+import exceptions.*;
 import javafx.geometry.Point2D;
 
 import java.util.Arrays;
@@ -83,7 +80,7 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public void placeTileIn(int candidateTilePlacement) {
+    public void placeTileIn(int candidateTilePlacement) throws CellNotAvailableException {
         getGameBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
     }
 

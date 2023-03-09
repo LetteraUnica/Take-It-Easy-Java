@@ -2,10 +2,7 @@ package engine.controller;
 
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
-import exceptions.NoBoardFoundException;
-import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
-import exceptions.PlayerNameNotFoundException;
-import exceptions.TileCacheEmptyException;
+import exceptions.*;
 import javafx.geometry.Point2D;
 
 import java.util.List;
@@ -32,7 +29,7 @@ public interface GameControllerInterface {
 
     TileInterface getTileOf(String playerName, int tileId) throws PlayerNameNotFoundException;
 
-    void placeTileIn(int candidateTilePlacement);
+    void placeTileIn(int candidateTilePlacement) throws CellNotAvailableException;
 
     List<Integer> getScores();
 
