@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MatchStateTest {
 
@@ -88,10 +87,11 @@ class MatchStateTest {
         for (String player: nicknames) {
             state.addBoard(new BoardClassic(player));
         }
-        List<BoardInterface> boards = state.getBoards();
-        for (int i=0; i < state.getNumberOfBoards(); i++) {
-            assertEquals(state.getBoards().get(i).getNickname(), boards.get(i).getNickname());
-        }
+        ArrayList<BoardInterface> boards = new ArrayList<>(state.getBoards());
+        BoardInterface newBoard = new BoardClassic("pinco");
+        boards.add(newBoard);
+        List<String> modifiedGameNicknames = boards.stream().map(BoardInterface::getNickname).toList();
+        assertNotEquals(nicknames, modifiedGameNicknames);
     }
 
 }

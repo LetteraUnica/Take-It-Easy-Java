@@ -68,9 +68,7 @@ public class MatchState implements MatchStateInterface {
     }
 
     @Override
-    public List<BoardInterface> getBoards() {
-        return boards.stream().map(BoardInterface::copy).toList();
-    }
+    public List<BoardInterface> getBoards() { return boards.stream().map(BoardInterface::copy).toList(); }
 
     @Override
     public int getNumberOfBoards() {
