@@ -46,8 +46,16 @@ public class Tile implements TileInterface {
     }
 
     @Override
-    public boolean equals(TileInterface tile) {
-        List<Integer> tileValues = tile.getValues();
-        return tileValues.get(1) == leftPath && tileValues.get(0) == rightPath && tileValues.get(2) == topPath;
+    public boolean equals(Object tile) {
+        if (this == tile) {
+            return true;
+        }
+        if (tile == null || getClass() != tile.getClass()) {
+            return false;
+        }
+
+        Tile other = (Tile)tile;
+        return ((rightPath == other.getValues().get(0)) && (leftPath == other.getValues().get(1)) && (topPath == other.getValues().get(2)));
     }
+
 }
