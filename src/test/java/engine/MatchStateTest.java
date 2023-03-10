@@ -74,7 +74,7 @@ class MatchStateTest {
         state.drawTile();
         boolean isInTileList = false;
         for (TileInterface tile: tileList) {
-            if (state.getCurrentTile().equals(tile)) {
+            if (state.getCurrentTile().getIdTile() == tile.getIdTile() && state.getCurrentTile().getValues().equals(tile.getValues())) {
                 isInTileList = true;
             }
         }

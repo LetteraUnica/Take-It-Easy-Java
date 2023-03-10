@@ -15,5 +15,4 @@ public interface TileInterface {
 
     String toString();
 
-    boolean equals(Object tile);
 }
