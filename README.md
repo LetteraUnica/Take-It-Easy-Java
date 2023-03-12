@@ -95,7 +95,7 @@ The *engine* package is located in` main.java.engine` and it is divided into thr
 The *state* (`main.java.engine.state`) package contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
 * `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface.
----to be continued---
+--to be continued--
 
 #### Controller
 The *controller* (`main.java.engine.controller`) package contains the following files:
