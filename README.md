@@ -59,7 +59,7 @@ Once all players have filled their boards with tiles, the victory screen will be
 
 ## Development Overview
 
-After conducting an initial exploration phase as a team, we chose to implement the MVC design pattern for our application. We then divided the work evenly among the group members:
+After conducting an initial exploration phase as a team, we chose to implement the *Model-View-Controller* (MVC) design pattern for our application. We then divided the work evenly among the group members:
 
 * Lorenzo Cavuoti was responsible for UI development using JavaFX and SceneBuilder.
 * Marco Sicklinger focused on the controller.
@@ -80,14 +80,28 @@ The project was written in Java 17 and built using gradle version 7.4. We also u
 ## Architecture
 We organized the code in different packages, each performing a separate task:
 * The engine under main.java.engine implements the game logic and structure.
-* The user interface under main.java.ui which implements the UI using the JavaFX library
-* An utils package main.utils, containing utility functions for the classes
-* An exceptions package main.exceptions, containing custom exceptions that can be thrown during program execution
+* The user interface under main.java.ui which implements the UI using the JavaFX library.
+* An utils package main.utils, containing utility functions for the classes.
+* An exceptions package main.exceptions, containing custom exceptions that can be thrown during program execution.
 
 The application entrypoint is defined in the takeiteasy.Main class, which simply launches the takeiteasy.GUI.FXApplication.
 
 ### Engine
-Da scrivere
+The *engine* package is located in` main.java.engine` and it is divided into three components: the **model**, the **state** and the **controller** packages.
+
+#### Model
+
+#### State
+The *state* (`main.java.engine.state`) package contains the following java files:
+* `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
+* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface.
+---to be continued---
+
+#### Controller
+The *controller* (`main.java.engine.controller`) package contains the following files:
+* `main.java.engine.controller.GameControllerInterface.java`: public interface acting as a bridge between the *Model* and the *View* ends of the MVC pattern. It provides all the method which are accessible from the UI. 
+* `main.java.engine.controller.GameController`: it contains the java class **GameController** which implements the _GameControllerInterface_.
+--to be continued--
 
 ### UI
 The UI package is located in main.java.ui and is divided into various controller classes, each corresponding to a different window or screen that the user interacts with. The navigator class manages the movement between these windows.
@@ -104,6 +118,8 @@ The UI is made up of four different views, each controlled by its own controller
 
 Finally, each controller implements the `UIControllerInterface` interface, defined in `main\java\ui\windows\UIControllerInterface.java`. The interface defines a single method, `initController(GameInterface gameController)`, which is essential for all UI controllers to connect to the gameController defined in the engine package. Connecting to the gameController is crucial as it enables navigation between different views of the game by maintaining the current state of the game. For example, when transitioning from the lobby view to the Main Game view, it is important to keep track of the player names, which can only be achieved by passing the gameController between the different UIControllers.
 
+![MVC_Diagram.png](images/MVC_Diagram.png)
 
 ## References
-Take it easy rules: https://en.wikipedia.org/wiki/Take_It_Easy_(game)
+* Take it easy rules: https://en.wikipedia.org/wiki/Take_It_Easy_(game)
+* MVC Diagram image: https://thedotnetguide.com/mvc-design-pattern/
