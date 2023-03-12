@@ -39,7 +39,7 @@ class MatchStateTest {
         state.addBoard(new BoardClassic("caio"));
         state.addBoard(new BoardClassic("tizio"));
         int currentPlayer = state.getCurrentPlayer();
-        state.nextPlayer();
+        state.setNextPlayer();
         int nextPlayer = state.getCurrentPlayer();
         assertEquals(nextPlayer, currentPlayer + 1);
     }

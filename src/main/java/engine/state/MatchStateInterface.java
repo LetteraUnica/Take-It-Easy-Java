@@ -11,7 +11,7 @@ public interface MatchStateInterface {
 
     int getCurrentPlayer();
 
-    void nextPlayer();
+    void setNextPlayer();
 
     void drawTile() throws TileCacheEmptyException;
 
@@ -26,7 +26,7 @@ public interface MatchStateInterface {
     int getNumberOfBoards();
 
     TileInterface getCurrentTile();
-    
-    
-    
+
+
+    int getBoardIndex(String boardNickname);
 }

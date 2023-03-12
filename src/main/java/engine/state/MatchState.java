@@ -33,10 +33,10 @@ public class MatchState implements MatchStateInterface {
     public int getCurrentPlayer() { return currentPlayer; }
 
     @Override
-    public void nextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
+    public void setNextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
 
     @Contract(pure = true)
-    private @NotNull Integer getCacheSize() {
+    private @NotNull Integer getTileCacheSize() {
         return tileCache.size();
     }
 
@@ -45,7 +45,7 @@ public class MatchState implements MatchStateInterface {
         if (tileCache.isEmpty()) {
             throw new TileCacheEmptyException();
         }
-        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize());
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getTileCacheSize());
         currentTile = tileCache.remove(chosenTileIndex);
     }
 
@@ -77,5 +77,10 @@ public class MatchState implements MatchStateInterface {
 
     @Override
     public TileInterface getCurrentTile() { return currentTile; }
+
+    @Override
+    public int getBoardIndex(String boardNickname) {
+        return boards.stream().map(BoardInterface::getNickname).toList().indexOf(boardNickname);
+    }
 
 }

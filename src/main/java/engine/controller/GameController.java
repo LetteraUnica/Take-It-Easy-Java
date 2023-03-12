@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class GameController implements GameControllerInterface {
@@ -41,7 +42,7 @@ public class GameController implements GameControllerInterface {
         if (isLastPlayer()) {
             matchState.drawTile();
         }
-        matchState.nextPlayer();
+        matchState.setNextPlayer();
     }
 
     @Override
@@ -57,14 +58,7 @@ public class GameController implements GameControllerInterface {
 
     @Override
     public void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException {
-        matchState.deleteBoard(getPlayerIndex(playerName));
-    }
-
-    private int getPlayerIndex(String playerName) throws PlayerNameNotFoundException {
-        if (!getPlayersNicknames().contains(playerName)) {
-            throw new PlayerNameNotFoundException(playerName);
-        }
-        return getPlayersNicknames().indexOf(playerName);
+        matchState.deleteBoard(matchState.getBoardIndex(playerName));
     }
 
     @Override
@@ -74,7 +68,7 @@ public class GameController implements GameControllerInterface {
 
     @Override
     public BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
-        return getGameBoards().get(getPlayerIndex(playerName));
+        return getGameBoards().get(matchState.getBoardIndex(playerName));
     }
 
     @Override
