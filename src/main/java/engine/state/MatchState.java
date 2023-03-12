@@ -4,6 +4,7 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
+import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +80,11 @@ public class MatchState implements MatchStateInterface {
     public TileInterface getCurrentTile() { return currentTile; }
 
     @Override
-    public int getBoardIndex(String boardNickname) {
+    public int getBoardIndex(String boardNickname) throws PlayerNameNotFoundException {
+        List<String> allNicknames = boards.stream().map(BoardInterface::getNickname).toList();
+        if (!allNicknames.contains(boardNickname)) {
+            throw new PlayerNameNotFoundException(boardNickname);
+        }
         return boards.stream().map(BoardInterface::getNickname).toList().indexOf(boardNickname);
     }
 

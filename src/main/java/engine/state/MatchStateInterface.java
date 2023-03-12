@@ -3,6 +3,7 @@ package engine.state;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
+import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
 
 import java.util.List;
@@ -28,5 +29,5 @@ public interface MatchStateInterface {
     TileInterface getCurrentTile();
 
 
-    int getBoardIndex(String boardNickname);
+    int getBoardIndex(String boardNickname) throws PlayerNameNotFoundException;
 }
