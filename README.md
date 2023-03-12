@@ -87,8 +87,26 @@ We organized the code in different packages, each performing a separate task:
 The application entrypoint is defined in the takeiteasy.Main class, which simply launches the takeiteasy.GUI.FXApplication.
 
 ### Engine
-Da scrivere
+#### Model
 
+#####  Board
+
+* `BoardInterface`:  public interface for the generic game board to fulfill the Open-Closed SOLID principle. This interface allows for the use of different boards that are required to play various versions of the classic Take It Easy game rules.
+* `BoardClassic`:  class  responsible for implementing the game board used to play the traditional version of Take It Easy. It contains methods for placing tiles, retrieving the board, get the coordinates of the cell's centers as well as for computing the player's score.
+
+##### Tile
+
+* `TileInterface`:  public interface for the generic Tile to fulfill the Open-Closed SOLID principle. This interface allows for the use of different Tile's shapes that are required to play various versions of the classic Take It Easy game rules.
+* `Tile`: class  responsible for implementing the  tile used to play the traditional version of Take It Easy. It contains methods for retrieving the tile values, as well as an equals method to identify identical tiles. 
+
+#####  Utils
+
+* `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
+* `HexagonalGrid`: Utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board. 
+
+
+
+#### Controller
 ### UI
 The UI package is located in main.java.ui and is divided into various controller classes, each corresponding to a different window or screen that the user interacts with. The navigator class manages the movement between these windows.
 During the implementation of the UI, we ensured user-friendliness by disabling buttons that would lead to illegal actions such as adding a player that already exists or starting a match when no players are present. This approach not only enhances the user experience but also reduces the need for error handling in the code.
