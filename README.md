@@ -91,6 +91,21 @@ The *engine* package is located in` main.java.engine` and it is divided into thr
 
 #### Model
 
+#####  Board
+
+* `BoardInterface`:  public interface for the generic game board to fulfill the Open-Closed SOLID principle. This interface allows for the use of different boards that are required to play various versions of the classic Take It Easy game rules.
+* `BoardClassic`:  class  responsible for implementing the game board used to play the traditional version of Take It Easy. It contains methods for placing tiles, retrieving the board, get the coordinates of the cell's centers as well as for computing the player's score.
+
+##### Tile
+
+* `TileInterface`:  public interface for the generic Tile to fulfill the Open-Closed SOLID principle. This interface allows for the use of different Tile's shapes that are required to play various versions of the classic Take It Easy game rules.
+* `Tile`: class  responsible for implementing the  tile used to play the traditional version of Take It Easy. It contains methods for retrieving the tile values, as well as an equals method to identify identical tiles.
+
+#####  Utils
+
+* `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
+* `HexagonalGrid`: Utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
+
 #### State
 The *state* (`main.java.engine.state`) package contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
