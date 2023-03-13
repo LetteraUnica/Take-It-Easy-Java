@@ -88,7 +88,7 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public List<Point2D> getViewOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+    public List<Point2D> getRepresentationOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
         List<Point2D> hexagonCenterCoordinates = getBoardOf(playerName).getEuclideanCoordinates();
         if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOf(playerName).getBoard().size()) {
             throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
@@ -99,7 +99,8 @@ public class GameController implements GameControllerInterface {
     @Override
     public List<String> getPlayersNicknames() { return getGameBoards().stream().map(BoardInterface::getNickname).toList(); }
 
-    private boolean isLastPlayer() {
+    @Override
+    public boolean isLastPlayer() {
         return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
     }
 

@@ -2,7 +2,6 @@ package engine;
 
 import engine.controller.GameController;
 import engine.controller.GameControllerInterface;
-import engine.model.board.BoardInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
@@ -12,7 +11,7 @@ import utils.tile.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameControllerTest {
@@ -52,7 +51,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testIsGameOver() throws TileCacheEmptyException, PlayerNameNotFoundException {
+    void testIsGameOver() throws TileCacheEmptyException {
         controller.addPlayer("pincopallo");
         int i = 0;
         while (!controller.isGameOver()) {

@@ -35,5 +35,7 @@ public interface GameControllerInterface {
 
     int getWinnersScore();
 
-    List<Point2D> getViewOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+    List<Point2D> getRepresentationOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+
+    boolean isLastPlayer();
 }

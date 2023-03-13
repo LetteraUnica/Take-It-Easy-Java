@@ -109,7 +109,7 @@ public class MainGameController implements UIControllerInterface {
 
         insertBoardPanePadding();
 
-        List<Point2D> hexagonCenterCoordinates = gameController.getViewOf(playerName);
+        List<Point2D> hexagonCenterCoordinates = gameController.getRepresentationOf(playerName);
         double maxX = Objects.requireNonNull(hexagonCenterCoordinates
                 .stream()
                 .max(Comparator.comparing(Point2D::getX))
@@ -179,15 +179,15 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private void insertBoardPanePadding() {
-        int n_hexagons = 5;
+        int numberHexagons = 5;
         double angle = Math.PI / 6;
-        double height_width_ratio = 2 * (n_hexagons - 1) * Math.cos(angle) / (n_hexagons * (1 + Math.cos(2 * angle)) - 2);
+        double heightWidthRatio = 2 * (numberHexagons - 1) * Math.cos(angle) / (numberHexagons * (1 + Math.cos(2 * angle)) - 2);
         boardPane.setPadding(
                 new Insets(
                         Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * height_width_ratio,
+                        Constants.tileRadius * heightWidthRatio,
                         Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * height_width_ratio
+                        Constants.tileRadius * heightWidthRatio
                 )
         );
     }
