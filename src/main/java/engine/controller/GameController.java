@@ -105,7 +105,7 @@ public class GameController implements GameControllerInterface {
     public List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
         List<Point2D> hexagonCenterCoordinates = getBoardOf(playerName).getEuclideanCoordinates();
         if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOf(playerName).getBoard().size()) {
-            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
+            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of gameboard cells");
         }
         return hexagonCenterCoordinates;
     }

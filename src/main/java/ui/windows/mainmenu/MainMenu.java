@@ -1,4 +1,4 @@
-package ui.windows.mainMenu;
+package ui.windows.mainmenu;
 
 import engine.controller.GameControllerInterface;
 import javafx.application.Platform;
@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 import static ui.utils.UIUtils.getStage;
 
-public class MainMenuController implements UIControllerInterface {
+public class MainMenu implements UIControllerInterface {
 
     public static final String HOW_TO_PLAY_URL = "https://www.ultraboardgames.com/take-it-easy/game-rules.php";
 

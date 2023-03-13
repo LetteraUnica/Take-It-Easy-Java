@@ -1,4 +1,4 @@
-package ui.windows.lobby;
+package ui.windows.gamelobby;
 
 import engine.controller.GameControllerInterface;
 import exceptions.NoBoardFoundException;
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import static ui.utils.UIUtils.getStage;
 
-public class LobbyController implements UIControllerInterface {
+public class GameLobby implements UIControllerInterface {
     @FXML
     public Button addPlayerButton;
     @FXML

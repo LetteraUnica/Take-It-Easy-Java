@@ -1,4 +1,4 @@
-package ui.windows.mainGame;
+package ui.windows.gameboard;
 
 import engine.controller.GameControllerInterface;
 import engine.model.tile.TileInterface;
@@ -25,7 +25,7 @@ import java.util.Objects;
 
 import static ui.utils.UIUtils.*;
 
-public class MainGameController implements UIControllerInterface {
+public class GameBoard implements UIControllerInterface {
     @FXML
     private Pane boardPane;
     @FXML
@@ -55,10 +55,10 @@ public class MainGameController implements UIControllerInterface {
         }
         updatePlaceTileButton();
         initializePlayerList();
-        showCurrentTile();
+        drawCurrentTile();
     }
 
-    private void showCurrentTile() {
+    private void drawCurrentTile() {
         currentTilePane.getChildren().clear();
         TileInterface currentTile = gameController.getCurrentTile();
         Polygon cell = drawHexagonalTile(Constants.tileRadius);

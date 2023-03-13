@@ -1,4 +1,4 @@
-package ui.windows.gameOver;
+package ui.windows.gameover;
 
 import engine.controller.GameControllerInterface;
 import exceptions.ReassignedControllerException;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static ui.utils.UIUtils.getStage;
 
-public class GameOverController implements UIControllerInterface {
+public class GameOver implements UIControllerInterface {
     @FXML
     private Text winnerText;
     private GameControllerInterface gameController;

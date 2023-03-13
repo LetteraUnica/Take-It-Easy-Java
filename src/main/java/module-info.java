@@ -9,10 +9,10 @@ module ui {
     requires org.jetbrains.annotations;
 
     exports ui;
-    opens ui.windows.mainMenu to javafx.fxml;
-    opens ui.windows.lobby to javafx.fxml;
-    opens ui.windows.mainGame to javafx.fxml;
-    opens ui.windows.gameOver to javafx.fxml;
+    opens ui.windows.mainmenu to javafx.fxml;
+    opens ui.windows.gamelobby to javafx.fxml;
+    opens ui.windows.gameboard to javafx.fxml;
+    opens ui.windows.gameover to javafx.fxml;
     opens ui.navigator to javafx.fxml;
 
     opens engine.model.tile to com.google.gson;
