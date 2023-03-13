@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class GameController implements GameControllerInterface {
@@ -46,11 +45,6 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public boolean isLastPlayer() {
-        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
-    }
-
-    @Override
     public void addPlayer(String newPlayerName) {
         BoardInterface newBoard = new BoardClassic(newPlayerName);
         matchState.addBoard(newBoard);
@@ -64,11 +58,6 @@ public class GameController implements GameControllerInterface {
     @Override
     public boolean isGameOver() {
         return getGameBoards().stream().allMatch(BoardInterface::isBoardFull) && isLastPlayer();
-    }
-
-    @Override
-    public BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
-        return getGameBoards().get(matchState.getBoardIndex(playerName));
     }
 
     @Override
@@ -99,7 +88,7 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+    public List<Point2D> getViewOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
         List<Point2D> hexagonCenterCoordinates = getBoardOf(playerName).getEuclideanCoordinates();
         if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOf(playerName).getBoard().size()) {
             throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
@@ -110,6 +99,14 @@ public class GameController implements GameControllerInterface {
     @Override
     public List<String> getPlayersNicknames() { return getGameBoards().stream().map(BoardInterface::getNickname).toList(); }
 
+    private boolean isLastPlayer() {
+        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
+    }
+
     private List<BoardInterface> getGameBoards() { return matchState.getBoards(); }
+
+    private BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
+        return getGameBoards().get(matchState.getBoardIndex(playerName));
+    }
 
 }

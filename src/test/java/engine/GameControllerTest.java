@@ -52,17 +52,10 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetBoardOfPlayer() throws PlayerNameNotFoundException {
-        controller.addPlayer("pinco");
-        BoardInterface boardOfPallo = controller.getBoardOf("pinco");
-        assertEquals("pinco", boardOfPallo.getNickname());
-    }
-
-    @Test
     void testIsGameOver() throws TileCacheEmptyException, PlayerNameNotFoundException {
         controller.addPlayer("pincopallo");
         int i = 0;
-        while (!(controller.getBoardOf("pincopallo").isBoardFull())) {
+        while (!controller.isGameOver()) {
             controller.placeTileIn(i);
             controller.nextTurn();
             i++;
