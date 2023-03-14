@@ -106,7 +106,7 @@ public class GameBoard implements UIControllerInterface {
 
         insertBoardPanePadding();
 
-        List<Point2D> hexagonCenterCoordinates = gameController.getBoardCoordinatesOf(playerName);
+        List<Point2D> hexagonCenterCoordinates = gameController.getRepresentationOf(playerName);
         double maxX = Objects.requireNonNull(hexagonCenterCoordinates
                 .stream()
                 .max(Comparator.comparing(Point2D::getX))

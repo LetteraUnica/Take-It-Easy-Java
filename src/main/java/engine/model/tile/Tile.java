@@ -45,9 +45,4 @@ public class Tile implements TileInterface {
         return "\"Tile[idTile" + this.idTile + "leftPath" + this.leftPath + "rightPath" + this.rightPath + "topPath" + this.topPath + "]";
     }
 
-    @Override
-    public boolean equals(TileInterface tile) {
-        List<Integer> tileValues = tile.getValues();
-        return tileValues.get(1) == leftPath && tileValues.get(0) == rightPath && tileValues.get(2) == topPath;
-    }
 }

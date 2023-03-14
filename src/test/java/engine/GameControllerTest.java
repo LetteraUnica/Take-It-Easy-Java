@@ -2,6 +2,7 @@ package engine;
 
 import engine.controller.GameController;
 import engine.controller.GameControllerInterface;
+import exceptions.CellNotAvailableException;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
@@ -18,7 +19,7 @@ class GameControllerTest {
 
     GameControllerInterface controller = new GameController();
 
-    private void trivialGameFinisher() throws TileCacheEmptyException {
+    private void trivialGameFinisher() throws TileCacheEmptyException, CellNotAvailableException {
         int place = 0;
         while (!controller.isGameOver()) {
             for (int playerIndex = 0; playerIndex < controller.getPlayersNicknames().size(); playerIndex++) {
@@ -51,7 +52,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testIsGameOver() throws TileCacheEmptyException {
+    void testIsGameOver() throws TileCacheEmptyException, CellNotAvailableException {
         controller.addPlayer("pincopallo");
         int i = 0;
         while (!controller.isGameOver()) {
@@ -72,7 +73,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetGameWinners() throws TileCacheEmptyException {
+    void testGetGameWinners() throws TileCacheEmptyException, CellNotAvailableException {
         controller.addPlayer("caio");
         controller.addPlayer("sempronio");
         trivialGameFinisher();
@@ -83,7 +84,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetWinnersScore() throws TileCacheEmptyException {
+    void testGetWinnersScore() throws TileCacheEmptyException, CellNotAvailableException {
         controller.addPlayer("caio");
         trivialGameFinisher();
         assertTrue(controller.getScores().stream().allMatch(i -> i <= controller.getWinnersScore()));
@@ -101,7 +102,7 @@ class GameControllerTest {
     }
 
     @Test
-    void testGetScores() throws TileCacheEmptyException {
+    void testGetScores() throws TileCacheEmptyException, CellNotAvailableException {
         controller.addPlayer("macro");
         controller.addPlayer("chic");
         trivialGameFinisher();
