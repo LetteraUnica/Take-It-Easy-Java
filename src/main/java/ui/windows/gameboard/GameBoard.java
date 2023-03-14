@@ -1,11 +1,8 @@
-package ui.windows.mainGame;
+package ui.windows.gameboard;
 
 import engine.controller.GameControllerInterface;
 import engine.model.tile.TileInterface;
-import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
-import exceptions.PlayerNameNotFoundException;
-import exceptions.ReassignedControllerException;
-import exceptions.TileCacheEmptyException;
+import exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -28,7 +25,7 @@ import java.util.Objects;
 
 import static ui.utils.UIUtils.*;
 
-public class MainGameController implements UIControllerInterface {
+public class GameBoard implements UIControllerInterface {
     @FXML
     private Pane boardPane;
     @FXML
@@ -58,13 +55,13 @@ public class MainGameController implements UIControllerInterface {
         }
         updatePlaceTileButton();
         initializePlayerList();
-        showCurrentTile();
+        drawCurrentTile();
     }
 
-    private void showCurrentTile() {
+    private void drawCurrentTile() {
         currentTilePane.getChildren().clear();
         TileInterface currentTile = gameController.getCurrentTile();
-        Polygon cell = drawHexagonalTile(Constants.tileRadius);
+        Polygon cell = drawHexagonalTile(GameBoardConstants.tileRadius);
         cell.getStyleClass().add("tile");
         currentTilePane.getChildren().add(cell);
 
@@ -119,7 +116,7 @@ public class MainGameController implements UIControllerInterface {
         double minY = hexagonCenterCoordinates.stream().min(Comparator.comparing(Point2D::getY)).get().getY();
         for (int tileId = 0; tileId < hexagonCenterCoordinates.size(); tileId++) {
             Point2D centerPoint = hexagonCenterCoordinates.get(tileId);
-            Polygon cell = drawHexagonalTile(Constants.tileRadius);
+            Polygon cell = drawHexagonalTile(GameBoardConstants.tileRadius);
             boardPane.getChildren().add(cell);
             double x = rescaleCoordinate(centerPoint.getX(), minX, maxX,
                     boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
@@ -169,8 +166,8 @@ public class MainGameController implements UIControllerInterface {
         Group tileNumbers = new Group();
         for (int i = 0; i < 3; i++) {
             Text text = new Text(String.valueOf(tileValues.get(i)));
-            text.setX(Constants.numberRadius * Math.cos(startAngle + i * increment));
-            text.setY(Constants.numberRadius * Math.sin(startAngle + i * increment));
+            text.setX(GameBoardConstants.numberRadius * Math.cos(startAngle + i * increment));
+            text.setY(GameBoardConstants.numberRadius * Math.sin(startAngle + i * increment));
             text.getStyleClass().add("tileText");
             text.setFill(Paint.valueOf(tileColors.get(i)));
             tileNumbers.getChildren().add(text);
@@ -179,15 +176,15 @@ public class MainGameController implements UIControllerInterface {
     }
 
     private void insertBoardPanePadding() {
-        int numberHexagons = 5;
+        int nHexagons = 5;
         double angle = Math.PI / 6;
-        double heightWidthRatio = 2 * (numberHexagons - 1) * Math.cos(angle) / (numberHexagons * (1 + Math.cos(2 * angle)) - 2);
+        double heightWidthRatio = 2 * (nHexagons - 1) * Math.cos(angle) / (nHexagons * (1 + Math.cos(2 * angle)) - 2);
         boardPane.setPadding(
                 new Insets(
-                        Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * heightWidthRatio,
-                        Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * heightWidthRatio
+                        GameBoardConstants.tileRadius * Math.cos(angle),
+                        GameBoardConstants.tileRadius * heightWidthRatio,
+                        GameBoardConstants.tileRadius * Math.cos(angle),
+                        GameBoardConstants.tileRadius * heightWidthRatio
                 )
         );
     }
@@ -199,7 +196,7 @@ public class MainGameController implements UIControllerInterface {
     }
 
     @FXML
-    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException {
+    public void placeTile(ActionEvent e) throws ReassignedControllerException, IOException, TileCacheEmptyException, CellNotAvailableException {
         gameController.placeTileIn(candidateTilePlacement);
         candidateTilePlacement = -1;
         if (gameController.isGameOver()) {
