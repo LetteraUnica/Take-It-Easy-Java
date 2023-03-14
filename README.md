@@ -109,7 +109,7 @@ The *engine* package is located in` main.java.engine` and it is divided into thr
 #### State
 The *state* (`main.java.engine.state`) package contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
-* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All and only public methods implemented in this class are used in the controller implementation in order to comply with the MVC pattern logic. This class has for `private` attributes
+* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All the public methods implemented in this class are used only in the controller implementation in order to comply with the MVC pattern logic. This class has for `private` attributes
   * `ArrayList<BoardInterface> boards` stores the `BoardInterface` implementations of the players in the game;
   * `ArrayList<TileInterface> tileCache` stores the `TileInterface` implementations for the tiles still available (drawable);
   * `TileInterface currentTile` stores the `TileInterface` implementation of the just drawn tile (the tile to be placed in the current round of the game);
@@ -133,7 +133,9 @@ The *state* (`main.java.engine.state`) package contains the following java files
 #### Controller
 The *controller* (`main.java.engine.controller`) package contains the following files:
 * `main.java.engine.controller.GameControllerInterface.java`: public interface acting as a bridge between the *Model* and the *View* ends of the MVC pattern. It provides all the method which are accessible from the UI. 
-* `main.java.engine.controller.GameController`: it contains the java class **GameController** which implements the _GameControllerInterface_. The public methods in the implementation of _GameControllerInterface_
+* `main.java.engine.controller.GameController`: it contains the java class **GameController** which implements the _GameControllerInterface_. The public methods in the implementation of _GameControllerInterface_ are all used only in the classes the UI consists of, in order to follow the MVC pattern as much as possible. 
+  The implemented `public` methods are the followings:
+  * dd
 --to be continued--
 
 ### UI
