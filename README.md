@@ -79,17 +79,14 @@ The project was written in Java 17 and built using gradle version 7.4. We also u
 
 ## Architecture
 We organized the code in different packages, each performing a separate task:
-* The engine under main.java.engine implements the game logic and structure.
+* The engine under main.java.engine implements the game logic and structure. The *engine* package is located in` main.java.engine` and it is divided into three components: the **model**, the **state** and the **controller** packages.
 * The user interface under main.java.ui which implements the UI using the JavaFX library.
 * An utils package main.utils, containing utility functions for the classes.
 * An exceptions package main.exceptions, containing custom exceptions that can be thrown during program execution.
 
 The application entrypoint is defined in the takeiteasy.Main class, which simply launches the takeiteasy.GUI.FXApplication.
 
-### Engine
-The *engine* package is located in` main.java.engine` and it is divided into three components: the **model**, the **state** and the **controller** packages.
-
-#### Model
+### Engine: model
 
 #####  Board
 
@@ -105,6 +102,8 @@ The *engine* package is located in` main.java.engine` and it is divided into thr
 
 * `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
 * `HexagonalGrid`: Utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
+
+### Engine: state
 
 #### State
 The *state* (`main.java.engine.state`) package contains the following java files:
@@ -129,6 +128,8 @@ The *state* (`main.java.engine.state`) package contains the following java files
   
   One additional `private` method was added:
   * `void initializeTileCollection()` initializes the collection of tiles in the `tileCache`. Since it depends on the specific implementation of the game (`TileLoader` and consequently `TileGenerator`, or an existing file for storing the tiles), the `private` access modifier has been chosen.
+
+### Engine: controller
 
 #### Controller
 The *controller* (`main.java.engine.controller`) package contains the following files:
