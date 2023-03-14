@@ -3,6 +3,7 @@ package engine.state;
 import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
+import exceptions.CellNotAvailableException;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
@@ -59,7 +60,7 @@ public class MatchState implements MatchStateInterface {
     }
 
     @Override
-    public void fillBoardCell(int placementIndex) {
+    public void fillBoardCell(int placementIndex) throws CellNotAvailableException {
         boards.get(currentPlayer).placeTile(placementIndex, getCurrentTile());
     }
 

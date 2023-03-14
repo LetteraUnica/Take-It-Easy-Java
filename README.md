@@ -109,7 +109,14 @@ The *engine* package is located in` main.java.engine` and it is divided into thr
 #### State
 The *state* (`main.java.engine.state`) package contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
-* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface.
+* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All and only public methods implemented in this class are used in the controller implementation in order to comply with the MVC pattern logic. This class has for `private` attributes
+  * `ArrayList<BoardInterface> boards`: it stores the `BoardInterface` implementations of the players in the game;
+  * `ArrayList<TileInterface> tileCache`: it stores the `TileInterface` implementations for the tiles still available (drawable);
+  * `TileInterface currentTile`: it stores the `TileInterface` implementation of the just drawn tile (the tile to be placed in the current round of the game);
+  * `Integer currentPlayerIndex`: it stores the index of the player who needs tom place the tile in the current turn;
+  
+  The implemented methods are:
+  * `int getCurrentPlayerIndex()`
 --to be continued--
 
 #### Controller

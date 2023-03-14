@@ -2,6 +2,7 @@ package engine.state;
 
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
+import exceptions.CellNotAvailableException;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
@@ -20,7 +21,7 @@ public interface MatchStateInterface {
 
     void deleteBoard(int playerIndex) throws NoBoardFoundException;
 
-    void fillBoardCell(int placementIndex);
+    void fillBoardCell(int placementIndex) throws CellNotAvailableException;
 
     List<BoardInterface> getBoards();
 
