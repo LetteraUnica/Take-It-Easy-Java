@@ -61,7 +61,7 @@ public class GameBoard implements UIControllerInterface {
     private void drawCurrentTile() {
         currentTilePane.getChildren().clear();
         TileInterface currentTile = gameController.getCurrentTile();
-        Polygon cell = drawHexagonalTile(Constants.tileRadius);
+        Polygon cell = drawHexagonalTile(GameBoardConstants.tileRadius);
         cell.getStyleClass().add("tile");
         currentTilePane.getChildren().add(cell);
 
@@ -116,7 +116,7 @@ public class GameBoard implements UIControllerInterface {
         double minY = hexagonCenterCoordinates.stream().min(Comparator.comparing(Point2D::getY)).get().getY();
         for (int tileId = 0; tileId < hexagonCenterCoordinates.size(); tileId++) {
             Point2D centerPoint = hexagonCenterCoordinates.get(tileId);
-            Polygon cell = drawHexagonalTile(Constants.tileRadius);
+            Polygon cell = drawHexagonalTile(GameBoardConstants.tileRadius);
             boardPane.getChildren().add(cell);
             double x = rescaleCoordinate(centerPoint.getX(), minX, maxX,
                     boardPane.getPrefWidth() - 2 * boardPane.getInsets().getRight());
@@ -166,8 +166,8 @@ public class GameBoard implements UIControllerInterface {
         Group tileNumbers = new Group();
         for (int i = 0; i < 3; i++) {
             Text text = new Text(String.valueOf(tileValues.get(i)));
-            text.setX(Constants.numberRadius * Math.cos(startAngle + i * increment));
-            text.setY(Constants.numberRadius * Math.sin(startAngle + i * increment));
+            text.setX(GameBoardConstants.numberRadius * Math.cos(startAngle + i * increment));
+            text.setY(GameBoardConstants.numberRadius * Math.sin(startAngle + i * increment));
             text.getStyleClass().add("tileText");
             text.setFill(Paint.valueOf(tileColors.get(i)));
             tileNumbers.getChildren().add(text);
@@ -181,10 +181,10 @@ public class GameBoard implements UIControllerInterface {
         double height_width_ratio = 2 * (n_hexagons - 1) * Math.cos(angle) / (n_hexagons * (1 + Math.cos(2 * angle)) - 2);
         boardPane.setPadding(
                 new Insets(
-                        Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * height_width_ratio,
-                        Constants.tileRadius * Math.cos(angle),
-                        Constants.tileRadius * height_width_ratio
+                        GameBoardConstants.tileRadius * Math.cos(angle),
+                        GameBoardConstants.tileRadius * height_width_ratio,
+                        GameBoardConstants.tileRadius * Math.cos(angle),
+                        GameBoardConstants.tileRadius * height_width_ratio
                 )
         );
     }
