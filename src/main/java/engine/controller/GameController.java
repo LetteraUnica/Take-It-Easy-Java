@@ -25,7 +25,7 @@ public class GameController implements GameControllerInterface {
 
     @Override
     public TileInterface getCurrentTile() {
-        return matchState.getCurrentTile();
+        return matchState.getExtractedTile();
     }
 
     @Override

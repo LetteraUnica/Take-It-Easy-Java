@@ -27,7 +27,7 @@ public interface MatchStateInterface {
 
     int getNumberOfBoards();
 
-    TileInterface getCurrentTile();
+    TileInterface getExtractedTile();
 
 
     int getBoardIndex(String boardNickname) throws PlayerNameNotFoundException;

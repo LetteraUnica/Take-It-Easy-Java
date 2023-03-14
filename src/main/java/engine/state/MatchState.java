@@ -16,7 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MatchState implements MatchStateInterface {
     private final ArrayList<BoardInterface> boards =  new ArrayList<>();
     private final ArrayList<TileInterface> tileCache = new ArrayList<>();
-    private TileInterface currentTile;
+    private TileInterface extractedTile;
     private Integer currentPlayer;
 
     public MatchState() {
@@ -41,7 +41,7 @@ public class MatchState implements MatchStateInterface {
             throw new TileCacheEmptyException();
         }
         int chosenTileIndex = ThreadLocalRandom.current().nextInt(tileCache.size());
-        currentTile = tileCache.remove(chosenTileIndex);
+        extractedTile = tileCache.remove(chosenTileIndex);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MatchState implements MatchStateInterface {
 
     @Override
     public void fillBoardCell(int placementIndex) throws CellNotAvailableException {
-        boards.get(currentPlayer).placeTile(placementIndex, getCurrentTile());
+        boards.get(currentPlayer).placeTile(placementIndex, getExtractedTile());
     }
 
     @Override
@@ -71,7 +71,7 @@ public class MatchState implements MatchStateInterface {
     }
 
     @Override
-    public TileInterface getCurrentTile() { return currentTile; }
+    public TileInterface getExtractedTile() { return extractedTile; }
 
     @Override
     public int getBoardIndex(String boardNickname) throws PlayerNameNotFoundException {

@@ -106,38 +106,64 @@ The application entrypoint is defined in the takeiteasy.Main class, which simply
 ### Engine: state
 
 #### State
-The *state* (`main.java.engine.state`) package contains the following java files:
+The state package `main.java.engine.state` contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
-* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All the public methods implemented in this class are used only in the controller implementation in order to comply with the MVC pattern logic. This class has for `private` attributes
-  * `ArrayList<BoardInterface> boards` stores the `BoardInterface` implementations of the players in the game;
-  * `ArrayList<TileInterface> tileCache` stores the `TileInterface` implementations for the tiles still available (drawable);
-  * `TileInterface currentTile` stores the `TileInterface` implementation of the just drawn tile (the tile to be placed in the current round of the game);
-  * `Integer currentPlayerIndex` stores the index of the player who needs tom place the tile in the current turn;
-  
-  The `public` implemented methods are:
-  * `int getCurrentPlayerIndex()` returns the index of the board in which a player is currently placing a tile (current player's board);
-  * `void setNextPlayer()` updates (increments by one) the index "pointing" of the current board;
-  * `void drawTile()` randomly extracts a tile from the `tileCache`;
-  * `void addBoard(BoardInterface)` adds a board given an implementation of the `BoardInterface`;
-  * `void deleteBoard(int)` removes a board from `boards` given the corresponding index of the player to be eliminated;
-  * `void fillBoardCell(int)` invokes the `BoardInterface::placeTile` method in order to place a tile in the given candidate position index;
-  * `List<BoardInterface> getBoards()` returns the copy of all the boards in the game;
-  * `int getNumberOfBoards()` returns the number of boards in the game (tht is the number of players);
-  * `TileInterface getCurrentTile()` returns the just drawn tile (that is the tile to be placed by the players);
-  * `int getBoardIndex(String)` returns the corresponding index in `boards` of a player given its nickname;
-  
-  One additional `private` method was added:
-  * `void initializeTileCollection()` initializes the collection of tiles in the `tileCache`. Since it depends on the specific implementation of the game (`TileLoader` and consequently `TileGenerator`, or an existing file for storing the tiles), the `private` access modifier has been chosen.
+* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All the public methods implemented in this class are used only in the controller implementation in order to comply with the MVC pattern logic. 
+
+[//]: # (  This class has four `private` attributes:)
+
+[//]: # (    * `ArrayList<BoardInterface> boards` stores the `BoardInterface` implementations of the players in the game;)
+
+[//]: # (    * `ArrayList<TileInterface> tileCache` stores the `TileInterface` implementations for the tiles still available &#40;drawable&#41;;)
+
+[//]: # (    * `TileInterface currentTile` stores the `TileInterface` implementation of the just drawn tile &#40;the tile to be placed in the current round of the game&#41;;)
+
+[//]: # (    * `Integer currentPlayerIndex` stores the index of the player who needs tom place the tile in the current turn;)
+
+[//]: # (  )
+[//]: # (  The `public` implemented methods are:)
+
+[//]: # (    * `int getCurrentPlayerIndex&#40;&#41;` returns the index of the board in which a player is currently placing a tile &#40;current player's board&#41;;)
+
+[//]: # (    * `void setNextPlayer&#40;&#41;` updates &#40;increments by one&#41; the index "pointing" of the current board;)
+
+[//]: # (    * `void drawTile&#40;&#41;` randomly extracts a tile from the `tileCache`;)
+
+[//]: # (    * `void addBoard&#40;BoardInterface&#41;` adds a board given an implementation of the `BoardInterface`;)
+
+[//]: # (    * `void deleteBoard&#40;int&#41;` removes a board from `boards` given the corresponding index of the player to be eliminated;)
+
+[//]: # (    * `void fillBoardCell&#40;int&#41;` invokes the `BoardInterface::placeTile` method in order to place a tile in the given candidate position index;)
+
+[//]: # (    * `List<BoardInterface> getBoards&#40;&#41;` returns the copy of all the boards in the game;)
+
+[//]: # (    * `int getNumberOfBoards&#40;&#41;` returns the number of boards in the game &#40;tht is the number of players&#41;;)
+
+[//]: # (    * `TileInterface getExtractedTile&#40;&#41;` returns the tile just popped out of `tileCache`;)
+
+[//]: # (    * `int getBoardIndex&#40;String&#41;` returns the corresponding index in `boards` of a player given its nickname.)
+
+[//]: # (  )
+[//]: # (  One additional `private` method was added:)
+
+[//]: # (    * `void initializeTileCollection&#40;&#41;` initializes the collection of tiles in the `tileCache`. Since it depends on the specific implementation of the game &#40;`TileLoader` and consequently `TileGenerator`, or an existing file for storing the tiles&#41;, the `private` access modifier has been chosen.)
 
 ### Engine: controller
 
 #### Controller
 The *controller* (`main.java.engine.controller`) package contains the following files:
 * `main.java.engine.controller.GameControllerInterface.java`: public interface acting as a bridge between the *Model* and the *View* ends of the MVC pattern. It provides all the method which are accessible from the UI. 
-* `main.java.engine.controller.GameController`: it contains the java class **GameController** which implements the _GameControllerInterface_. The public methods in the implementation of _GameControllerInterface_ are all used only in the classes the UI consists of, in order to follow the MVC pattern as much as possible. 
-  The implemented `public` methods are the followings:
-  * dd
---to be continued--
+* `main.java.engine.controller.GameController.java`: it contains the public java class `GameController` which implements the `GameControllerInterface`. The public methods in the implementation of `GameController` are all used only in the classes the UI consists of, in order to follow the MVC pattern as much as possible. These methods are responsible for carrying on the game mechanics. 
+  
+  The few private methods were implemented just to facilitate some computations.
+
+[//]: # (  The implemented `public` methods are the followings:)
+
+[//]: # (  * `void getCurrentTile&#40;&#41;` returns the tile which is currently to be placed by the players;)
+
+[//]: # (  * `String getCurrentPlayerName&#40;&#41;` returns the name of the player currently placing the tile;)
+
+[//]: # (  * ``)
 
 ### UI
 The UI package is located in main.java.ui and is divided into various controller classes, each corresponding to a different window or screen that the user interacts with. The navigator class manages the movement between these windows.
