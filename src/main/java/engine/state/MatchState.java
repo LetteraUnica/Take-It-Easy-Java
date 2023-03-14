@@ -6,8 +6,6 @@ import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -36,17 +34,12 @@ public class MatchState implements MatchStateInterface {
     @Override
     public void setNextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
 
-    @Contract(pure = true)
-    private @NotNull Integer getTileCacheSize() {
-        return tileCache.size();
-    }
-
     @Override
     public void drawTile() throws TileCacheEmptyException {
         if (tileCache.isEmpty()) {
             throw new TileCacheEmptyException();
         }
-        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getTileCacheSize());
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(tileCache.size());
         currentTile = tileCache.remove(chosenTileIndex);
     }
 
