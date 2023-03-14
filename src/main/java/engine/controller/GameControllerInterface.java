@@ -1,8 +1,10 @@
 package engine.controller;
 
-import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
-import exceptions.*;
+import exceptions.NoBoardFoundException;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+import exceptions.PlayerNameNotFoundException;
+import exceptions.TileCacheEmptyException;
 import javafx.geometry.Point2D;
 
 import java.util.List;
@@ -15,8 +17,6 @@ public interface GameControllerInterface {
 
     void nextTurn() throws TileCacheEmptyException;
 
-    boolean isLastPlayer();
-
     void addPlayer(String newPlayerName);
 
     void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException;
@@ -25,11 +25,9 @@ public interface GameControllerInterface {
 
     boolean isGameOver();
 
-    BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException;
-
     TileInterface getTileOf(String playerName, int tileId) throws PlayerNameNotFoundException;
 
-    void placeTileIn(int candidateTilePlacement) throws CellNotAvailableException;
+    void placeTileIn(int candidateTilePlacement);
 
     List<Integer> getScores();
 
@@ -37,5 +35,7 @@ public interface GameControllerInterface {
 
     int getWinnersScore();
 
-    List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+    List<Point2D> getRepresentationOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+
+    boolean isLastPlayer();
 }

@@ -1,4 +1,4 @@
-package ui.windows.gameboard;
+package ui.windows.mainGame;
 
 public class Constants {
     public static final double tileRadius = 35;

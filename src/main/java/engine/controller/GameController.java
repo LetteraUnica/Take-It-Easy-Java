@@ -5,7 +5,10 @@ import engine.model.board.BoardClassic;
 import engine.model.board.BoardInterface;
 import engine.model.tile.TileInterface;
 import engine.state.MatchState;
-import exceptions.*;
+import exceptions.NoBoardFoundException;
+import exceptions.NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException;
+import exceptions.PlayerNameNotFoundException;
+import exceptions.TileCacheEmptyException;
 import javafx.geometry.Point2D;
 
 import java.util.Arrays;
@@ -38,12 +41,7 @@ public class GameController implements GameControllerInterface {
         if (isLastPlayer()) {
             matchState.drawTile();
         }
-        matchState.nextPlayer();
-    }
-
-    @Override
-    public boolean isLastPlayer() {
-        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
+        matchState.setNextPlayer();
     }
 
     @Override
@@ -54,14 +52,7 @@ public class GameController implements GameControllerInterface {
 
     @Override
     public void removePlayer(String playerName) throws NoBoardFoundException, PlayerNameNotFoundException {
-        matchState.deleteBoard(getPlayerIndex(playerName));
-    }
-
-    private int getPlayerIndex(String playerName) throws PlayerNameNotFoundException {
-        if (!getPlayersNicknames().contains(playerName)) {
-            throw new PlayerNameNotFoundException(playerName);
-        }
-        return getPlayersNicknames().indexOf(playerName);
+        matchState.deleteBoard(matchState.getBoardIndex(playerName));
     }
 
     @Override
@@ -70,18 +61,13 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
-        return getGameBoards().get(getPlayerIndex(playerName));
-    }
-
-    @Override
     public TileInterface getTileOf(String playerName, int tileId) throws PlayerNameNotFoundException {
         return getBoardOf(playerName).getTile(tileId);
     }
 
     @Override
-    public void placeTileIn(int candidateTilePlacement) throws CellNotAvailableException {
-        getGameBoards().get(matchState.getCurrentPlayer()).placeTile(candidateTilePlacement, matchState.getCurrentTile());
+    public void placeTileIn(int candidateTilePlacement) {
+        matchState.fillBoardCell(candidateTilePlacement);
     }
 
     @Override
@@ -102,10 +88,10 @@ public class GameController implements GameControllerInterface {
     }
 
     @Override
-    public List<Point2D> getBoardCoordinatesOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
+    public List<Point2D> getRepresentationOf(String playerName) throws PlayerNameNotFoundException, NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException {
         List<Point2D> hexagonCenterCoordinates = getBoardOf(playerName).getEuclideanCoordinates();
         if (hexagonCenterCoordinates.isEmpty() || hexagonCenterCoordinates.size() != getBoardOf(playerName).getBoard().size()) {
-            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of gameboard cells");
+            throw new NumberOfTileCentersCoordinatesNotMatchingNumberOfBoardCellsException("Number of coordinates pairs for centering the tiles do not match number of board cells");
         }
         return hexagonCenterCoordinates;
     }
@@ -113,6 +99,15 @@ public class GameController implements GameControllerInterface {
     @Override
     public List<String> getPlayersNicknames() { return getGameBoards().stream().map(BoardInterface::getNickname).toList(); }
 
+    @Override
+    public boolean isLastPlayer() {
+        return matchState.getCurrentPlayer() == matchState.getNumberOfBoards() - 1;
+    }
+
     private List<BoardInterface> getGameBoards() { return matchState.getBoards(); }
+
+    private BoardInterface getBoardOf(String playerName) throws PlayerNameNotFoundException {
+        return getGameBoards().get(matchState.getBoardIndex(playerName));
+    }
 
 }

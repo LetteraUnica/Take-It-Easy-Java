@@ -3,17 +3,16 @@ package engine.model.tile;
 import java.util.List;
 
 public interface TileInterface {
-    public int getIdTile();
+    int getIdTile();
 
-    public int getLeftPath();
+    int getLeftPath();
 
-    public int getRightPath();
+    int getRightPath();
 
-    public int getTopPath();
+    int getTopPath();
 
-    public List<Integer> getValues();
+    List<Integer> getValues();
 
-    public String toString();
+    String toString();
 
-    public boolean equals(TileInterface tile);
 }

@@ -4,6 +4,7 @@ import engine.model.board.BoardInterface;
 import engine.model.tile.Tile;
 import engine.model.tile.TileInterface;
 import exceptions.NoBoardFoundException;
+import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -33,19 +34,14 @@ public class MatchState implements MatchStateInterface {
     public int getCurrentPlayer() { return currentPlayer; }
 
     @Override
-    public void nextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
-
-    @Contract(pure = true)
-    private @NotNull Integer getCacheSize() {
-        return tileCache.size();
-    }
+    public void setNextPlayer() { currentPlayer = (currentPlayer + 1) % boards.size(); }
 
     @Override
     public void drawTile() throws TileCacheEmptyException {
         if (tileCache.isEmpty()) {
             throw new TileCacheEmptyException();
         }
-        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getCacheSize());
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getTileCacheSize());
         currentTile = tileCache.remove(chosenTileIndex);
     }
 
@@ -63,9 +59,12 @@ public class MatchState implements MatchStateInterface {
     }
 
     @Override
-    public List<BoardInterface> getBoards() {
-        return boards;
+    public void fillBoardCell(int placementIndex) {
+        boards.get(currentPlayer).placeTile(placementIndex, getCurrentTile());
     }
+
+    @Override
+    public List<BoardInterface> getBoards() { return boards.stream().map(BoardInterface::copy).toList(); }
 
     @Override
     public int getNumberOfBoards() {
@@ -74,5 +73,19 @@ public class MatchState implements MatchStateInterface {
 
     @Override
     public TileInterface getCurrentTile() { return currentTile; }
+
+    @Override
+    public int getBoardIndex(String boardNickname) throws PlayerNameNotFoundException {
+        List<String> allNicknames = boards.stream().map(BoardInterface::getNickname).toList();
+        if (!allNicknames.contains(boardNickname)) {
+            throw new PlayerNameNotFoundException(boardNickname);
+        }
+        return boards.stream().map(BoardInterface::getNickname).toList().indexOf(boardNickname);
+    }
+
+    @Contract(pure = true)
+    private @NotNull Integer getTileCacheSize() {
+        return tileCache.size();
+    }
 
 }

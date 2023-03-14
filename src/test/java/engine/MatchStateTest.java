@@ -9,38 +9,22 @@ import engine.state.MatchStateInterface;
 import exceptions.NoBoardFoundException;
 import exceptions.TileCacheEmptyException;
 import org.junit.jupiter.api.Test;
-import utils.BoardFiller;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MatchStateTest {
 
     MatchStateInterface state = new MatchState();
-    BoardFiller filler = new BoardFiller();
-
-//    @Test
-//    void testStartingMatchStateAvailableTiles() {
-//        ArrayList<Tile> tileList = (ArrayList<Tile>) new TileLoader().loadTileList();
-//        assertEquals(tileList.size(), state.getCacheSize());
-//    }
 
     @Test
     void testStartingCurrentPlayer() {
         assertEquals(0, state.getCurrentPlayer());
     }
-
-//    @Test
-//    void testDrawTileReducesCacheSize() throws TileCacheEmptyException {
-//        int currentCacheSize = state.getCacheSize();
-//        state.drawTile();
-//        assertEquals(currentCacheSize - 1, state.getCacheSize());
-//    }
 
     @Test
     void testAddBoard() {
@@ -55,7 +39,7 @@ class MatchStateTest {
         state.addBoard(new BoardClassic("caio"));
         state.addBoard(new BoardClassic("tizio"));
         int currentPlayer = state.getCurrentPlayer();
-        state.nextPlayer();
+        state.setNextPlayer();
         int nextPlayer = state.getCurrentPlayer();
         assertEquals(nextPlayer, currentPlayer + 1);
     }
@@ -90,7 +74,7 @@ class MatchStateTest {
         state.drawTile();
         boolean isInTileList = false;
         for (TileInterface tile: tileList) {
-            if (state.getCurrentTile().equals(tile)) {
+            if (state.getCurrentTile().getIdTile() == tile.getIdTile() && state.getCurrentTile().getValues().equals(tile.getValues())) {
                 isInTileList = true;
             }
         }
@@ -103,10 +87,11 @@ class MatchStateTest {
         for (String player: nicknames) {
             state.addBoard(new BoardClassic(player));
         }
-        List<BoardInterface> boards = state.getBoards();
-        for (int i=0; i < state.getNumberOfBoards(); i++) {
-            assertEquals(state.getBoards().get(i).getNickname(), boards.get(i).getNickname());
-        }
+        ArrayList<BoardInterface> boards = new ArrayList<>(state.getBoards());
+        BoardInterface newBoard = new BoardClassic("pinco");
+        boards.add(newBoard);
+        List<String> modifiedGameNicknames = boards.stream().map(BoardInterface::getNickname).toList();
+        assertNotEquals(nicknames, modifiedGameNicknames);
     }
 
 }
