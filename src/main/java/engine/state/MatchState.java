@@ -7,8 +7,6 @@ import exceptions.CellNotAvailableException;
 import exceptions.NoBoardFoundException;
 import exceptions.PlayerNameNotFoundException;
 import exceptions.TileCacheEmptyException;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import utils.tile.TileLoader;
 
 import java.util.ArrayList;
@@ -42,7 +40,7 @@ public class MatchState implements MatchStateInterface {
         if (tileCache.isEmpty()) {
             throw new TileCacheEmptyException();
         }
-        int chosenTileIndex = ThreadLocalRandom.current().nextInt(getTileCacheSize());
+        int chosenTileIndex = ThreadLocalRandom.current().nextInt(tileCache.size());
         currentTile = tileCache.remove(chosenTileIndex);
     }
 
@@ -82,11 +80,6 @@ public class MatchState implements MatchStateInterface {
             throw new PlayerNameNotFoundException(boardNickname);
         }
         return boards.stream().map(BoardInterface::getNickname).toList().indexOf(boardNickname);
-    }
-
-    @Contract(pure = true)
-    private @NotNull Integer getTileCacheSize() {
-        return tileCache.size();
     }
 
 }
