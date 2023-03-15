@@ -7,6 +7,28 @@ This is an implementation of the the board game "Take it Easy" by Peter Burley i
 The project is intended for educational purposes only and no copyright infringement is intended.
 The authors of the project are Lorenzo Cavuoti, Marco Sicklinger and Marco Sciorilli.
 
+## Launching the game
+
+Download the repository
+```bash
+git clone https://github.com/LetteraUnica/SDM-final-project.git
+```
+
+Navigate to the project folder
+```bash
+cd SDM-final-project
+```
+
+On Windows execute `gradlew.bat run`, on Linux `./gradlew run` to launch the game.
+
+Full script:
+
+```bash
+git clone https://github.com/LetteraUnica/SDM-final-project.git;
+cd SDM-final-project;
+./gradlew run
+```
+
 ## Game rules:
 
 1. On each turn, select one of the 19 empty hexagonal slots to place a tile by clicking on the slot and confirming with the "Place Tile" button.
