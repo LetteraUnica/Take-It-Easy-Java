@@ -43,12 +43,12 @@
         </GridPane>
     </ScrollPane>
     <HBox layoutX="338.0" layoutY="48.0" prefHeight="56.0" prefWidth="240.0">
-        <TextField fx:id="playerNameField" onKeyTyped="#onPlayerNameChange" prefHeight="55.0" prefWidth="154.0" promptText="Add player" style="-fx-background-radius: 10 0 0 10;" styleClass="textfield">
+        <TextField fx:id="playerNameField" onKeyTyped="#onPlayerNameChange" prefHeight="55.0" prefWidth="154.0" promptText="Name" style="-fx-background-radius: 10 0 0 10;" styleClass="textfield">
             <font>
                 <Font size="14.0" />
             </font>
         </TextField>
-        <Button fx:id="addPlayerButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#addPlayerButtonPressed" prefHeight="54.0" prefWidth="95.0" style="-fx-background-radius: 0 10 10 0;" text="Add player">
+        <Button fx:id="addPlayerButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#addPlayerButtonPressed" prefHeight="54.0" prefWidth="110.0" style="-fx-background-radius: 0 10 10 0;" text="Add player">
             <font>
                 <Font size="14.0" />
             </font>

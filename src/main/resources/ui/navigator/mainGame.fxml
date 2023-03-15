@@ -41,10 +41,10 @@
             </padding>
         </GridPane>
     </ScrollPane>
-    <Pane fx:id="currentTilePane" layoutX="503.0" layoutY="252.0" prefHeight="84.0" prefWidth="91.0" />
-   <Text layoutX="510.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current tile" textAlignment="CENTER" wrappingWidth="77.13671875">
+    <Pane fx:id="currentTilePane" layoutX="500.0" layoutY="252.0" prefHeight="84.0" prefWidth="97.0" />
+   <Text layoutX="500.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current tile" textAlignment="CENTER" wrappingWidth="90">
       <font>
-         <Font size="15.0" />
+         <Font size="14.0" />
       </font>
    </Text>
 </AnchorPane>
