@@ -111,7 +111,7 @@ The application entrypoint is defined in the takeiteasy.Main class, which simply
 #### State
 The state package `main.java.engine.state` contains the following java files:
 * `main.java.engine.state.MatchStateInterface.java`: public interface for the state of the game, providing all the methods needed to store and retrieve the information about the model which can be useful at the higher level of the implementation (Controller and UI);
-* `main.java.engine.state.MatchState.java`, containing the java class **MatchState** which implements the aforementioned java interface. All the public methods implemented in this class are used only in the controller implementation in order to comply with the MVC pattern logic. 
+* `main.java.engine.state.MatchState.java`, containing the java class `MatchState` which implements the aforementioned java interface. All the public methods implemented in this class are used only in the controller implementation in order to comply with the MVC pattern logic. 
 
 [//]: # (  This class has four `private` attributes:)
 
