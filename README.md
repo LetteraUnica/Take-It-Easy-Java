@@ -9,20 +9,25 @@ The authors of the project are Lorenzo Cavuoti, Marco Sicklinger and Marco Scior
 
 ## Launching the game
 
-Download the repository
+Download the repository:
 ```bash
 git clone https://github.com/LetteraUnica/SDM-final-project.git
 ```
 
-Navigate to the project folder
+Navigate to the project folder:
 ```bash
 cd SDM-final-project
 ```
 
-On Windows execute `gradlew.bat run`, on Linux `./gradlew run` to launch the game.
+Launch the game:
 
-Full script:
+```bash
+./gradlew.bat run  # On Windows
 
+./gradlew run  # On Linux
+```
+
+Full script on Linux:
 ```bash
 git clone https://github.com/LetteraUnica/SDM-final-project.git;
 cd SDM-final-project;
