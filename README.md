@@ -98,14 +98,6 @@ The application entrypoint is defined in the takeiteasy.Main class, which simply
 * `TileInterface`:  public interface for the generic Tile to fulfill the Open-Closed SOLID principle. This interface allows for the use of different Tile's shapes that are required to play various versions of the classic Take It Easy game rules.
 * `Tile`: class  responsible for implementing the  tile used to play the traditional version of Take It Easy. It contains methods for retrieving the tile values, as well as an equals method to identify identical tiles.
 
-#####  Utils
-
-* `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
-* `HexagonalGrid`: utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
-* `TileGenerator`: utility class consisting of one single method that generates the tile collection according to th standard version of the game _take it easy_, as explained in _Game rules_ above. This class was initially created just to generate the tile collection (to be saved in a file using JSON format) and it has been kept for completeness and in the case there is any problem in finding or reading the aforementioned file.
-* `TileLoader`: utility class consisting of one single method which loads a tile collection, either from a file (JSON format), if the file path is found, or by generating it using the `TileGenerator` class.
-* `Constants`: utility class for storing some constant related to the specific implementation of the game, such sa the values of the tile paths and the maximum score possible in the standard version of the game.
-
 ### Engine: state
 
 #### State
@@ -184,6 +176,18 @@ The UI is made up of four different views, each controlled by its own controller
 Finally, each controller implements the `UIControllerInterface` interface, defined in `main\java\ui\windows\UIControllerInterface.java`. The interface defines a single method, `initController(GameInterface gameController)`, which is essential for all UI controllers to connect to the gameController defined in the engine package. Connecting to the gameController is crucial as it enables navigation between different views of the game by maintaining the current state of the game. For example, when transitioning from the lobby view to the Main Game view, it is important to keep track of the player names, which can only be achieved by passing the gameController between the different UIControllers.
 
 ![MVC_Diagram.png](images/MVC_Diagram.png)
+
+### Exceptions and utils
+
+#### Exceptions
+Exceptions classes are located in the package `main.java.engine.exceptions`. Their purpose is to better represent some exceptional behaviors that may occur during the game.
+
+#### Utils
+* `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
+* `HexagonalGrid`: utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
+* `TileGenerator`: utility class consisting of one single method that generates the tile collection according to th standard version of the game _take it easy_, as explained in _Game rules_ above. This class was initially created just to generate the tile collection (to be saved in a file using JSON format) and it has been kept for completeness and in the case there is any problem in finding or reading the aforementioned file.
+* `TileLoader`: utility class consisting of one single method which loads a tile collection, either from a file (JSON format), if the file path is found, or by generating it using the `TileGenerator` class.
+* `Constants`: utility class for storing some constant related to the specific implementation of the game, such sa the values of the tile paths and the maximum score possible in the standard version of the game.
 
 ## References
 * Take it easy rules: https://en.wikipedia.org/wiki/Take_It_Easy_(game)
