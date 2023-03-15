@@ -13,7 +13,7 @@ import ui.windows.UIControllerInterface;
 import java.io.IOException;
 import java.util.List;
 
-import static ui.utils.UIUtils.getStage;
+import static utils.ui.UIUtils.getStage;
 
 public class GameOver implements UIControllerInterface {
     @FXML

@@ -12,12 +12,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import ui.navigator.NavigationConstants;
 import ui.navigator.Navigator;
-import ui.utils.UIUtils;
+import utils.ui.UIUtils;
 import ui.windows.UIControllerInterface;
 
 import java.io.IOException;
 
-import static ui.utils.UIUtils.getStage;
+import static utils.ui.UIUtils.getStage;
 
 public class GameLobby implements UIControllerInterface {
     @FXML
