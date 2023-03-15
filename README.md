@@ -101,7 +101,10 @@ The application entrypoint is defined in the takeiteasy.Main class, which simply
 #####  Utils
 
 * `CubeCoordinates`: class implementation of the Java Comparable interface. This class represent a set of three coordinates in an hexagonal grid necessary for the classical version of the Take It Easy board. It contains methods to retrieve coordinates, override comparisons methods between coordinates, navigate through the grid and map to Euclidean coordinates.
-* `HexagonalGrid`: Utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
+* `HexagonalGrid`: utility class to generate a set of centers of hexagonal cells in normalized Euclidean coordinates to be used by the UI to draw the board.
+* `TileGenerator`: utility class consisting of one single method that generates the tile collection according to th standard version of the game _take it easy_, as explained in _Game rules_ above. This class was initially created just to generate the tile collection (to be saved in a file using JSON format) and it has been kept for completeness and in the case there is any problem in finding or reading the aforementioned file.
+* `TileLoader`: utility class consisting of one single method which loads a tile collection, either from a file (JSON format), if the file path is found, or by generating it using the `TileGenerator` class.
+* `Constants`: utility class for storing some constant related to the specific implementation of the game, such sa the values of the tile paths and the maximum score possible in the standard version of the game.
 
 ### Engine: state
 
