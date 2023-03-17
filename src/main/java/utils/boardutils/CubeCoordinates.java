@@ -1,14 +1,17 @@
 package utils.boardutils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CubeCoordinates implements Comparable<CubeCoordinates> {
     private Integer x;
     private Integer y;
     private Integer z;
-    private int hashCode;
+    private final int hashCode;
 
 
     public CubeCoordinates(Integer x, Integer y, Integer z) {
@@ -57,35 +60,27 @@ public class CubeCoordinates implements Comparable<CubeCoordinates> {
         return this;
     }
 
-    public CubeCoordinates rotateRight() {
-        Integer buffer = x;
-        x = z;
-        z = y;
-        y = buffer;
-        return this;
-    }
 
     public List<CubeCoordinates> navigateRing(int radius) {
         CubeCoordinates center = new CubeCoordinates(this.x,this.y,this.z);
         ArrayList<CubeCoordinates> results = new ArrayList<>();
-        center = center.cubeAdd(center.cubeDirection(4).cubeScale(radius));
-        for (int i = 0; i < 6; i++) {
+        if (radius == 0){
+            results.add(center);
+        }
+        else {
+            center = center.cubeAdd(center.cubeDirection(4).cubeScale(radius));
+            for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < radius; j++) {
                     results.add(center);
                     center = center.cubeNeighbor(i);
                 }
             }
+        }
         return results;
     }
 
     public List<CubeCoordinates> navigateSpiral(int radius){
-        CubeCoordinates center = new CubeCoordinates(this.x,this.y,this.z);
-        ArrayList<CubeCoordinates> results = new ArrayList<>();
-        results.add(center);
-        for (int i = 1; i<radius+1;++i) {
-            results.addAll(navigateRing(i));
-        }
-        return results;
+        return IntStream.range(0, radius+1).mapToObj(this::navigateRing).flatMap(Collection::stream).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int[] toEuclidean(){
