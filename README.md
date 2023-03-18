@@ -125,7 +125,7 @@ The application entrypoint is defined in the takeiteasy.Main class, which simply
 * `TileInterface`:  public interface for the generic Tile to fulfill the Open-Closed SOLID principle. This interface allows for the use of different Tile's shapes that are required to play various versions of the classic Take It Easy game rules.
 * `Tile`: class  responsible for implementing the  tile used to play the traditional version of Take It Easy. It contains methods for retrieving the tile values, as well as an equals method to identify identical tiles.
 
-### Engine: state
+### Engine: state and controller
 
 #### State
 The state package `main.java.engine.state` contains the following java files:
@@ -170,8 +170,6 @@ The state package `main.java.engine.state` contains the following java files:
 
 [//]: # (    * `void initializeTileCollection&#40;&#41;` initializes the collection of tiles in the `tileCache`. Since it depends on the specific implementation of the game &#40;`TileLoader` and consequently `TileGenerator`, or an existing file for storing the tiles&#41;, the `private` access modifier has been chosen.)
 
-### Engine: controller
-
 #### Controller
 The *controller* (`main.java.engine.controller`) package contains the following files:
 * `main.java.engine.controller.GameControllerInterface.java`: public interface acting as a bridge between the *Model* and the *View* ends of the MVC pattern. It provides all the method which are accessible from the UI. 
@@ -186,6 +184,8 @@ The *controller* (`main.java.engine.controller`) package contains the following 
 [//]: # (  * `String getCurrentPlayerName&#40;&#41;` returns the name of the player currently placing the tile;)
 
 [//]: # (  * ``)
+
+Since, according to the MVC pattern, the state methods should be used only in the game controller, we could have used the `protected` access modifier for those methods (with corresponding relocation of state and controller classes in a single package). However, we opted for public methods and separate packages so to guarantee a flexible structure, allowing for future possible deviation from the MVC design, and also to keep a clear separation of project structure components.
 
 ### UI
 The UI package is located in main.java.ui and is divided into various controller classes, each corresponding to a different window or screen that the user interacts with. The navigator class manages the movement between these windows.
