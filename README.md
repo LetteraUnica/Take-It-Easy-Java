@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.com/LetteraUnica/SDM-final-project.svg?branch=main)](https://api.travis-ci.com/LetteraUnica/SDM-final-project)
+[![Build Status](https://app.travis-ci.com/LetteraUnica/Take-It-Easy-Java.svg?branch=main)](https://app.travis-ci.com/LetteraUnica/Take-It-Easy-Java.svg?branch=main)
 
 # Take it Easy
 
